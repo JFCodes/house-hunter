@@ -1,0 +1,16 @@
+{
+  "name": "house-hunter",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "pnpm --filter @house-hunter/types build && pnpm --filter @house-hunter/functions build"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.9.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module"
+}
