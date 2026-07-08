@@ -209,6 +209,9 @@ importers:
 
   apps/backend:
     dependencies:
+      '@house-hunter/functions':
+        specifier: workspace:*
+        version: link:../../packages/functions
       '@house-hunter/types':
         specifier: workspace:*
         version: link:../../packages/types

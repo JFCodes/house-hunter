@@ -1,3 +1,3 @@
-declare function dummyFunction(): void;
+declare function F_Validator_PostingType(value: string): boolean;
 
-export { dummyFunction };
+export { F_Validator_PostingType };

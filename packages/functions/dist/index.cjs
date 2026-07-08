@@ -20,13 +20,21 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var index_exports = {};
 __export(index_exports, {
-  dummyFunction: () => dummyFunction
+  F_Validator_PostingType: () => F_Validator_PostingType
 });
 module.exports = __toCommonJS(index_exports);
-function dummyFunction() {
-  console.log("dummyFunction");
+
+// src/entities/posting.ts
+function F_Validator_PostingType(value) {
+  switch (value) {
+    case "rent":
+    case "buy":
+      return true;
+    default:
+      return false;
+  }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  dummyFunction
+  F_Validator_PostingType
 });

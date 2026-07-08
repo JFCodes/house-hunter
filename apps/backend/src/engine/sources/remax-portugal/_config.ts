@@ -1,8 +1,11 @@
 // App
 import type { CrawlerGetBrowserOptions } from '../../crawler/types'
 
+export const BASE_URL = 'https://remax.pt/pt'
+export const BASE_IMAGE_URL = 'https://i.maxwork.pt/l-feat'
+
 export const GET_BROWSER_CONFIG: CrawlerGetBrowserOptions = {
-  url: 'https://remax.pt/pt'
+  url: BASE_URL,
 }
 
 export const SELECTORS = {

@@ -34,7 +34,7 @@ export class Data<T extends { id: string }> {
     if (!item) return
 
     // Don't allow for id mutations
-    const updated = { ...item, payload, id: item.id }
+    const updated = { ...item, ...payload, id: item.id }
     this.data[index] = updated
     this.scheduleSaveData(this.data)
   }

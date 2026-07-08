@@ -11,5 +11,5 @@ export async function ClickAllowCookiesBanner (page: Page): Promise<void> {
 
   await button.waitFor({ state: 'visible' })
   await button.click()
-  await button.waitFor({ state: 'detached' })
+  await button.waitFor({ state: 'hidden' })
 }

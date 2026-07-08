@@ -1,13 +1,26 @@
 [
    {
+      "id": "4d8108b3-e0c1-4146-a04a-ba1ba7b86135",
       "source": "remax-portugal",
       "task": "crawl-new-postings",
-      "id": "4d8108b3-e0c1-4146-a04a-ba1ba7b86135",
-      "payload": {
-         "id": "4d8108b3-e0c1-4146-a04a-ba1ba7b86135",
-         "options": {
-            "location": "Leiria"
-         }
+      "options": {
+         "typologies": [
+            "single-home"
+         ],
+         "location": "leiria",
+         "postingType": "buy"
+      }
+   },
+   {
+      "id": "5ef6cffb-cb59-4abf-b5fa-ff260004864a",
+      "source": "remax-portugal",
+      "task": "crawl-new-postings",
+      "options": {
+         "typologies": [
+            "single-home"
+         ],
+         "location": "leiria/leiria",
+         "postingType": "buy"
       }
    }
 ]

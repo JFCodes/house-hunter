@@ -72,6 +72,11 @@ class EventQueueClass {
       const { event } = queueItem
       if (event.source !== toAdd.source) return false
       if (event.task !== toAdd.task) return false
+
+      const toAddArgsString = JSON.stringify(toAdd.args)
+      const eventArgs = JSON.stringify(event.args)
+      if (eventArgs !== toAddArgsString) return false
+
       return true
     }
 

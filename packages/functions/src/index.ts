@@ -1,3 +1,1 @@
-export function dummyFunction () {
-  console.log('dummyFunction')
-}
+export * from './entities'
