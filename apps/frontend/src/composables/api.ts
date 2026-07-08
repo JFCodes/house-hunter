@@ -9,6 +9,7 @@ export function useApi () {
   const baseUrl = 'http://localhost:3000/api'
 
   const ping = () => request<T_API_RESPONSE_Ping>({ path: 'ping', method: 'GET' })
+  const testStuff = () => request<void>({ path: 'test-stuff', method: 'GET' })
 
   // Private
   async function request <Response> (options: RequestOptions): Promise<Response> {
@@ -40,6 +41,7 @@ export function useApi () {
   }
 
   return {
+    testStuff,
     ping,
   }
 }

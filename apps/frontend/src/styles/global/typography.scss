@@ -1,0 +1,17 @@
+$fontSizes:
+  "3xs" 0.7rem,
+  "2xs" 0.8rem,
+  "xs" 0.9rem,
+  "sm" 0.95rem,
+  "md" 1rem,
+  "lg" 1.4rem,
+  "xl" 1.8rem,
+  "2xl" 2.2rem,
+  "3xl" 2.6rem;
+
+@each $semanticSize, $size in $fontSizes { .hh-text-#{$semanticSize} { font-size: $size; } }
+
+.hh-font-light { font-weight: 400; }
+.hh-font-regular { font-weight: 500; }
+.hh-font-semibold { font-weight: 600; }
+.hh-font-bold { font-weight: 700; }

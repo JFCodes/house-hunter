@@ -2,3 +2,7 @@
 @use './global/reset';
 @use './global/variables';
 @use './global/base';
+@use './global/typography.scss';
+@use './global/spacing.scss';
+// Elements
+@use './elements/base-button.scss';

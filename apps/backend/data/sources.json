@@ -1,0 +1,13 @@
+[
+   {
+      "source": "remax-portugal",
+      "task": "crawl-new-postings",
+      "id": "4d8108b3-e0c1-4146-a04a-ba1ba7b86135",
+      "payload": {
+         "id": "4d8108b3-e0c1-4146-a04a-ba1ba7b86135",
+         "options": {
+            "location": "Leiria"
+         }
+      }
+   }
+]

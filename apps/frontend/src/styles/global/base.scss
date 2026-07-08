@@ -6,7 +6,8 @@ html, body, #app {
 }
 
 #app {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px; // Controls rem relative sizing
   background-color: var(--color-background);
+  font-family: var(--font-family);
   color: var(--color-text-base);
 }

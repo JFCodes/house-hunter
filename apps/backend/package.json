@@ -26,6 +26,7 @@
     "@house-hunter/types": "workspace:*",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "morgan": "^1.11.0"
+    "morgan": "^1.11.0",
+    "playwright": "^1.61.1"
   }
 }

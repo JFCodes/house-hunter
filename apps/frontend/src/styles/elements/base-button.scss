@@ -1,0 +1,21 @@
+.hh-base-button {
+  border: solid 1px var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-base);
+  background-color: transparent;
+  justify-content: center;
+  gap: var(--spacing-2xs);
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 32px;
+
+  &:hover {
+    background-color: var(--color-background-emphasis);
+  }
+
+  &:focus-within {
+    border-color: var(--color-text-muted);
+    outline: none;
+  }
+}

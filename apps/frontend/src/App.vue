@@ -2,7 +2,9 @@
 // App
 import { useServerStatusStore } from '@/stores/server-status'
 // Components
+import CompGlobalPage from '@/components/global/g-page.vue'
 import CompUiLoading from '@/components/ui/ui-loading.vue'
+import ViewOffline from '@/views/v-offline.vue'
 
 const serverStatusStore = useServerStatusStore()
 
@@ -10,13 +12,13 @@ const serverStatusStore = useServerStatusStore()
 
 <template>
   <CompUiLoading v-if="serverStatusStore.isInitializing" />
-  <template v-if="!serverStatusStore.serverOk">
-    app down, please make sure all resources are up and running
-  </template>
+  <ViewOffline v-if="!serverStatusStore.serverOk" />
 
-  <template v-else>
-    server is up
-  </template>
+  <CompGlobalPage v-else>
+    <template #content>
+      <RouterView />
+    </template>
+  </CompGlobalPage>
 </template>
 
 <style scoped></style>

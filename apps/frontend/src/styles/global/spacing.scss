@@ -1,0 +1,31 @@
+$spacingSizes:
+  "3xs" var(--spacing-3xs),
+  "2xs" var(--spacing-2xs),
+  "xs" var(--spacing-xs),
+  "sm" var(--spacing-sm),
+  "md" var(--spacing-md),
+  "lg" var(--spacing-lg),
+  "xl" var(--spacing-xl),
+  "2xl" var(--spacing-2xl),
+  "3xl" var(--spacing-3xl);
+
+
+@each $semanticSize, $size in $spacingSizes {
+  // Padding
+  .hh-p-#{$semanticSize} { padding: $size; }
+  .hh-px-#{$semanticSize} { padding-left: $size; padding-right: $size; }
+  .hh-py-#{$semanticSize} { padding-top: $size; padding-bottom: $size; }
+  .hh-pt-#{$semanticSize} { padding-top: $size; }
+  .hh-pr-#{$semanticSize} { padding-right: $size; }
+  .hh-pb-#{$semanticSize} { padding-bottom: $size; }
+  .hh-pl-#{$semanticSize} { padding-left: $size; }
+
+  // Margin
+  .hh-m-#{$semanticSize} { margin: $size; }
+  .hh-mx-#{$semanticSize} { margin-left: $size; margin-right: $size; }
+  .hh-my-#{$semanticSize} { margin-top: $size; margin-bottom: $size; }
+  .hh-mt-#{$semanticSize} { margin-top: $size; }
+  .hh-mr-#{$semanticSize} { margin-right: $size; }
+  .hh-mb-#{$semanticSize} { margin-bottom: $size; }
+  .hh-ml-#{$semanticSize} { margin-left: $size; }
+}
