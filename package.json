@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "pnpm --filter @house-hunter/types build && pnpm --filter @house-hunter/functions build"
+    "build": "pnpm --filter @house-hunter/types build && pnpm --filter @house-hunter/functions build && pnpm --filter @house-hunter/sources build"
   },
   "devEngines": {
     "packageManager": {

@@ -1,41 +1,109 @@
-declare enum E_ENGINE_SOURCES {
+declare enum E_TASK_TYPE {
+    CRAWL_NEW_POSTINGS = "crawl-new-postings",
+    UPDATED_POSTING = "update-posting"
+}
+declare enum E_TASK_SOURCE {
     IDEALISTA_PORTUGAL = "idealista-portugal",
     REMAX_PORTUGAL = "remax-portugal"
 }
-
-declare enum E_ENGINE_TASKS {
-    CRAWL_NEW_POSTINGS = "crawl-new-postings",
-    UPDATE_POSTING = "update-posting"
-}
-
-type T_PostingType = 'rent' | 'buy';
-type T_PostingTypology = 'single-home' | 'apartment';
-
-type T_Source = {
-    source: E_ENGINE_SOURCES;
-    task: E_ENGINE_TASKS;
+type T_BaseTask<T extends E_TASK_TYPE> = {
+    source: E_TASK_SOURCE;
+    createdAt: number;
     id: string;
+    type: T;
+};
+type T_TaskCrawlNewPostings = T_BaseTask<E_TASK_TYPE.CRAWL_NEW_POSTINGS> & {
     options: {
-        typologies: Array<T_PostingTypology>;
-        postingType: T_PostingType;
+        postingOperation: T_PostingOperation;
+        postingTypes: Array<T_PostingType>;
         location: string;
     };
 };
+type T_TaskUpdatePosting = T_BaseTask<E_TASK_TYPE.UPDATED_POSTING> & {
+    options: {};
+};
+type T_Task = T_TaskCrawlNewPostings | T_TaskUpdatePosting;
 
-type T_EngineEventExecutionOutcome = 'error-execution' | 'error-arguments' | 'error-unknown' | 'success';
-type T_EngineEventExecution = {
-    outcome: T_EngineEventExecutionOutcome;
+type T_PostingOperation = 'rent' | 'buy';
+type T_PostingType = 'single-home' | 'apartment';
+type T_PostingLocation = {
+    isExact: boolean;
+    longitude: number;
+    latitude: number;
+    localZone: string;
+    zipCode: string;
+    address: string;
+    region: string;
+};
+type T_PostingAreas = {
+    builtArea: null | number;
+    livingArea: number;
+    totalArea: number;
+};
+type T_PostingTypology = {
+    bedrooms: number;
+    bathrooms: number;
+    otherRooms: number;
+    totalRooms: null | number;
+    hasParking: boolean;
+    hasGarage: boolean;
+    parkingSpots: number;
+};
+type T_PostingImages = {
+    main: string;
+    images: Array<string>;
+};
+type T_PostingContacts = {
+    agencyContact: string;
+    agencyName: string;
+    userContact: string;
+    username: string;
+};
+type T_Posting = {
+    location: T_PostingLocation;
+    contacts: T_PostingContacts;
+    typology: T_PostingTypology;
+    images: T_PostingImages;
+    areas: T_PostingAreas;
+    operation: T_PostingOperation;
+    types: Array<T_PostingType>;
+    constructionYear: number;
+    source: E_TASK_SOURCE;
+    idWithSource: string;
+    sourceId: string;
+    active: boolean;
+    price: number;
+    url: string;
+    id: string;
 };
 
-type T_EngineEvent<Options extends object> = {
-    source: E_ENGINE_SOURCES;
-    task: E_ENGINE_TASKS;
-    retries: number;
-    args: Options;
+type T_TaskExecutionOutcome = 'error-invalid-task-source' | 'error-invalid-task-type' | 'error-execution' | 'error-arguments' | 'error-unknown' | 'success';
+type T_TaskExecution = {
+    maxRetries: number;
+    startedAt: number;
+    endedAt: number;
+    task: T_Task;
 };
+type T_TaskExecutionResult = {
+    outcome: T_TaskExecutionOutcome;
+    error?: Err_TaskExecution;
+    postings: Array<T_Posting>;
+};
+
+declare enum E_ERROR_TYPES {
+    TASK_EXECUTION_ERROR = "task-execution-error"
+}
+declare class Err_TaskExecution extends Error {
+    readonly task: T_Task;
+    readonly outcome: T_TaskExecutionOutcome;
+    readonly details: string;
+    errorType: E_ERROR_TYPES;
+    message: string;
+    constructor(task: T_Task, outcome: T_TaskExecutionOutcome, details: string);
+}
 
 type T_API_RESPONSE_Ping = {
     status: 'ok';
 };
 
-export { E_ENGINE_SOURCES, E_ENGINE_TASKS, type T_API_RESPONSE_Ping, type T_EngineEvent, type T_EngineEventExecution, type T_EngineEventExecutionOutcome, type T_PostingType, type T_PostingTypology, type T_Source };
+export { E_ERROR_TYPES, E_TASK_SOURCE, E_TASK_TYPE, Err_TaskExecution, type T_API_RESPONSE_Ping, type T_Posting, type T_PostingAreas, type T_PostingContacts, type T_PostingImages, type T_PostingLocation, type T_PostingOperation, type T_PostingType, type T_PostingTypology, type T_Task, type T_TaskCrawlNewPostings, type T_TaskExecution, type T_TaskExecutionOutcome, type T_TaskExecutionResult, type T_TaskUpdatePosting };

@@ -3,13 +3,13 @@ import morgan from 'morgan'
 import cors from 'cors'
 // App
 import { controller as NoCacheController } from './controllers/no-cache'
-import { EventQueue } from './engine/event-queue'
+import { TaskExecutionQueue } from './tasks/execution-queue'
 import { router as ApiRouter } from './routers'
 import './data'
 
 const PORT = 3000
 
-EventQueue.initialize()
+TaskExecutionQueue.initialize()
 
 const app = express()
 

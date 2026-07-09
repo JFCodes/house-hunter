@@ -1,2 +1,2 @@
-export * from './sources'
 export * from './posting'
+export * from './task'

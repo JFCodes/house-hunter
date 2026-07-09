@@ -20,21 +20,45 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var index_exports = {};
 __export(index_exports, {
-  F_Validator_PostingType: () => F_Validator_PostingType
+  F_GetPostingIds: () => F_GetPostingIds,
+  F_IsSameTask: () => F_IsSameTask,
+  F_IsSameTaskExecution: () => F_IsSameTaskExecution
 });
 module.exports = __toCommonJS(index_exports);
 
-// src/entities/posting.ts
-function F_Validator_PostingType(value) {
-  switch (value) {
-    case "rent":
-    case "buy":
-      return true;
-    default:
-      return false;
+// src/entities/get-posting-id.ts
+function F_GetPostingIds(source, sourceId) {
+  return {
+    idWithSource: `${source.toUpperCase()}-${sourceId}`,
+    sourceId: String(sourceId),
+    id: crypto.randomUUID(),
+    source
+  };
+}
+
+// src/entities/is-same-task.ts
+var import_types = require("@house-hunter/types");
+function F_IsSameTask(leftTask, rightTask) {
+  if (leftTask.source !== rightTask.source) return false;
+  if (leftTask.type === import_types.E_TASK_TYPE.CRAWL_NEW_POSTINGS && rightTask.type === import_types.E_TASK_TYPE.CRAWL_NEW_POSTINGS) {
+    const { options: leftOptions } = leftTask;
+    const { options: rightOptions } = rightTask;
+    if (leftOptions.postingOperation !== rightOptions.postingOperation) return false;
+    if (leftOptions.location !== rightOptions.location) return false;
+    const rightPostingTypes = rightOptions.postingTypes.sort().join(",");
+    const leftPostingTypes = leftOptions.postingTypes.sort().join(",");
+    if (leftPostingTypes !== rightPostingTypes) return false;
   }
+  if (leftTask.type === import_types.E_TASK_TYPE.UPDATED_POSTING && rightTask.type === import_types.E_TASK_TYPE.UPDATED_POSTING) {
+  }
+  return true;
+}
+function F_IsSameTaskExecution(leftExecution, rightExecution) {
+  return F_IsSameTask(leftExecution.task, rightExecution.task);
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  F_Validator_PostingType
+  F_GetPostingIds,
+  F_IsSameTask,
+  F_IsSameTaskExecution
 });
