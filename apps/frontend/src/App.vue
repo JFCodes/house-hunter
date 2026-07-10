@@ -20,5 +20,3 @@ const serverStatusStore = useServerStatusStore()
     </template>
   </CompGlobalPage>
 </template>
-
-<style scoped></style>

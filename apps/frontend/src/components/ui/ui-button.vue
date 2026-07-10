@@ -16,7 +16,3 @@ function onButtonClick(): void {
     {{ label }}
   </button>
 </template>
-
-<style lang="scss" scoped>
-.button {}
-</style>

@@ -17,7 +17,8 @@ withDefaults(
 
 <template>
   <CompUiBadge
-    :color="entity.isActive ? 'var(--color-success)' : 'var(--color-danger)'">
+    :border-color="entity.isActive ? 'var(--color-success)' : 'var(--color-danger)'"
+    :text-color="entity.isActive ? 'var(--color-success)' : 'var(--color-danger)'">
 
     {{ entity.isActive ? $t(activeLabelKey) : $t(inactiveLabelKey) }}
 

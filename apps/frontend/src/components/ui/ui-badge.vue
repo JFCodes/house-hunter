@@ -2,15 +2,18 @@
 import { computed } from 'vue'
 
 const props = defineProps<{
-  color?: string
+  backGroundColor?: string
+  borderColor?: string
+  textColor?: string
 }>()
 
 const styleString = computed(() => {
   const styles: Array<string> = []
-  if (props.color) {
-    styles.push(`border-color:${props.color}`)
-    styles.push(`color:${props.color}`)
-  }
+
+  if (props.backGroundColor) styles.push(`background-color:${props.backGroundColor}`)
+  if (props.borderColor) styles.push(`border-color:${props.borderColor}`)
+  if (props.textColor) styles.push(`color:${props.textColor}`)
+
   return styles.join(';')
 })
 </script>
@@ -27,6 +30,7 @@ const styleString = computed(() => {
   border-radius: var(--radius-sm);
   padding: 0 var(--spacing-xs);
   align-items: center;
+  width: fit-content;
   line-height: 24px;
   display: flex;
   height: 24px;

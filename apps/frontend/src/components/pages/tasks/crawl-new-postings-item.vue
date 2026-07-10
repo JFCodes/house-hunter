@@ -3,8 +3,9 @@ import type { T_TaskCrawlNewPostingsWithStatus } from '@house-hunter/types'
 // App
 import { E_ROUTER_PAGES, E_ROUTER_PARAMS } from '@/router/enums'
 // Components
+import CompEntityPostingTypesBadges from '@/components/entities/posting/types-badges.vue'
+import CompEntityOperationBadge from '@/components/entities/operation-badge.vue'
 import CompEntityActiveBadge from '@/components/entities/is-active-badge.vue'
-import CompUiBadge from '@/components/ui/ui-badge.vue'
 
 defineProps<{
   task: T_TaskCrawlNewPostingsWithStatus
@@ -26,17 +27,8 @@ defineProps<{
     </div>
 
     <div class="task-item__types">
-      <CompUiBadge>
-        {{ $t(`enums.postingOperation.${task.options.postingOperation}`) }}
-      </CompUiBadge>
-
-      <CompUiBadge
-        v-for="(postingType, index) in task.options.postingTypes"
-        color="var(--color-info)"
-        :key="`${postingType}-${index}`">
-        {{ $t(`enums.postingType.${postingType}`) }}
-      </CompUiBadge>
-
+      <CompEntityOperationBadge :posting-operation="task.options.postingOperation" />
+      <CompEntityPostingTypesBadges :posting-types="task.options.postingTypes" />
       <CompEntityActiveBadge :entity="task" />
     </div>
   </RouterLink>
@@ -46,12 +38,11 @@ defineProps<{
 .task-item {
   background-color: var(--color-background-light);
   padding: var(--spacing-sm) var(--spacing-xs);
-  border: solid 1px transparent;
   border-bottom-color: var(--color-border);
   justify-content: space-between;
+  border: solid 1px transparent;
   align-items: center;
   display: flex;
-
 
   &__types {
     gap: var(--spacing-2xs);

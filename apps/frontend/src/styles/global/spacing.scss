@@ -11,20 +11,20 @@ $spacingSizes:
 
 @each $semanticSize, $size in $spacingSizes {
   // Padding
-  .hh-p-#{$semanticSize} { padding: $size; }
-  .hh-px-#{$semanticSize} { padding-left: $size; padding-right: $size; }
-  .hh-py-#{$semanticSize} { padding-top: $size; padding-bottom: $size; }
-  .hh-pt-#{$semanticSize} { padding-top: $size; }
-  .hh-pr-#{$semanticSize} { padding-right: $size; }
-  .hh-pb-#{$semanticSize} { padding-bottom: $size; }
-  .hh-pl-#{$semanticSize} { padding-left: $size; }
+  .hh-p-#{$semanticSize} { padding: $size !important; }
+  .hh-px-#{$semanticSize} { padding-left: $size; padding-right: $size !important; }
+  .hh-py-#{$semanticSize} { padding-top: $size; padding-bottom: $size !important; }
+  .hh-pt-#{$semanticSize} { padding-top: $size !important; }
+  .hh-pr-#{$semanticSize} { padding-right: $size !important; }
+  .hh-pb-#{$semanticSize} { padding-bottom: $size !important; }
+  .hh-pl-#{$semanticSize} { padding-left: $size !important; }
 
   // Margin
-  .hh-m-#{$semanticSize} { margin: $size; }
-  .hh-mx-#{$semanticSize} { margin-left: $size; margin-right: $size; }
-  .hh-my-#{$semanticSize} { margin-top: $size; margin-bottom: $size; }
-  .hh-mt-#{$semanticSize} { margin-top: $size; }
-  .hh-mr-#{$semanticSize} { margin-right: $size; }
-  .hh-mb-#{$semanticSize} { margin-bottom: $size; }
-  .hh-ml-#{$semanticSize} { margin-left: $size; }
+  .hh-m-#{$semanticSize} { margin: $size !important; }
+  .hh-mx-#{$semanticSize} { margin-left: $size; margin-right: $size !important; }
+  .hh-my-#{$semanticSize} { margin-top: $size; margin-bottom: $size !important; }
+  .hh-mt-#{$semanticSize} { margin-top: $size !important; }
+  .hh-mr-#{$semanticSize} { margin-right: $size !important; }
+  .hh-mb-#{$semanticSize} { margin-bottom: $size !important; }
+  .hh-ml-#{$semanticSize} { margin-left: $size !important; }
 }

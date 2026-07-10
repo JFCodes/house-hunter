@@ -13,7 +13,11 @@ const postingOperation: Record<T_PostingOperation, string> = {
 export default {
   global: {
     active: 'Active',
+    area: 'Area',
+    askingPrice: 'Asking price',
+    constructionYear: 'Construction year',
     stopped: 'Stopped',
+    typology: 'Rooms',
   },
   pages: {},
   notFound: {
