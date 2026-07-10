@@ -161,6 +161,9 @@ function parseResult(task, fromSource) {
     totalArea: fromSource.totalArea,
     builtArea: fromSource.builtArea
   });
+  const getUrl = () => {
+    return `${BASE_URL}/imoveis/${fromSource.descriptionTags}/${fromSource.listingTitle}`;
+  };
   return {
     ...F_GetPostingIds(task.source, fromSource.id),
     location: getLocationData(),
@@ -168,12 +171,12 @@ function parseResult(task, fromSource) {
     typology: getTypologyData(),
     images: getImagesData(),
     areas: getAreasData(),
+    url: getUrl(),
     constructionYear: fromSource.constructionYear,
     operation: task.options.postingOperation,
     types: task.options.postingTypes,
     price: fromSource.listingPrice,
-    active: fromSource.isActive,
-    url: ""
+    active: fromSource.isActive
   };
 }
 

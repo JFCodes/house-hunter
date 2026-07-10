@@ -3,6 +3,8 @@ export type PostingSearchItem = {
   isActive: boolean
   constructionYear: number
   listingPrice: number
+  descriptionTags: string // used to construct url
+  listingTitle: string // used to construct url
   // User related
   userName: string
   userAgencyPhoneNumber: string

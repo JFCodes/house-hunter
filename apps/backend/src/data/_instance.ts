@@ -1,6 +1,6 @@
 import { existsSync, writeFileSync, writeFile, readFileSync } from 'fs'
 
-type Options<T extends { id: string }> = {
+export type Options<T extends { id: string }> = {
   fallback: Array<T>
   fileName: string
 }
@@ -59,7 +59,7 @@ export class Data<T extends { id: string }> {
     writeFileSync(this.fullFilename, JSON.stringify(data))
   }
 
-  private scheduleSaveData (data: Array<T>) {
+  public scheduleSaveData (data: Array<T>) {
     const content = JSON.stringify(data, null, 3)
     writeFile(this.fullFilename, content, () => {})
   }

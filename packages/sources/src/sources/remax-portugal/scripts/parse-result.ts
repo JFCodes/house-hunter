@@ -10,7 +10,7 @@ import type {
 } from '@house-hunter/types'
 // App
 import type { PostingSearchItem } from '../_types'
-import { BASE_IMAGE_URL } from '../_constants'
+import { BASE_URL, BASE_IMAGE_URL } from '../_constants'
 
 export function parseResult (task: T_TaskCrawlNewPostings, fromSource: PostingSearchItem): T_Posting {
   const getLocationData = (): T_PostingLocation => {
@@ -69,6 +69,9 @@ export function parseResult (task: T_TaskCrawlNewPostings, fromSource: PostingSe
     builtArea: fromSource.builtArea,
   })
 
+  const getUrl = (): string => {
+    return `${BASE_URL}/imoveis/${fromSource.descriptionTags}/${fromSource.listingTitle}`
+  }
 
   return {
     ...F_GetPostingIds(task.source, fromSource.id),
@@ -77,11 +80,11 @@ export function parseResult (task: T_TaskCrawlNewPostings, fromSource: PostingSe
     typology: getTypologyData(),
     images: getImagesData(),
     areas: getAreasData(),
+    url: getUrl(),
     constructionYear: fromSource.constructionYear,
     operation: task.options.postingOperation,
     types: task.options.postingTypes,
     price: fromSource.listingPrice,
     active: fromSource.isActive,
-    url: '',
   }
 }

@@ -1,6 +1,7 @@
 import { F_IsSameTaskExecution } from '@house-hunter/functions'
 import { T_TaskExecution } from '@house-hunter/types'
 // App
+import { ProcessExecutionResult } from './process-execution-result'
 import type { QueueTaskExecution } from './types'
 import { ExecuteTask } from './execute'
 
@@ -42,7 +43,7 @@ class TaskExecutionQueueClass {
       await new Promise(r => setTimeout(r, 0))
 
       const result = await ExecuteTask(nextExecution.taskExecution)
-      console.log(result.postings)
+      ProcessExecutionResult(result)
       
       if (result.outcome !== 'success') {
         // No source or no task type errors do not re-schedule
