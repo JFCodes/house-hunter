@@ -8,7 +8,7 @@ import CompGlobalPageHeader from '@/components/global/g-page-header.vue'
     <div class="page__grid">
       <CompGlobalPageHeader />
 
-      <div>
+      <div class="page__grid-content">
         <slot name="content"></slot>
       </div>
     </div>
@@ -30,6 +30,10 @@ import CompGlobalPageHeader from '@/components/global/g-page-header.vue'
     display: grid;
     height: 100%;
     width: 100%;
+
+    &-content {
+      position: relative;
+    }
   }
 }
 </style>

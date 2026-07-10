@@ -1,0 +1,53 @@
+<script setup lang="ts">
+import { onBeforeMount } from 'vue'
+// App
+import type { UiPageTabRoute } from '@/components/ui/types'
+import { E_ROUTER_PAGES } from '@/router/enums'
+import { useTasksStore } from '@/stores/tasks'
+// Components
+import CompUiPageTags from '@/components/ui/ui-page-tabs.vue'
+import CompUiLoading from '@/components/ui/ui-loading.vue'
+import { ClipboardClock, Cctv } from '@lucide/vue'
+
+const tasksStore = useTasksStore()
+
+const tabs: Array<UiPageTabRoute> = [
+  {
+    to: { name: E_ROUTER_PAGES.TASKS_CRAWL_NEW_POSTINGS },
+    key: E_ROUTER_PAGES.TASKS_CRAWL_NEW_POSTINGS,
+    label: 'Tasks',
+    icon: Cctv,
+  },
+  {
+    to: { name: E_ROUTER_PAGES.TASKS_LOGS },
+    key: E_ROUTER_PAGES.TASKS_LOGS,
+    icon: ClipboardClock,
+    label: 'History',
+  }
+]
+
+onBeforeMount(tasksStore.searchCrawlNewPostingTasks)
+</script>
+
+<template>
+  <CompUiLoading v-if="tasksStore.isLoading" />
+  <div class="tasks">
+    <CompUiPageTags :tabs="tabs" />
+    <div class="tasks__content">
+      <RouterView />
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.tasks {
+  flex-direction: column;
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+
+  &__content {
+    flex: 1;
+  }
+}
+</style>

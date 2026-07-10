@@ -1,4 +1,4 @@
-import type { T_API_RESPONSE_Ping } from '@house-hunter/types'
+import type { T_API_RESPONSE_Ping, T_API_RESPONSE_TasksCrawlNewPostingsSearch } from '@house-hunter/types'
 
 type RequestOptions = {
   path: string
@@ -10,6 +10,12 @@ export function useApi () {
 
   const ping = () => request<T_API_RESPONSE_Ping>({ path: 'ping', method: 'GET' })
   const testStuff = () => request<void>({ path: 'test-stuff', method: 'GET' })
+  
+  const tasks = {
+    crawlNewPostings: {
+      search: () => request<T_API_RESPONSE_TasksCrawlNewPostingsSearch>({ path: 'tasks/crawl-new-postings/search', method: 'GET' })
+    }
+  }
 
   // Private
   async function request <Response> (options: RequestOptions): Promise<Response> {
@@ -43,5 +49,6 @@ export function useApi () {
   return {
     testStuff,
     ping,
+    tasks,
   }
 }

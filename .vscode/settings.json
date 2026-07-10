@@ -3,5 +3,6 @@
     "IDEALISTA",
     "lucide",
     "networkidle"
-  ]
+  ],
+  "vue.format.wrapAttributes": "preserve"
 }

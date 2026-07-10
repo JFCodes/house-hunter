@@ -36,3 +36,5 @@ export type T_TaskUpdatePosting =
 export type T_Task =
   | T_TaskCrawlNewPostings
   | T_TaskUpdatePosting
+
+export type T_TaskCrawlNewPostingsWithStatus = T_TaskCrawlNewPostings & { isActive: boolean }

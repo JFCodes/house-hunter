@@ -11,6 +11,8 @@ $fontSizes:
 
 @each $semanticSize, $size in $fontSizes { .hh-text-#{$semanticSize} { font-size: $size; } }
 
+.hh-text-muted { color: var(--color-text-muted); }
+
 .hh-font-light { font-weight: 400; }
 .hh-font-regular { font-weight: 500; }
 .hh-font-semibold { font-weight: 600; }

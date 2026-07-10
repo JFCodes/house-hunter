@@ -23,6 +23,9 @@ type T_TaskUpdatePosting = T_BaseTask<E_TASK_TYPE.UPDATED_POSTING> & {
     options: {};
 };
 type T_Task = T_TaskCrawlNewPostings | T_TaskUpdatePosting;
+type T_TaskCrawlNewPostingsWithStatus = T_TaskCrawlNewPostings & {
+    isActive: boolean;
+};
 
 type T_PostingOperation = 'rent' | 'buy';
 type T_PostingType = 'single-home' | 'apartment';
@@ -105,5 +108,6 @@ declare class Err_TaskExecution extends Error {
 type T_API_RESPONSE_Ping = {
     status: 'ok';
 };
+type T_API_RESPONSE_TasksCrawlNewPostingsSearch = Array<T_TaskCrawlNewPostingsWithStatus>;
 
-export { E_ERROR_TYPES, E_TASK_SOURCE, E_TASK_TYPE, Err_TaskExecution, type T_API_RESPONSE_Ping, type T_Posting, type T_PostingAreas, type T_PostingContacts, type T_PostingImages, type T_PostingLocation, type T_PostingOperation, type T_PostingType, type T_PostingTypology, type T_Task, type T_TaskCrawlNewPostings, type T_TaskExecution, type T_TaskExecutionOutcome, type T_TaskExecutionResult, type T_TaskUpdatePosting };
+export { E_ERROR_TYPES, E_TASK_SOURCE, E_TASK_TYPE, Err_TaskExecution, type T_API_RESPONSE_Ping, type T_API_RESPONSE_TasksCrawlNewPostingsSearch, type T_Posting, type T_PostingAreas, type T_PostingContacts, type T_PostingImages, type T_PostingLocation, type T_PostingOperation, type T_PostingType, type T_PostingTypology, type T_Task, type T_TaskCrawlNewPostings, type T_TaskCrawlNewPostingsWithStatus, type T_TaskExecution, type T_TaskExecutionOutcome, type T_TaskExecutionResult, type T_TaskUpdatePosting };
