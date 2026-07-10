@@ -1,6 +1,6 @@
-import { E_TASK_TYPE, type T_TaskCrawlNewPostingsWithStatus, type T_TaskCrawlNewPostings } from '@house-hunter/types'
-import { ref, computed } from 'vue'
+import type { T_TaskCrawlNewPostingsWithStatus } from '@house-hunter/types'
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 // App
 import { useApi } from '@/composables/api'
 

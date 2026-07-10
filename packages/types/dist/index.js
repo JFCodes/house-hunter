@@ -1,3 +1,15 @@
+// src/entities/posting.ts
+var E_POSTING_USER_STATUS = /* @__PURE__ */ ((E_POSTING_USER_STATUS2) => {
+  E_POSTING_USER_STATUS2["NEW"] = "new";
+  E_POSTING_USER_STATUS2["DISMISS"] = "dismiss";
+  E_POSTING_USER_STATUS2["INTERESTING"] = "interesting";
+  E_POSTING_USER_STATUS2["CONTACT_MADE"] = "contact-made";
+  E_POSTING_USER_STATUS2["PROPOSAL_MADE"] = "proposal-made";
+  E_POSTING_USER_STATUS2["PROPOSAL_ACCEPTED"] = "bought";
+  E_POSTING_USER_STATUS2["BOUGHT"] = "bought";
+  return E_POSTING_USER_STATUS2;
+})(E_POSTING_USER_STATUS || {});
+
 // src/entities/task.ts
 var E_TASK_TYPE = /* @__PURE__ */ ((E_TASK_TYPE2) => {
   E_TASK_TYPE2["CRAWL_NEW_POSTINGS"] = "crawl-new-postings";
@@ -34,6 +46,7 @@ var Err_TaskExecution = class extends Error {
 };
 export {
   E_ERROR_TYPES,
+  E_POSTING_USER_STATUS,
   E_TASK_SOURCE,
   E_TASK_TYPE,
   Err_TaskExecution

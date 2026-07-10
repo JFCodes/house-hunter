@@ -1,6 +1,13 @@
 .hh-pointer { cursor: pointer; }
+
 .hh-group {
   gap: var(--spacing-xs);
   align-items: center;
   display: flex;
+}
+
+.hh-truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

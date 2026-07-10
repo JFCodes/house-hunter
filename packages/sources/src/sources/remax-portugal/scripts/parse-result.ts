@@ -1,4 +1,4 @@
-import { F_GetPostingIds } from '@house-hunter/functions'
+import { F_GetPostingEmptyHouseHunterFields, F_GetPostingIds } from '@house-hunter/functions'
 import type {
   T_TaskCrawlNewPostings,
   T_PostingLocation,
@@ -75,6 +75,7 @@ export function parseResult (task: T_TaskCrawlNewPostings, fromSource: PostingSe
 
   return {
     ...F_GetPostingIds(task.source, fromSource.id),
+    _houseHunterFields: F_GetPostingEmptyHouseHunterFields(),
     location: getLocationData(),
     contacts: getContactsData(),
     typology: getTypologyData(),
@@ -83,6 +84,7 @@ export function parseResult (task: T_TaskCrawlNewPostings, fromSource: PostingSe
     url: getUrl(),
     constructionYear: fromSource.constructionYear,
     operation: task.options.postingOperation,
+    description: fromSource.descriptionTags,
     types: task.options.postingTypes,
     price: fromSource.listingPrice,
     active: fromSource.isActive,

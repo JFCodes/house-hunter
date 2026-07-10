@@ -1,4 +1,8 @@
-import type { T_API_RESPONSE_Ping, T_API_RESPONSE_TasksCrawlNewPostingsSearch } from '@house-hunter/types'
+import {
+  type T_API_RESPONSE_TasksCrawlNewPostingsSearch,
+  type T_API_RESPONSE_PostingsSearch,
+  type T_API_RESPONSE_Ping,
+} from '@house-hunter/types'
 
 type RequestOptions = {
   path: string
@@ -15,6 +19,10 @@ export function useApi () {
     crawlNewPostings: {
       search: () => request<T_API_RESPONSE_TasksCrawlNewPostingsSearch>({ path: 'tasks/crawl-new-postings/search', method: 'GET' })
     }
+  }
+
+  const postings = {
+    search: () => request<T_API_RESPONSE_PostingsSearch>({ path: 'postings/search', method: 'GET' })
   }
 
   // Private
@@ -49,6 +57,7 @@ export function useApi () {
   return {
     testStuff,
     ping,
+    postings,
     tasks,
   }
 }

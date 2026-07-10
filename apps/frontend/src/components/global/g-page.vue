@@ -24,7 +24,7 @@ import CompGlobalPageHeader from '@/components/global/g-page-header.vue'
   &__grid {
     grid-template-rows: auto 1fr;
     gap: var(--spacing-xs);
-    max-width: 1480px;
+    max-width: 1550px;
     overflow: hidden;
     margin: 0 auto;
     display: grid;
@@ -33,6 +33,7 @@ import CompGlobalPageHeader from '@/components/global/g-page-header.vue'
 
     &-content {
       position: relative;
+      overflow: hidden;
     }
   }
 }

@@ -27,6 +27,15 @@ type T_TaskCrawlNewPostingsWithStatus = T_TaskCrawlNewPostings & {
     isActive: boolean;
 };
 
+declare enum E_POSTING_USER_STATUS {
+    NEW = "new",
+    DISMISS = "dismiss",
+    INTERESTING = "interesting",
+    CONTACT_MADE = "contact-made",
+    PROPOSAL_MADE = "proposal-made",
+    PROPOSAL_ACCEPTED = "bought",
+    BOUGHT = "bought"
+}
 type T_PostingOperation = 'rent' | 'buy';
 type T_PostingType = 'single-home' | 'apartment';
 type T_PostingLocation = {
@@ -62,7 +71,15 @@ type T_PostingContacts = {
     userContact: string;
     username: string;
 };
+type T_PostingHouseHunterFields = {
+    userStatus: E_POSTING_USER_STATUS;
+    proposedAmount: number;
+    dismissedAt: number;
+    created: number;
+    notes: string;
+};
 type T_Posting = {
+    _houseHunterFields: T_PostingHouseHunterFields;
     location: T_PostingLocation;
     contacts: T_PostingContacts;
     typology: T_PostingTypology;
@@ -73,6 +90,7 @@ type T_Posting = {
     constructionYear: number;
     source: E_TASK_SOURCE;
     idWithSource: string;
+    description: string;
     sourceId: string;
     active: boolean;
     price: number;
@@ -105,9 +123,10 @@ declare class Err_TaskExecution extends Error {
     constructor(task: T_Task, outcome: T_TaskExecutionOutcome, details: string);
 }
 
+type T_API_RESPONSE_TasksCrawlNewPostingsSearch = Array<T_TaskCrawlNewPostingsWithStatus>;
+type T_API_RESPONSE_PostingsSearch = Array<T_Posting>;
 type T_API_RESPONSE_Ping = {
     status: 'ok';
 };
-type T_API_RESPONSE_TasksCrawlNewPostingsSearch = Array<T_TaskCrawlNewPostingsWithStatus>;
 
-export { E_ERROR_TYPES, E_TASK_SOURCE, E_TASK_TYPE, Err_TaskExecution, type T_API_RESPONSE_Ping, type T_API_RESPONSE_TasksCrawlNewPostingsSearch, type T_Posting, type T_PostingAreas, type T_PostingContacts, type T_PostingImages, type T_PostingLocation, type T_PostingOperation, type T_PostingType, type T_PostingTypology, type T_Task, type T_TaskCrawlNewPostings, type T_TaskCrawlNewPostingsWithStatus, type T_TaskExecution, type T_TaskExecutionOutcome, type T_TaskExecutionResult, type T_TaskUpdatePosting };
+export { E_ERROR_TYPES, E_POSTING_USER_STATUS, E_TASK_SOURCE, E_TASK_TYPE, Err_TaskExecution, type T_API_RESPONSE_Ping, type T_API_RESPONSE_PostingsSearch, type T_API_RESPONSE_TasksCrawlNewPostingsSearch, type T_Posting, type T_PostingAreas, type T_PostingContacts, type T_PostingHouseHunterFields, type T_PostingImages, type T_PostingLocation, type T_PostingOperation, type T_PostingType, type T_PostingTypology, type T_Task, type T_TaskCrawlNewPostings, type T_TaskCrawlNewPostingsWithStatus, type T_TaskExecution, type T_TaskExecutionOutcome, type T_TaskExecutionResult, type T_TaskUpdatePosting };

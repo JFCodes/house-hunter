@@ -1,3 +1,15 @@
+// src/entities/get-posting-empty-house-hunter-fields.ts
+import { E_POSTING_USER_STATUS } from "@house-hunter/types";
+function F_GetPostingEmptyHouseHunterFields() {
+  return {
+    userStatus: E_POSTING_USER_STATUS.NEW,
+    created: (/* @__PURE__ */ new Date()).getTime(),
+    proposedAmount: 0,
+    dismissedAt: 0,
+    notes: ""
+  };
+}
+
 // src/entities/get-posting-id.ts
 function F_GetPostingIds(source, sourceId) {
   return {
@@ -29,6 +41,7 @@ function F_IsSameTaskExecution(leftExecution, rightExecution) {
   return F_IsSameTask(leftExecution.task, rightExecution.task);
 }
 export {
+  F_GetPostingEmptyHouseHunterFields,
   F_GetPostingIds,
   F_IsSameTask,
   F_IsSameTaskExecution

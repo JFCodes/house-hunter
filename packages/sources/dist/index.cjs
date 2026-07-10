@@ -190,6 +190,7 @@ function parseResult(task, fromSource) {
   };
   return {
     ...(0, import_functions.F_GetPostingIds)(task.source, fromSource.id),
+    _houseHunterFields: (0, import_functions.F_GetPostingEmptyHouseHunterFields)(),
     location: getLocationData(),
     contacts: getContactsData(),
     typology: getTypologyData(),
@@ -198,6 +199,7 @@ function parseResult(task, fromSource) {
     url: getUrl(),
     constructionYear: fromSource.constructionYear,
     operation: task.options.postingOperation,
+    description: fromSource.descriptionTags,
     types: task.options.postingTypes,
     price: fromSource.listingPrice,
     active: fromSource.isActive

@@ -20,11 +20,24 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var index_exports = {};
 __export(index_exports, {
+  F_GetPostingEmptyHouseHunterFields: () => F_GetPostingEmptyHouseHunterFields,
   F_GetPostingIds: () => F_GetPostingIds,
   F_IsSameTask: () => F_IsSameTask,
   F_IsSameTaskExecution: () => F_IsSameTaskExecution
 });
 module.exports = __toCommonJS(index_exports);
+
+// src/entities/get-posting-empty-house-hunter-fields.ts
+var import_types = require("@house-hunter/types");
+function F_GetPostingEmptyHouseHunterFields() {
+  return {
+    userStatus: import_types.E_POSTING_USER_STATUS.NEW,
+    created: (/* @__PURE__ */ new Date()).getTime(),
+    proposedAmount: 0,
+    dismissedAt: 0,
+    notes: ""
+  };
+}
 
 // src/entities/get-posting-id.ts
 function F_GetPostingIds(source, sourceId) {
@@ -37,10 +50,10 @@ function F_GetPostingIds(source, sourceId) {
 }
 
 // src/entities/is-same-task.ts
-var import_types = require("@house-hunter/types");
+var import_types2 = require("@house-hunter/types");
 function F_IsSameTask(leftTask, rightTask) {
   if (leftTask.source !== rightTask.source) return false;
-  if (leftTask.type === import_types.E_TASK_TYPE.CRAWL_NEW_POSTINGS && rightTask.type === import_types.E_TASK_TYPE.CRAWL_NEW_POSTINGS) {
+  if (leftTask.type === import_types2.E_TASK_TYPE.CRAWL_NEW_POSTINGS && rightTask.type === import_types2.E_TASK_TYPE.CRAWL_NEW_POSTINGS) {
     const { options: leftOptions } = leftTask;
     const { options: rightOptions } = rightTask;
     if (leftOptions.postingOperation !== rightOptions.postingOperation) return false;
@@ -49,7 +62,7 @@ function F_IsSameTask(leftTask, rightTask) {
     const leftPostingTypes = leftOptions.postingTypes.sort().join(",");
     if (leftPostingTypes !== rightPostingTypes) return false;
   }
-  if (leftTask.type === import_types.E_TASK_TYPE.UPDATED_POSTING && rightTask.type === import_types.E_TASK_TYPE.UPDATED_POSTING) {
+  if (leftTask.type === import_types2.E_TASK_TYPE.UPDATED_POSTING && rightTask.type === import_types2.E_TASK_TYPE.UPDATED_POSTING) {
   }
   return true;
 }
@@ -58,6 +71,7 @@ function F_IsSameTaskExecution(leftExecution, rightExecution) {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  F_GetPostingEmptyHouseHunterFields,
   F_GetPostingIds,
   F_IsSameTask,
   F_IsSameTaskExecution

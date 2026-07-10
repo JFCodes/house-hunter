@@ -1,5 +1,15 @@
 import type { E_TASK_SOURCE } from './task'
 
+export enum E_POSTING_USER_STATUS {
+  NEW = 'new',
+  DISMISS = 'dismiss',
+  INTERESTING = 'interesting',
+  CONTACT_MADE = 'contact-made',
+  PROPOSAL_MADE = 'proposal-made',
+  PROPOSAL_ACCEPTED = 'bought',
+  BOUGHT = 'bought',
+}
+
 // When we add more, need to update F_Validator_PostingType
 export type T_PostingOperation =
   | 'rent'
@@ -46,7 +56,17 @@ export type T_PostingContacts = {
   username: string
 }
 
+export type T_PostingHouseHunterFields = {
+  userStatus: E_POSTING_USER_STATUS
+  proposedAmount: number
+  dismissedAt: number
+  created: number
+  notes: string
+}
+
 export type T_Posting = {
+  _houseHunterFields: T_PostingHouseHunterFields
+
   location: T_PostingLocation
   contacts: T_PostingContacts
   typology: T_PostingTypology
@@ -58,6 +78,7 @@ export type T_Posting = {
   constructionYear: number
   source: E_TASK_SOURCE
   idWithSource: string
+  description: string
   sourceId: string
   active: boolean
   price: number

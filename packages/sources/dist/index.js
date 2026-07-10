@@ -110,7 +110,7 @@ function getPostingTypesSegment(types) {
 }
 
 // src/sources/remax-portugal/scripts/parse-result.ts
-import { F_GetPostingIds } from "@house-hunter/functions";
+import { F_GetPostingEmptyHouseHunterFields, F_GetPostingIds } from "@house-hunter/functions";
 function parseResult(task, fromSource) {
   const getLocationData = () => {
     const region = [
@@ -166,6 +166,7 @@ function parseResult(task, fromSource) {
   };
   return {
     ...F_GetPostingIds(task.source, fromSource.id),
+    _houseHunterFields: F_GetPostingEmptyHouseHunterFields(),
     location: getLocationData(),
     contacts: getContactsData(),
     typology: getTypologyData(),
@@ -174,6 +175,7 @@ function parseResult(task, fromSource) {
     url: getUrl(),
     constructionYear: fromSource.constructionYear,
     operation: task.options.postingOperation,
+    description: fromSource.descriptionTags,
     types: task.options.postingTypes,
     price: fromSource.listingPrice,
     active: fromSource.isActive

@@ -5,7 +5,7 @@ import { type Component, computed } from 'vue'
 import { E_ROUTER_PAGES } from '@/router/enums'
 // Components
 import UiIconButton from '@/components/ui/ui-icon-button.vue'
-import { MonitorCog, Home, Cctv, BellDot } from '@lucide/vue'
+import { MonitorCog, Home, Cctv, IdCard, BellDot } from '@lucide/vue'
 
 type Link = {
   to: RouteLocationRaw,
@@ -19,10 +19,11 @@ const route = useRoute()
 const links = computed<Array<Link>>(() => {
   const notificationsLink = getLinkItem(E_ROUTER_PAGES.NOTIFICATIONS, BellDot)
   const settingsLink = getLinkItem(E_ROUTER_PAGES.SETTINGS, MonitorCog)
+  const postingsLink = getLinkItem(E_ROUTER_PAGES.POSTINGS, IdCard)
   const tasksLink = getLinkItem(E_ROUTER_PAGES.TASKS, Cctv)
   const homeLink = getLinkItem(E_ROUTER_PAGES.HOME, Home)
 
-  return [homeLink, tasksLink, notificationsLink, settingsLink]
+  return [homeLink, postingsLink, tasksLink, notificationsLink, settingsLink]
 })
 
 const getLinkItem = (name: E_ROUTER_PAGES, icon: Component): Link => ({
