@@ -8,3 +8,8 @@ export type UiPageTab = {
 }
 
 export type UiPageTabRoute = UiPageTab & { to: RouteLocationRaw }
+
+export type UiSelectOption = {
+  value: null | string
+  label: string
+}

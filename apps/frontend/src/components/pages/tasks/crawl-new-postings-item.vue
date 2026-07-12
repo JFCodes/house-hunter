@@ -38,9 +38,9 @@ defineProps<{
 .task-item {
   background-color: var(--color-background-light);
   padding: var(--spacing-sm) var(--spacing-xs);
+  border: solid 1px transparent;
   border-bottom-color: var(--color-border);
   justify-content: space-between;
-  border: solid 1px transparent;
   align-items: center;
   display: flex;
 

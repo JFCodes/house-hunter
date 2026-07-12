@@ -1,5 +1,5 @@
 {
-  "name": "@house-hunter/sources",
+  "name": "@house-hunter/sources-info",
   "version": "0.0.1",
   "main": "./dist/index.js",
   "type": "module",
@@ -22,11 +22,5 @@
     "chokidar-cli": "^3.0.0",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3"
-  },
-  "dependencies": {
-    "@house-hunter/functions": "workspace:*",
-    "@house-hunter/sources-info": "workspace:*",
-    "@house-hunter/types": "workspace:*",
-    "playwright": "^1.61.1"
   }
 }
