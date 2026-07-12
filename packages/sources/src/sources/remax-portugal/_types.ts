@@ -36,6 +36,14 @@ export type PostingSearchItem = {
   listingPictures: Array<string>
 }
 
+export type MultiSearchPaginatedPayload = {
+  filters: Array<unknown>
+  searchValue: string
+  sort: Array<string>
+  pageNumber: number
+  pageSize: number
+}
+
 export type MultiSearchPaginated = {
   results: Array<PostingSearchItem>
   hasNextPage: number

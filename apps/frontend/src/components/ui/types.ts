@@ -7,9 +7,15 @@ export type UiPageTab = {
   key: string
 }
 
+export type IconToggleItem<K extends string> = {
+  isActive: boolean
+  icon: Component
+  key: K
+}
+
 export type UiPageTabRoute = UiPageTab & { to: RouteLocationRaw }
 
-export type UiSelectOption = {
-  value: null | string
+export type UiSelectOption<T extends string = string> = {
+  value: null | T
   label: string
 }

@@ -6,7 +6,7 @@ import {
 
 type RequestOptions = {
   path: string
-  method: 'GET'
+  method: 'GET' | 'POST'
 }
 
 export function useApi () {
@@ -17,7 +17,8 @@ export function useApi () {
   
   const tasks = {
     crawlNewPostings: {
-      search: () => request<T_API_RESPONSE_TasksCrawlNewPostingsSearch>({ path: 'tasks/crawl-new-postings/search', method: 'GET' })
+      search: () => request<T_API_RESPONSE_TasksCrawlNewPostingsSearch>({ path: 'tasks/crawl-new-postings/search', method: 'GET' }),
+      schedule: (taskId: string) => request({ path: `tasks/crawl-new-postings/${taskId}/schedule`, method: 'POST' })
     }
   }
 

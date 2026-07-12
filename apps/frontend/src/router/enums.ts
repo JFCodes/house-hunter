@@ -15,7 +15,9 @@ export enum E_ROUTER_PARAMS {
   TASK_ID = 'task_id'
 }
 
-export enum E_ROUTER_QUERIES {}
+export enum E_ROUTER_QUERIES {
+  viewTable = 'view-table'
+}
 
 export const CONST_ROUTER_PATHS: Record<E_ROUTER_PAGES, string> = {
   [E_ROUTER_PAGES.NOTIFICATIONS]: '/notifications',

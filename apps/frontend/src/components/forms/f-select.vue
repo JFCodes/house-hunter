@@ -75,8 +75,12 @@ const toggleMultiValue = (value: null | string): void => {
   emits('update:model-value', cloneValues)
 }
 
-const optionIsActive = (options: UiSelectOption): boolean => {
-  return true
+const optionIsActive = (option: UiSelectOption): boolean => {
+  if (Array.isArray(props.modelValue)) {
+    return props.modelValue.some(v => v === option.value)
+  } else {
+    return props.modelValue === option.value
+  }
 }
 
 function positionDropdown(options: null | HTMLDivElement): void {

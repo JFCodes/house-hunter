@@ -1,30 +1,25 @@
 <script setup lang="ts">
 import type { T_Task, T_TaskCrawlNewPostingsWithStatus } from '@house-hunter/types'
 import { computed, watch, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 // App
 import { useRouterUtils } from '@/composables/router-utils'
-import { useTooltips } from '@/composables/tooltips'
+import { useApi } from '@/composables/api'
 import { E_ROUTER_PARAMS } from '@/router/enums'
 import { useTasksStore } from '@/stores/tasks'
 // Components
+import CompEntityCrawlTaskLocationField from '@/components/entities/crawling-task/ct-location-field.vue'
+import CompEntityCrawlTaskTypeField from '@/components/entities/crawling-task/ct-type-field.vue'
 import CompEntityActiveBadge from '@/components/entities/is-active-badge.vue'
-import CompFormSelect from '@/components/forms/f-select.vue'
-import CompFormInput from '@/components/forms/f-input.vue'
+import CompUiButton from '@/components/ui/ui-button.vue'
 import CompUiEmpty from '@/components/ui/ui-empty.vue'
 import CompUiCard from '@/components/ui/ui-card.vue'
-import { BadgeInfo } from '@lucide/vue'
 
 const { computedStringParam } = useRouterUtils()
-const { sourceLocationInfo } = useTooltips()
-const { t } = useI18n()
+const { tasks: apiTasks } = useApi()
 const tasksStore = useTasksStore()
 
 const taskId = computedStringParam(E_ROUTER_PARAMS.TASK_ID)
 const editableTask = ref<null | T_TaskCrawlNewPostingsWithStatus>(null)
-
-const singleSelectValue = ref<null | string>(null)
-const multiSelectValue = ref<Array<string>>([])
 
 const task = computed<null | T_TaskCrawlNewPostingsWithStatus>(() => {
   if (!taskId.value) return null
@@ -37,13 +32,9 @@ const cloneTask = (task: T_Task | null): void => {
     : null
 }
 
-const showLoadingTooltip = (event: MouseEvent): void => {
-  sourceLocationInfo(event, {
-    messages: [
-      t('tooltips.crawlNewPostingLocation1'),
-      t('tooltips.crawlNewPostingLocation2'),
-    ]
-  })
+const scheduleCrawl = (): void => {
+  if (!task.value) return
+  apiTasks.crawlNewPostings.schedule(task.value.id)
 }
 
 watch(task, cloneTask, { immediate: true })
@@ -56,40 +47,33 @@ watch(task, cloneTask, { immediate: true })
 
   <CompUiCard v-else>
     <template #header>
-      <div class="hh-group">
-        <CompEntityActiveBadge :entity="editableTask" />
-
-        <p class="hh-font-bold hh-text-lg">
-          {{ editableTask.source.replaceAll('-', ' ') }}
-        </p>
-      </div>
+      <header class="header">
+        <div class="hh-group">
+          <CompEntityActiveBadge :entity="editableTask" />
+          <p class="hh-font-bold hh-text-lg">
+            {{ editableTask.source.replaceAll('-', ' ') }}
+          </p>
+        </div>
+        <div class="hh-group">
+          <CompUiButton :label="$t('pages.task.crawling.triggerCrawl')" @click="scheduleCrawl" />
+        </div>
+      </header>
     </template>
 
     <div class="layout">
-      <CompFormInput
-        v-model="editableTask.options.location"
-        :label="$t('global.location')">
-        <template #after-label>
-          <BadgeInfo class="hh-help" :size="16" @mouseenter="showLoadingTooltip" />
-        </template>
-      </CompFormInput>
-
-      <CompFormSelect
-        v-model="singleSelectValue"
-        close-on-click-outside
-        label="Single select"
-        :options="[{ label: '1', value: '1' }, { label: '2', value: '2' }, { label: '3', value: '3' },]" />
-
-      <CompFormSelect
-        v-model="multiSelectValue"
-        close-on-click-outside
-        multi
-        label="Multi select"
-        :options="[{ label: '1', value: '1' }, { label: '2', value: '2' }, { label: '3', value: '3' },]" />
+      <CompEntityCrawlTaskLocationField v-model="editableTask.options.location" />
+      <CompEntityCrawlTaskTypeField v-model="editableTask.options.postingTypes" />
     </div>
   </CompUiCard>
 </template>
 
 <style lang="scss" scoped>
+.header {
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  align-items: center;
+  display: flex;
+}
+
 .layout {}
 </style>

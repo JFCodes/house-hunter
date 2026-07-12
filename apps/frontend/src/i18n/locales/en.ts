@@ -22,7 +22,14 @@ export default {
     tasks: 'Tasks',
     typology: 'Rooms',
   },
-  pages: {},
+  pages: {
+    task: {
+      crawling: {
+        triggerCrawl: 'Find new posts',
+        types: 'Posting types'
+      }
+    }
+  },
   notFound: {
     task: 'Task not found',
   },
@@ -35,3 +42,4 @@ export default {
     postingType
   }
 } as const
+

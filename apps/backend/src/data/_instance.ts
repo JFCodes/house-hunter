@@ -39,6 +39,10 @@ export class Data<T extends { id: string }> {
     this.scheduleSaveData(this.data)
   }
 
+  public getRecord(id: string): null | T {
+    return this.data.find(i => i.id === id) ?? null
+  }
+
   // Private
   private get fullFilename () { return `./data/${this.filename}.json` }
 
