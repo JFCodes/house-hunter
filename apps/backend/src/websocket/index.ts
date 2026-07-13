@@ -6,9 +6,24 @@ import type {
   T_API_WEBSOCKET_ServerMessages,
 } from '@house-hunter/types'
 
+export let broadcast = (message: T_API_WEBSOCKET_ServerMessages): void => {
+  console.warn('broadCast callback not set')
+}
+
 export function initializeWebSocket (
   websocketServer: Server<typeof WebSocket, typeof http.IncomingMessage>
 ): void {
+
+  broadcast = (message: T_API_WEBSOCKET_ServerMessages): void => {
+    const serializedMessage = JSON.stringify(message)
+
+    for (const client of websocketServer.clients) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(serializedMessage)
+      }
+    }
+  }
+
   websocketServer.on('connection', (socket, request) => {
     const clientId = crypto.randomUUID()
     console.log(`WebSocket client connected: ${clientId}`)

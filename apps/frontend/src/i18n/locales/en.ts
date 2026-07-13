@@ -1,9 +1,14 @@
-import type { T_PostingType, T_PostingOperation } from '@house-hunter/types'
+import { type T_PostingType, type T_PostingOperation, E_TASK_TYPE } from '@house-hunter/types'
 import { E_POSTING_USER_STATUS } from '@house-hunter/types'
 
 const postingType: Record<T_PostingType, string> = {
   'apartment': 'Apartment',
   'single-home': 'Single home'
+}
+
+const taskType: Record<E_TASK_TYPE, string> = {
+  [E_TASK_TYPE.CRAWL_NEW_POSTINGS]: 'discovery new posts',
+  [E_TASK_TYPE.UPDATED_POSTING]: 'update item'
 }
 
 const postingOperation: Record<T_PostingOperation, string> = {
@@ -26,6 +31,7 @@ export default {
   global: {
     actions: 'Actions',
     active: 'Active',
+    activeTask: 'Active task',
     area: 'Area',
     askingPrice: 'Asking price',
     constructionYear: 'Construction year',
@@ -62,9 +68,24 @@ export default {
     crawlNewPostingLocation1: 'Location option is based on the source website.',
     crawlNewPostingLocation2: 'Please check the source information about this field.',
   },
+  toasts: {
+    taskStarted: {
+      message: `Task type '{type}' on {source} has started`,
+      title: 'Crawling started',
+    },
+    taskEndedSuccess: {
+      message: `Task type '{type}' on {source} finished successfully`,
+      title: 'Task finished successfully',
+    },
+    taskEndedError: {
+      message: `Task type '{type}' on {source} finished with an error:`,
+      title: 'Task error',
+    }
+  },
   enums: {
     postingOperation,
     postingStatus,
-    postingType
+    postingType,
+    taskType
   }
 } as const

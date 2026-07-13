@@ -3,6 +3,7 @@ import { T_TaskExecution } from '@house-hunter/types'
 // App
 import { ProcessExecutionResult } from './process-execution-result'
 import type { QueueTaskExecution } from './types'
+import { broadcast } from '../websocket/index'
 import { ExecuteTask } from './execute'
 
 class TaskExecutionQueueClass {
@@ -42,8 +43,17 @@ class TaskExecutionQueueClass {
       // This makes no op execution still wait for this.queue mutation in the meantime
       await new Promise(r => setTimeout(r, 0))
 
+      broadcast({ type: 'task-started', payload: { task: nextExecution.taskExecution } })
       const result = await ExecuteTask(nextExecution.taskExecution)
+
       ProcessExecutionResult(result)
+      broadcast({ type: 'task-ended', payload: {
+        task: nextExecution.taskExecution,
+        result: {
+          outcome: result.outcome,
+          error: result.error
+        }
+      } })
       
       if (result.outcome !== 'success') {
         // No source or no task type errors do not re-schedule
