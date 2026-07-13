@@ -19,3 +19,10 @@ export type UiSelectOption<T extends string = string> = {
   value: null | T
   label: string
 }
+
+export type T_UI_Toast = {
+  type: 'info' | 'success' | 'warning' | 'danger'
+  messages?: Array<string>
+  title: string
+  id: string
+}

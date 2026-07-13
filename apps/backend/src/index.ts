@@ -1,9 +1,12 @@
 import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
+import http from 'http'
+import { WebSocketServer } from 'ws'
 // App
 import { controller as NoCacheController } from './controllers/no-cache'
 import { TaskExecutionQueue } from './tasks/execution-queue'
+import { initializeWebSocket } from './websocket'
 import { router as ApiRouter } from './routers'
 import './data'
 
@@ -19,6 +22,13 @@ app.use(cors({ origin: '*' }))
 
 app.use('/api', NoCacheController, ApiRouter)
 
-app.listen(PORT, () => {
+const httpServer = http.createServer(app)
+const websocketServer = new WebSocketServer({
+  server: httpServer,
+  path: '/ws',
+})
+
+initializeWebSocket(websocketServer)
+httpServer.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
 })

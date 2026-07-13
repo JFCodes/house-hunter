@@ -54,6 +54,7 @@ const onEscapePress = (): void => {
       </div>
 
       <div class="modal-base__content">
+        <slot name="content"></slot>
       </div>
 
       <div v-if="slots['footer']" class="modal-base__footer">

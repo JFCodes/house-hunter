@@ -19,8 +19,9 @@ type RequestOptions<Body = never> =
     ? RequestBaseOptions
     : RequestBaseOptions & { body: Body }
 
+const baseUrl = `${import.meta.env.VITE_BACKEND_HOST}/api`
+
 export function useApi () {
-  const baseUrl = 'http://localhost:3000/api'
 
   const ping = () => request<T_API_RESPONSE_Ping>({ path: 'ping', method: 'GET' })
   const testStuff = () => request({ path: 'test-stuff', method: 'GET' })

@@ -7,8 +7,9 @@ import type { InjectedProps } from '@/stores/modals'
 import { usePostingsStore } from '@/stores/postings'
 import { useApi } from '@/composables/api'
 // Components
-import CompEntityPostingSourceBadge from '@/components/entities/posting/source-badge.vue'
 import CompEntityPostingStatusPicker from '@/components/entities/posting/status-picker.vue'
+import CompEntityPostingImageGallery from '@/components/entities/posting/image-gallery.vue'
+import CompEntityPostingSourceBadge from '@/components/entities/posting/source-badge.vue'
 import CompUiButton from '@/components/ui/ui-button.vue'
 import ModalsBase from '@/components/modals/m-base.vue'
 
@@ -45,7 +46,7 @@ onMounted(() => {
   <ModalsBase
     close-on-escape-press
     :is-loading="isLoading"
-    :width="820"
+    :width="1220"
     @overlay-click="closeModal(null)"
     @close="closeModal(null)">
 
@@ -64,7 +65,12 @@ onMounted(() => {
     </template>
 
     <template #content>
-      the content
+      <div class="content">
+        <CompEntityPostingImageGallery :images="posting.images" />
+        <div>
+          right side content
+        </div>
+      </div>
     </template>
 
     <template #footer>
@@ -81,5 +87,12 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   display: flex;
+}
+
+.content {
+  grid-template-columns: auto 1fr;
+  padding: var(--spacing-sm);
+  gap: var(--spacing-md);
+  display: grid;
 }
 </style>

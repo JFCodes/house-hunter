@@ -52,6 +52,9 @@ export default {
       }
     }
   },
+  empty: {
+    noPostingImages: 'No images in this posting',
+  },
   notFound: {
     task: 'Task not found',
   },
