@@ -13,14 +13,21 @@ class PostingsClass extends Data<T_Posting> {
   public batchUpsert (maybeNewPostings: Array<T_Posting>): void {
     // Make a map keyed by `idWithSource` which is the unique identifier of the respective source
     const map = new Map<string, T_Posting>()
+    const mergeIntoExisting = (mergeInto: T_Posting, mergeWith: T_Posting): T_Posting => ({
+      ...mergeInto,
+      ...mergeWith,
+      // Can't overwrite id nor head hunter fields
+      _houseHunterFields: mergeInto._houseHunterFields,
+      id: mergeInto.id,
+    })
+    
     this.data.forEach(posting => map.set(posting.sourceId, posting))
 
     for (const toUpsert of maybeNewPostings) {
-      // If exists - updated all fields but preserve existing system id
-      // If not, append new entry
+      // If exists - merge data - otherwise append new entry
       const exists = map.get(toUpsert.sourceId)
-      const updated = exists
-        ? { ...exists, ...toUpsert, id: exists.id }
+      const updated: T_Posting = exists
+        ? mergeIntoExisting(exists, toUpsert)
         : toUpsert
 
       map.set(toUpsert.sourceId, updated)
