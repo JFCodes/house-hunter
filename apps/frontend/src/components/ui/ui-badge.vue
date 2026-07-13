@@ -5,6 +5,8 @@ const props = defineProps<{
   backGroundColor?: string
   borderColor?: string
   textColor?: string
+  height?: number
+  width?: number | string
 }>()
 
 const styleString = computed(() => {
@@ -13,6 +15,17 @@ const styleString = computed(() => {
   if (props.backGroundColor) styles.push(`background-color:${props.backGroundColor}`)
   if (props.borderColor) styles.push(`border-color:${props.borderColor}`)
   if (props.textColor) styles.push(`color:${props.textColor}`)
+
+  if (props.width) {
+    typeof props.width === 'number'
+      ? styles.push(`width:${props.width}px`)
+      : styles.push(`width:${props.width}`)
+  }
+
+  if (props.height) {
+    styles.push(`line-height:${props.height}px`)
+    styles.push(`height:${props.height}px`)
+  }
 
   return styles.join(';')
 })

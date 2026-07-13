@@ -1,7 +1,11 @@
 export enum E_ROUTER_PAGES {
   NOTIFICATIONS = 'notifications',
-  POSTINGS = 'postings',
   SETTINGS = 'settings',
+
+  POSTINGS = 'postings',
+    POSTINGS_ALL = 'postings-all',
+    POSTINGS_BY_STATUS = 'postings-by-status',
+
 
   TASKS = 'tasks',
     TASKS_CRAWL_NEW_POSTINGS = 'tasks-crawl-new-postings',
@@ -12,6 +16,7 @@ export enum E_ROUTER_PAGES {
 }
 
 export enum E_ROUTER_PARAMS {
+  POSTING_STATUS = 'posting_status_id',
   TASK_ID = 'task_id'
 }
 
@@ -21,8 +26,11 @@ export enum E_ROUTER_QUERIES {
 
 export const CONST_ROUTER_PATHS: Record<E_ROUTER_PAGES, string> = {
   [E_ROUTER_PAGES.NOTIFICATIONS]: '/notifications',
-  [E_ROUTER_PAGES.POSTINGS]: '/postings',
   [E_ROUTER_PAGES.SETTINGS]: '/settings',
+
+  [E_ROUTER_PAGES.POSTINGS]: '/postings',
+    [E_ROUTER_PAGES.POSTINGS_ALL]: '',
+    [E_ROUTER_PAGES.POSTINGS_BY_STATUS]: `:${E_ROUTER_PARAMS.POSTING_STATUS}`,
 
   [E_ROUTER_PAGES.TASKS]: '/tasks',
     [E_ROUTER_PAGES.TASKS_CRAWL_NEW_POSTINGS]: '/crawl-new-postings',

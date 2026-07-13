@@ -1,0 +1,29 @@
+.hh-base-table {
+  width: 100%;
+  background-color: var(--color-background-light);
+  border-top-right-radius: var(--radius-md);
+  border-top-left-radius: var(--radius-md);
+
+  thead {
+    background-color: var(--color-background-light);
+    position: sticky;
+    top: 0;
+  }
+
+  th {
+    text-align: left;
+    padding: var(--spacing-sm) var(--spacing-xs);
+  }
+
+  td {
+    padding: var(--spacing-xs);
+  }
+
+  thead tr {
+    border-bottom: solid 3px var(--color-border);
+  }
+
+  tbody tr {
+    border-bottom: solid 1px var(--color-border);
+  }
+}

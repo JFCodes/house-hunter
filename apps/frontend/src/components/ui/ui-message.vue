@@ -17,7 +17,6 @@ const styleString = computed<string>(() => {
 
   if (props.maxWidth) styles.push(`max-width:${props.maxWidth}px`)
 
-  console.log({ styles: styles.join(';') })
   return styles.join(';')
 })
 </script>

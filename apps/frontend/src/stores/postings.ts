@@ -19,8 +19,14 @@ export const usePostingsStore = defineStore('postings', () => {
       .finally(() => isLoading.value = false)
   }
 
+  const updateRecord = (posting: T_Posting): void => {
+    const index = postings.value.findIndex(p => p.id === posting.id)
+    if (index !== -1) postings.value[index] = posting
+  }
+
   return {
     searchPostings,
+    updateRecord,
     isLoading,
     postings,
   }

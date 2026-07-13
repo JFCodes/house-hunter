@@ -10,6 +10,9 @@
   gap: var(--spacing-xs);
   align-items: center;
   display: flex;
+
+  &--spread { justify-content: space-between; }
+  &--end { justify-content: end; }
 }
 
 .hh-truncate {

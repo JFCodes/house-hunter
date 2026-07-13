@@ -5,13 +5,13 @@
 </template>
 
 <style lang="scss" scoped>
-
 .loading {
   background-color: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
   position: absolute;
   display: flex;
+  z-index: 1000;
   inset: 0;
 
   &__loader {
@@ -23,7 +23,8 @@
     display: grid;
     width: 50px;
 
-    &::before, &::after {    
+    &::before,
+    &::after {
       border-radius: 50%;
       grid-area: 1/1;
       border: inherit;
@@ -44,7 +45,9 @@
   }
 }
 
-@keyframes l16 { 
-  100%{transform: rotate(1turn)}
+@keyframes l16 {
+  100% {
+    transform: rotate(1turn)
+  }
 }
 </style>

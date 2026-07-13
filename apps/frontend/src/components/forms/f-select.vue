@@ -4,7 +4,6 @@ import { watch, ref, type SelectHTMLAttributes, computed } from 'vue'
 import type { UiSelectOption } from '@/components/ui/types'
 import { useClickoutSide } from '@/composables/click-outside'
 import { TELEPORTS } from '@/components/constants'
-
 // Components
 import CompFormsSelectOption from '@/components/forms/f-select-option.vue'
 import CompFormsSelectPill from '@/components/forms/f-select-pill.vue'
@@ -93,7 +92,6 @@ function positionDropdown(options: null | HTMLDivElement): void {
   styles.push(`width:${selectRect.width}px`)
   styles.push(`top:${selectRect.y + selectRect.height}px`)
   styles.push(`left:${selectRect.x}px`)
-  console.log(optionsStyle)
   optionsStyle.value = styles.join(';')
 }
 

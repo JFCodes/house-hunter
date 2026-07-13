@@ -9,11 +9,22 @@
   --color-text-dark: #020408;
   --color-border: #3d444d;
   --color-border-active: #f78166;
+  --color-border-active-90: #f7816690;
   --color-background-emphasis: #656c7633;
   // --color-hover: #f1f3f4;
   // --color-primary: #2563eb;
   // --color-primary-hover: #1d4ed8;
   // --color-primary-text: #ffffff;
+
+  // Proposal status colors
+  --color-status-new: #759fda;
+  --color-status-dismiss: #dc2626;
+  --color-status-interesting: #f59e0b;
+  --color-status-contact-made: #709ce3;
+  --color-status-proposal-made: #ffffff;
+  --color-status-proposal-rejected: #dc2626;
+  --color-status-proposal-accepted: #10b981;
+  --color-status-bought: #85e2c5;
 
   // Toast colors
   --color-success: #10b981;

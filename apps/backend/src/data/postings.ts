@@ -29,8 +29,6 @@ class PostingsClass extends Data<T_Posting> {
     // Finally, update the local data and schedule saving
     this.data = Array.from(map.values())
     this.scheduleSaveData(this.data)
-
-    console.log(this.data.length)
   }
 }
 

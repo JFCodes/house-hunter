@@ -1,19 +1,29 @@
 import {
+  // Payload
+  type T_API_PAYLOAD_PathPostingHunterFields,
+  // Responses
   type T_API_RESPONSE_TasksCrawlNewPostingsSearch,
   type T_API_RESPONSE_PostingsSearch,
+  type T_API_RESPONSE_Posting,
   type T_API_RESPONSE_Ping,
 } from '@house-hunter/types'
 
-type RequestOptions = {
+
+type RequestBaseOptions = {
+  method: 'GET' | 'POST' | 'PATCH'
   path: string
-  method: 'GET' | 'POST'
 }
+
+type RequestOptions<Body = never> =
+  [Body] extends [never]
+    ? RequestBaseOptions
+    : RequestBaseOptions & { body: Body }
 
 export function useApi () {
   const baseUrl = 'http://localhost:3000/api'
 
   const ping = () => request<T_API_RESPONSE_Ping>({ path: 'ping', method: 'GET' })
-  const testStuff = () => request<void>({ path: 'test-stuff', method: 'GET' })
+  const testStuff = () => request({ path: 'test-stuff', method: 'GET' })
   
   const tasks = {
     crawlNewPostings: {
@@ -23,18 +33,28 @@ export function useApi () {
   }
 
   const postings = {
-    search: () => request<T_API_RESPONSE_PostingsSearch>({ path: 'postings/search', method: 'GET' })
+    search: () => request<T_API_RESPONSE_PostingsSearch>({ path: 'postings/search', method: 'GET' }),
+    pathHunterFields: (postingId: string, fields: Partial<T_API_PAYLOAD_PathPostingHunterFields>) => {
+      return request<T_API_RESPONSE_Posting, T_API_PAYLOAD_PathPostingHunterFields>({
+        path: `postings/${postingId}/hunter-fields`,
+        method: 'PATCH',
+        body: fields,
+      })
+    }
   }
 
   // Private
-  async function request <Response> (options: RequestOptions): Promise<Response> {
+  async function request <Response, Body = never> (options: RequestOptions<Body>): Promise<Response> {
     const { method, path } = options
     const url = getUrl(path)
+    const body = 'body' in options
+      ? JSON.stringify(options.body)
+      : null
 
     const init: RequestInit = {
-      // ...(body && { body: JSON.stringify(body) }),
-      // headers: this.getHeaders(),
+      headers: getHeaders(),
       method,
+      body,
     }
 
     const response = await fetch(url, init)
@@ -53,6 +73,12 @@ export function useApi () {
   function getUrl (path: string): string {
     const url = new URL(`${baseUrl}/${path}`)
     return url.href
+  }
+
+  function getHeaders (): Record<string, string> {
+    return {
+      'Content-Type': 'application/json',
+    }
   }
 
   return {

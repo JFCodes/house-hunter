@@ -2,8 +2,9 @@
 // App
 import { useServerStatusStore } from '@/stores/server-status'
 // Components
+import CompGlobalTooltipAnchor from '@/components/global/g-tooltip-anchor.vue'
+import CompGlobalModalAnchor from '@/components/global/g-modal-anchor.vue'
 import CompGlobalTeleports from '@/components/global/g-teleports.vue'
-import CompTooltipAnchor from '@/components/tooltips/t-anchor.vue'
 import CompGlobalPage from '@/components/global/g-page.vue'
 import CompUiLoading from '@/components/ui/ui-loading.vue'
 import ViewOffline from '@/views/v-offline.vue'
@@ -13,7 +14,8 @@ const serverStatusStore = useServerStatusStore()
 </script>
 
 <template>
-  <CompTooltipAnchor />
+  <CompGlobalTooltipAnchor />
+  <CompGlobalModalAnchor />
   <CompGlobalTeleports />
 
   <CompUiLoading v-if="serverStatusStore.isInitializing" />

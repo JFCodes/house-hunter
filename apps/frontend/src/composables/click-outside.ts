@@ -9,7 +9,6 @@ export function useClickoutSide (
 
   const onWindowClick = (event: MouseEvent): void => {
     if (!event.target) return
-
     checkClickOutside(event.target as HTMLElement)
   }
 

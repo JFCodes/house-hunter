@@ -21,9 +21,9 @@ defineProps<{ postings: Array<T_Posting> }>()
 .grid {
   justify-content: space-evenly;
   gap: var(--spacing-sm);
+  max-height: 100%;
   overflow-y: auto;
   flex-wrap: wrap;
   display: flex;
-  height: 100%;
 }
 </style>

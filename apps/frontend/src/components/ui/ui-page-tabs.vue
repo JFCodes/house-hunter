@@ -13,9 +13,15 @@ const route = useRoute()
 const tabIsActive = (tab: UiPageTab | UiPageTabRoute): boolean => {
   if ('to' in tab) {
     if (typeof tab.to !== 'string') {
-      if ('name' in tab.to) {
-        return tab.to.name === route.name
+      let hasSameName = false
+      let hasSameParams = true
+
+      if ('name' in tab.to) hasSameName = tab.to.name === route.name
+      if ('params' in tab.to) {
+        hasSameParams = JSON.stringify(tab.to.params) === JSON.stringify(route.params)
       }
+
+      return hasSameName && hasSameParams
     }
   }
 

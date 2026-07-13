@@ -42,8 +42,6 @@ export const useTooltipStore = defineStore('tooltip', () => {
       },
       element,
     }
-
-    console.log(activeTooltip.value)
   }
 
   return {

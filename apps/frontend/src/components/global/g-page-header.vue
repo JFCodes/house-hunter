@@ -4,7 +4,7 @@ import { type Component, computed } from 'vue'
 // App
 import { E_ROUTER_PAGES } from '@/router/enums'
 // Components
-import UiIconButton from '@/components/ui/ui-icon-button.vue'
+import CompUiIconButton from '@/components/ui/ui-icon-button.vue'
 import { MonitorCog, Home, Cctv, IdCard, BellDot } from '@lucide/vue'
 
 type Link = {
@@ -45,7 +45,7 @@ const checkLinkIsActive = (name: E_ROUTER_PAGES): boolean => {
     <p class="hh-font-bold">HOUSE HUNTER</p>
 
     <div class="header__actions">
-      <UiIconButton
+      <CompUiIconButton
         v-for="link in links"
         :is-active="link.isActive"
         :link-to="link.to"

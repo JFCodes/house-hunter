@@ -6,7 +6,8 @@ export enum E_POSTING_USER_STATUS {
   INTERESTING = 'interesting',
   CONTACT_MADE = 'contact-made',
   PROPOSAL_MADE = 'proposal-made',
-  PROPOSAL_ACCEPTED = 'bought',
+  PROPOSAL_ACCEPTED = 'proposal-accepted',
+  PROPOSAL_REJECTED = 'proposal-rejected',
   BOUGHT = 'bought',
 }
 

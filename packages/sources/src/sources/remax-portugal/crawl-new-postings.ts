@@ -42,6 +42,5 @@ export async function crawl(task: T_TaskCrawlNewPostings): Promise<T_TaskExecuti
   await browser.close()
 
   const postings = rawPostings.map(item => parseResult(task, item))
-  console.log(postings.length)
   return { outcome: 'success', postings }
 }
