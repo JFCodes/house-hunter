@@ -7,7 +7,7 @@ const postingType: Record<T_PostingType, string> = {
 }
 
 const taskType: Record<E_TASK_TYPE, string> = {
-  [E_TASK_TYPE.CRAWL_NEW_POSTINGS]: 'discovery new posts',
+  [E_TASK_TYPE.CRAWL_NEW_POSTINGS]: 'discover new posts',
   [E_TASK_TYPE.UPDATED_POSTING]: 'update item'
 }
 

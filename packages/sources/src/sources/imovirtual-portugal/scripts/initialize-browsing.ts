@@ -8,15 +8,15 @@ export async function initializeBrowsing (): Promise<{ browser: Browser, page: P
 
   await page.goto(BASE_URL, { waitUntil: 'networkidle' })
 
-  // Handle cookies banner
-  const banner = page.locator(SELECTORS.cookieBanner.banner)
-  if (await banner.isVisible()) {
-    const button = banner.locator(SELECTORS.cookieBanner.allowButton)
+  // // Handle cookies banner
+  // const banner = page.locator(SELECTORS.cookieBanner.banner)
+  // if (await banner.isVisible()) {
+  //   const button = banner.locator(SELECTORS.cookieBanner.allowButton)
 
-    await button.waitFor({ state: 'visible' })
-    await button.click()
-    await banner.waitFor({ state: 'hidden' })
-  }
+  //   await button.waitFor({ state: 'visible' })
+  //   await button.click()
+  //   await banner.waitFor({ state: 'hidden' })
+  // }
 
   return { browser, page }
 }

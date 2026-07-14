@@ -6,6 +6,7 @@ export enum E_TASK_TYPE {
 }
 
 export enum E_TASK_SOURCE {
+  IMOVIRTUAL_PORTUGAL = 'imovirtual-portugal',
   IDEALISTA_PORTUGAL = 'idealista-portugal',
   REMAX_PORTUGAL = 'remax-portugal',
 }

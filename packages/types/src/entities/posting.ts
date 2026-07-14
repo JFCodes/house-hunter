@@ -21,10 +21,10 @@ export type T_PostingType =
   | 'apartment'
 
 export type T_PostingLocation = {
-  isExact: boolean
-  longitude: number
-  latitude: number
+  longitude: null | number
+  latitude: null | number
   localZone: string
+  isExact: boolean
   zipCode: string
   address: string
   region: string
@@ -37,17 +37,17 @@ export type T_PostingAreas = {
 
 export type T_PostingTypology = {
   bedrooms: number
-  bathrooms: number
-  otherRooms: number
+  bathrooms: null | number
+  otherRooms: null | number
   totalRooms: null | number
-  hasParking: boolean
-  hasGarage: boolean
-  parkingSpots: number
+  hasParking: null | boolean
+  hasGarage: null | boolean
+  parkingSpots: null | number
 }
 
 export type T_PostingImages = {
-  main: string
   images: Array<string>
+  main: null | string
 }
 
 export type T_PostingContacts = {

@@ -9,24 +9,12 @@ export const data = new Data<T_Task>({
 
 // data.addRecord({
 //   type: E_TASK_TYPE.CRAWL_NEW_POSTINGS,
-//   source: E_TASK_SOURCE.REMAX_PORTUGAL,
+//   source: E_TASK_SOURCE.IMOVIRTUAL_PORTUGAL,
 //   createdAt: new Date().getTime(),
 //   id: crypto.randomUUID(),
 //   options: {
 //     postingTypes: ['single-home'],
 //     postingOperation: 'buy',
-//     location: 'leiria'
-//   }
-// })
-
-// data.addRecord({
-//   type: E_TASK_TYPE.CRAWL_NEW_POSTINGS,
-//   source: E_TASK_SOURCE.REMAX_PORTUGAL,
-//   createdAt: new Date().getTime(),
-//   id: crypto.randomUUID(),
-//   options: {
-//     postingTypes: ['apartment'],
-//     postingOperation: 'buy',
-//     location: 'leiria'
+//     location: 'leiria/leiria'
 //   }
 // })

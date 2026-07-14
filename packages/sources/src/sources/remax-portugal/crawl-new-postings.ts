@@ -1,15 +1,24 @@
 import { type T_TaskCrawlNewPostings, type T_TaskExecutionResult, Err_TaskExecution } from '@house-hunter/types'
 // App
-import { InterceptNetworkOnAction } from '../../engine/scripts/intercept-network-on-action'
 import type { MultiSearchPaginated, MultiSearchPaginatedPayload } from './_types'
-import { requestPageListing } from './scripts/request-page-listing-page'
-import { initializeBrowsing } from './scripts/initialize-browsing'
+import { requestPageListing } from './crawl-new-postings/request-page-listing-page'
+import { API_SEARCH_PATH, SELECTORS, BASE_URL } from './_constants'
 import { getSearchUrl } from './crawl-new-postings/get-search-url'
 import { parseResult } from './scripts/parse-result'
-import { API_SEARCH_PATH } from './_constants'
+import {
+  InterceptNetworkOnAction,
+  DismissCookieBanner,
+  GetBrowserAndPage
+} from '../../engine'
 
 export async function crawl(task: T_TaskCrawlNewPostings): Promise<T_TaskExecutionResult> {
-  const { browser, page } = await initializeBrowsing()
+  const { browser, page } = await GetBrowserAndPage()
+
+  await page.goto(BASE_URL, { waitUntil: 'networkidle' })
+  await DismissCookieBanner(page, {
+    bannerButtonSelection: SELECTORS.cookieBanner.allowButton,
+    bannerSelector: SELECTORS.cookieBanner.banner
+  })
 
   const searchUrl = getSearchUrl(task)
   const response = await InterceptNetworkOnAction<MultiSearchPaginated, MultiSearchPaginatedPayload>({
