@@ -2,8 +2,9 @@
 import { onMounted, onUnmounted } from 'vue'
 // App
 import { useServerStatusStore } from '@/stores/server-status'
-import { websocket } from '@/websocket/client'
 import { unsubscribeSocket } from '@/websocket/instance'
+import { usePostingsStore } from '@/stores/postings'
+import { websocket } from '@/websocket/client'
 // Components
 import CompGlobalTooltipAnchor from '@/components/global/g-tooltip-anchor.vue'
 import CompGlobalToastsAnchor from '@/components/global/g-toasts-anchor.vue'
@@ -14,8 +15,13 @@ import CompUiLoading from '@/components/ui/ui-loading.vue'
 import ViewOffline from '@/views/v-offline.vue'
 
 const serverStatusStore = useServerStatusStore()
+const postingsStore = usePostingsStore()
 
-onMounted(() => websocket.connect())
+onMounted(() => {
+  postingsStore.searchPostings()
+  websocket.connect()
+})
+
 onUnmounted(() => {
   unsubscribeSocket()
   websocket.disconnect()

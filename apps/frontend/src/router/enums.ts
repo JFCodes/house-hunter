@@ -13,6 +13,8 @@ export enum E_ROUTER_PAGES {
     TASKS_LOGS = 'tasks-logs',
   
   HOME = 'home',
+    HOME_DASHBOARD = 'home-dashboard',
+    HOME_SWIPE = 'home-swipe',
 }
 
 export enum E_ROUTER_PARAMS {
@@ -37,5 +39,7 @@ export const CONST_ROUTER_PATHS: Record<E_ROUTER_PAGES, string> = {
       [E_ROUTER_PAGES.TASKS_CRAWL_NEW_POSTINGS_TASK]: `:${E_ROUTER_PARAMS.TASK_ID}`,
     [E_ROUTER_PAGES.TASKS_LOGS]: 'logs',
     
-  [E_ROUTER_PAGES.HOME]: '/'
+  [E_ROUTER_PAGES.HOME]: '/',
+    [E_ROUTER_PAGES.HOME_DASHBOARD]: 'dashboard',
+    [E_ROUTER_PAGES.HOME_SWIPE]: 'swipe',
 }

@@ -19,6 +19,7 @@ const toastsStore = useToastsStore()
 
 <style lang="scss" scoped>
 .toasts-anchor {
+  z-index: 9000;
   bottom: var(--spacing-lg);
   right: var(--spacing-lg);
   flex-direction: column;

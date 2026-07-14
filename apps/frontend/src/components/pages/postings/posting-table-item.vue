@@ -20,7 +20,10 @@ const { showPostingsModal } = useModals()
     <!-- Thumbnail -->
     <td>
       <div class="thumbnail">
-        <img class="thumbnail__img" :src="posting.images.main" />
+        <img
+          v-if="posting.images.main"
+          class="thumbnail__img"
+          :src="posting.images.main" />
       </div>
     </td>
 

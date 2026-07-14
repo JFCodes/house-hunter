@@ -1,6 +1,8 @@
 .hh-pointer { cursor: pointer; }
 .hh-help { cursor: help; }
 
+.hh-inline { display: inline-block ;}
+
 .hh-divider {
   border-bottom: solid 1px var(--color-border);
   margin: var(--spacing-sm) 0;

@@ -27,12 +27,30 @@ onBeforeMount(postingsStore.searchPostings)
 </script>
 
 <template>
-  <div class="hh-group hh-mb-md">
-    <CompUiIconToggle
-      :items="toggleItems"
-      @item-click="key => tableView = key === 'table'" />
-  </div>
+  <div class="content">
+    <div class="hh-group hh-mb-md">
+      <CompUiIconToggle
+        :items="toggleItems"
+        @item-click="key => tableView = key === 'table'" />
+    </div>
 
-  <PostingsTable v-if="tableView" :postings="postingsStore.postings" />
-  <PostingsGrid v-else :postings="postingsStore.postings" />
+    <div class="content__container hh-pb-md">
+      <PostingsTable v-if="tableView" :postings="postingsStore.postings" />
+      <PostingsGrid v-else :postings="postingsStore.postings" />
+    </div>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+.content {
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: var(--spacing-md);
+
+  &__container {
+    overflow-y: auto;
+  }
+}
+</style>

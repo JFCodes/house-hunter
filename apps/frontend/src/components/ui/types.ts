@@ -3,6 +3,7 @@ import type { Component } from 'vue'
 
 export type UiPageTab = {
   icon?: Component
+  badge?: string
   label: string
   key: string
 }

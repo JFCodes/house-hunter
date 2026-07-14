@@ -9,7 +9,7 @@ defineProps<{ icon?: Component }>()
 <template>
   <div class="empty">
     <component :is="icon || ShieldQuestionMark" color="var(--color-text-muted)" :size="54" />
-    <div>
+    <div class="hh-text-center">
       <slot></slot>
     </div>
   </div>

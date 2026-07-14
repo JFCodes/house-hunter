@@ -5,7 +5,6 @@ import { computed, onMounted, ref } from 'vue'
 import type { ModalPostingReturnType, ModalPostingProps } from '@/components/modals/_types'
 import type { InjectedProps } from '@/stores/modals'
 import { usePostingsStore } from '@/stores/postings'
-import { useApi } from '@/composables/api'
 // Components
 import CompEntityPostingStatusPicker from '@/components/entities/posting/status-picker.vue'
 import CompEntityPostingImageGallery from '@/components/entities/posting/image-gallery.vue'
@@ -15,7 +14,6 @@ import ModalsBase from '@/components/modals/m-base.vue'
 
 const props = defineProps<ModalPostingProps & InjectedProps<ModalPostingReturnType>>()
 
-const { postings: apiPostings } = useApi()
 const postingsStore = usePostingsStore()
 
 const editableStatus = ref<E_POSTING_USER_STATUS>(E_POSTING_USER_STATUS.NEW)
@@ -27,13 +25,9 @@ const canSave = computed(() => {
 
 const save = async () => {
   isLoading.value = true
-  apiPostings
-    .pathHunterFields(props.posting.id, { userStatus: editableStatus.value })
-    .then(result => {
-      postingsStore.updateRecord(result)
-      props.closeModal(null)
-    })
-    .catch(() => { })
+  postingsStore
+    .updateHunterFields(props.posting.id, { userStatus: editableStatus.value })
+    .then(() => props.closeModal(null))
     .finally(() => isLoading.value = false)
 }
 

@@ -49,6 +49,7 @@ onBeforeMount(tasksStore.searchCrawlNewPostingTasks)
   height: 100%;
 
   &__content {
+    overflow: hidden;
     flex: 1;
   }
 }

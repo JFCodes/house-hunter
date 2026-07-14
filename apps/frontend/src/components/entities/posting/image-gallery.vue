@@ -26,7 +26,6 @@ const moveRight = (): void => {
     ? activeIndex.value + 1
     : 0
 }
-
 </script>
 
 <template>

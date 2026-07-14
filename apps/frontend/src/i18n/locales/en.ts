@@ -35,12 +35,14 @@ export default {
     area: 'Area',
     askingPrice: 'Asking price',
     constructionYear: 'Construction year',
+    dashboard: 'Dashboard',
     description: 'Description',
     location: 'Location',
     history: 'History',
     save: 'Save',
     status: 'Status',
     stopped: 'Stopped',
+    swipe: 'Swipe postings',
     tasks: 'Tasks',
     typology: 'Rooms',
     year: 'Year',
@@ -56,6 +58,12 @@ export default {
         triggerCrawl: 'Find new posts',
         types: 'Posting types'
       }
+    },
+    swipe: {
+      emptyMessage1: 'No more posts to swipe',
+      emptyMessage2: `No more posts with status '{status}'`,
+      postsLeft: 'You have {count} ads to swipe',
+      statusPicker: 'Select status to classify',
     }
   },
   empty: {
@@ -80,6 +88,10 @@ export default {
     taskEndedError: {
       message: `Task type '{type}' on {source} finished with an error:`,
       title: 'Task error',
+    },
+    postingUpdateFailed: {
+      message: `Failed to save changes to post`,
+      title: 'Update error',
     }
   },
   enums: {
