@@ -6,17 +6,17 @@
 
 <style lang="scss" scoped>
 .loading {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: var(--z-loading);
   justify-content: center;
   align-items: center;
   position: absolute;
   display: flex;
-  z-index: 1000;
   inset: 0;
 
   &__loader {
-    border: 4px solid var(--color-black);
-    border-color: var(--color-text-base) #0000;
+    border: 4px solid var(--c-black);
+    border-color: var(--c-font-main) #0000;
     animation: l16 1s infinite linear;
     border-radius: 50%;
     aspect-ratio: 1;
@@ -33,7 +33,7 @@
     }
 
     &::before {
-      border-color: var(--color-warning) #0000;
+      border-color: var(--c-orange) #0000;
       animation-direction: reverse;
       animation-duration: .5s;
       animation: inherit;

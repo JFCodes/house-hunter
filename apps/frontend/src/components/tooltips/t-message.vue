@@ -5,7 +5,7 @@ defineProps<TooltipMessageProps>()
 </script>
 
 <template>
-  <div class="tooltip hh-text-2xs">
+  <div class="tooltip --text-xs">
     <p v-for="(message, index) in messages" :key="index">
       {{ message }}
     </p>
@@ -14,6 +14,6 @@ defineProps<TooltipMessageProps>()
 
 <style lang="scss" scoped>
 .tooltip {
-  padding: var(--spacing-2xs) var(--spacing-xs);
+  padding: var(--s-2xs) var(--s-sm);
 }
 </style>

@@ -1,40 +1,30 @@
 <script setup lang="ts">
 import type { T_TaskExecution, T_TaskExecutionResult } from '@house-hunter/types'
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
+// Components
+import CompUiTaskBadge from '@/components/ui/ui-task-badge.vue'
 import { SearchCheck, SearchX } from '@lucide/vue'
 
-defineProps<{
+const props = defineProps<{
   result: Omit<T_TaskExecutionResult, 'postings'>
   execution: T_TaskExecution
 }>()
+
+const { t } = useI18n()
+
+const label = computed<string>(() => {
+  const { source, type } = props.execution.task
+  const taskType = t(`enums.taskType.${type}`)
+  const activeTask = t('global.activeTask')
+  return `${activeTask}: ${source} ${taskType}`
+})
 </script>
 
 <template>
-  <div
-    class="task-execution hh-text-3xs hh-uppercase hh-font-bold"
-    :class="{ 'task-execution--error': result.outcome !== 'success' }">
+  <CompUiTaskBadge
+    :icon="result.outcome === 'success' ? SearchCheck : SearchX"
+    :type="result.outcome === 'success' ? 'success' : 'error'"
+    :label="label" />
 
-    <SearchCheck v-if="result.outcome === 'success'" :size="17" />
-    <SearchX v-else :size="17" />
-
-    {{ $t('global.activeTask') }}: {{ execution.task.source }} ({{ $t(`enums.taskType.${execution.task.type}`) }})
-  </div>
 </template>
-
-<style lang="scss" scoped>
-.task-execution {
-  background-color: var(--color-success-muted);
-  border: solid 1px var(--color-success-text);
-  border-radius: var(--radius-sm);
-  padding: 0 var(--spacing-sm);
-  gap: var(--spacing-xs);
-  align-items: center;
-  line-height: 30px;
-  display: flex;
-  height: 32px;
-
-  &--error {
-    background-color: var(--color-danger-muted);
-    border: solid 1px var(--color-danger);
-  }
-}
-</style>

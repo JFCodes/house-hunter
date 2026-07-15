@@ -13,7 +13,6 @@ const style = computed<string>(() => {
 
   return GetTooltipStyle(element, tooltip.position)
 })
-
 </script>
 
 <template>
@@ -26,12 +25,13 @@ const style = computed<string>(() => {
 
 <style lang="scss" scoped>
 .tooltip-anchor {
-  background-color: var(--color-text-base);
-  border: solid 1px var(--color-white);
+  box-shadow: 0 0 4px rgba(229, 231, 235, 0.04);
+  border: solid 1px var(--c-tooltip-border-color);
+  background-color: var(--c-tooltip-background);
   border-radius: var(--radius-sm);
-  color: var(--color-text-dark);
+  color: var(--c-tooltip-color);
+  z-index: var(--z-tooltips);
   overflow: hidden;
   position: fixed;
-  z-index: 9999;
 }
 </style>

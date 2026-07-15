@@ -20,10 +20,18 @@ const tasksStore = useTasksStore()
 
 const taskId = computedStringParam(E_ROUTER_PARAMS.TASK_ID)
 const editableTask = ref<null | T_TaskCrawlNewPostingsWithStatus>(null)
+const isLaunchingTask = ref(false)
 
 const task = computed<null | T_TaskCrawlNewPostingsWithStatus>(() => {
   if (!taskId.value) return null
   return tasksStore.crawlNewPostingTasks.find(t => t.id === taskId.value) ?? null
+})
+
+
+const isExecutingTask = computed(() => {
+  if (!task.value) return false
+  if (!tasksStore.activeTaskExecution) return false
+  return tasksStore.activeTaskExecution.task.id === task.value.id
 })
 
 const cloneTask = (task: T_Task | null): void => {
@@ -34,7 +42,11 @@ const cloneTask = (task: T_Task | null): void => {
 
 const scheduleCrawl = (): void => {
   if (!task.value) return
-  apiTasks.crawlNewPostings.schedule(task.value.id)
+
+  isLaunchingTask.value = true
+  apiTasks.crawlNewPostings
+    .schedule(task.value.id)
+    .finally(() => isLaunchingTask.value = false)
 }
 
 watch(task, cloneTask, { immediate: true })
@@ -42,26 +54,31 @@ watch(task, cloneTask, { immediate: true })
 
 <template>
   <CompUiEmpty v-if="!editableTask">
-    <p class="hh-text-muted hh-text-md">{{ $t('notFound.task') }}</p>
+    <p class="--text-md">{{ $t('notFound.task') }}</p>
   </CompUiEmpty>
 
   <CompUiCard v-else>
     <template #header>
       <header class="header">
-        <div class="hh-group">
+        <div class="--group">
           <CompEntityActiveBadge :entity="editableTask" />
-          <p class="hh-font-bold hh-text-lg">
+          <p class="--font-bold --text-lg">
             {{ editableTask.source.replaceAll('-', ' ') }}
           </p>
         </div>
-        <div class="hh-group">
-          <CompUiButton :label="$t('pages.task.crawling.triggerCrawl')" @click="scheduleCrawl" />
+        <div class="--group">
+          <CompUiButton
+            filled
+            type="primary"
+            :is-loading="isLaunchingTask || isExecutingTask"
+            :label="$t('pages.task.crawling.triggerCrawl')"
+            @click="scheduleCrawl" />
         </div>
       </header>
     </template>
 
-    <div class="layout">
-      <CompEntityCrawlTaskLocationField v-model="editableTask.options.location" />
+    <div>
+      <CompEntityCrawlTaskLocationField v-model="editableTask.options.location" class="--mb-sm" />
       <CompEntityCrawlTaskTypeField v-model="editableTask.options.postingTypes" />
     </div>
   </CompUiCard>
@@ -74,6 +91,4 @@ watch(task, cloneTask, { immediate: true })
   align-items: center;
   display: flex;
 }
-
-.layout {}
 </style>

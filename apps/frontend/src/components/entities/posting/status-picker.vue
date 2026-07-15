@@ -10,13 +10,13 @@ defineProps<{ activeStatus: E_POSTING_USER_STATUS }>()
 
 const orderedStatus: Array<E_POSTING_USER_STATUS> = [
   E_POSTING_USER_STATUS.NEW,
-  E_POSTING_USER_STATUS.DISMISS,
   E_POSTING_USER_STATUS.INTERESTING,
   E_POSTING_USER_STATUS.CONTACT_MADE,
   E_POSTING_USER_STATUS.PROPOSAL_MADE,
   E_POSTING_USER_STATUS.PROPOSAL_ACCEPTED,
-  E_POSTING_USER_STATUS.PROPOSAL_REJECTED,
   E_POSTING_USER_STATUS.BOUGHT,
+  E_POSTING_USER_STATUS.PROPOSAL_REJECTED,
+  E_POSTING_USER_STATUS.DISMISS,
 ]
 
 const changeAndClose = (status: E_POSTING_USER_STATUS, close: () => void): void => {
@@ -45,7 +45,7 @@ const changeAndClose = (status: E_POSTING_USER_STATUS, close: () => void): void 
       <div class="options">
         <CompEntityPostingStatusBadge
           v-for="status in orderedStatus"
-          class="hh-pointer"
+          class="--pointer"
           width="100%"
           :posting-status="status"
           :key="status"
@@ -57,9 +57,9 @@ const changeAndClose = (status: E_POSTING_USER_STATUS, close: () => void): void 
 
 <style lang="scss" scoped>
 .options {
-  padding: var(--spacing-xs);
+  padding: var(--s-xs);
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--s-xs);
   display: flex;
 }
 </style>

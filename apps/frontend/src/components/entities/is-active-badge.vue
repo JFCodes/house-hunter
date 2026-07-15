@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T extends { isActive: boolean }">
 // Components
-import CompUiBadge from '@/components/ui/ui-badge.vue'
+import CompUiTypeBadge from '@/components/ui/ui-type-badge.vue'
 
 withDefaults(
   defineProps<{
@@ -16,11 +16,7 @@ withDefaults(
 </script>
 
 <template>
-  <CompUiBadge
-    :border-color="entity.isActive ? 'var(--color-success)' : 'var(--color-danger)'"
-    :text-color="entity.isActive ? 'var(--color-success)' : 'var(--color-danger)'">
-
+  <CompUiTypeBadge :type="entity.isActive ? 'success' : 'danger'">
     {{ entity.isActive ? $t(activeLabelKey) : $t(inactiveLabelKey) }}
-
-  </CompUiBadge>
+  </CompUiTypeBadge>
 </template>

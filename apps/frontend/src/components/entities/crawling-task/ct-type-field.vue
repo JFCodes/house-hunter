@@ -14,7 +14,6 @@ const postingTypeOptions: Array<UiSelectOption<T_PostingType>> = [
   { label: t(`enums.postingType.${'single-home'}`), value: 'single-home' },
   { label: t(`enums.postingType.${'apartment'}`), value: 'apartment' },
 ]
-
 </script>
 
 <template>
@@ -25,7 +24,3 @@ const postingTypeOptions: Array<UiSelectOption<T_PostingType>> = [
     :label="$t('pages.task.crawling.types')"
     :options="postingTypeOptions" />
 </template>
-
-<style lang="scss" scoped>
-.layout {}
-</style>

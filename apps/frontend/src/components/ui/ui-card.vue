@@ -5,11 +5,14 @@ const slots = defineSlots<{
   footer(): void
 }>()
 
-defineProps<{ noPadding?: boolean }>()
+defineProps<{
+  noPadding?: boolean
+  highlight?: boolean
+}>()
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" :class="{ 'card--highlight': highlight }">
     <div v-if="slots['header']" class="card__header">
       <slot name="header"></slot>
     </div>
@@ -26,29 +29,35 @@ defineProps<{ noPadding?: boolean }>()
 
 <style lang="scss" scoped>
 .card {
-  border: solid 1px var(--color-border);
+  box-shadow: 0 0 4px rgba(229, 231, 235, 0.04);
+  border: solid 1px var(--c-card-border-color);
+  background-color: var(--c-card-background);
   border-radius: var(--radius-md);
   flex-direction: column;
   overflow: hidden;
   display: flex;
 
   &__header {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-bottom: solid 1px var(--color-border);
+    padding: var(--s-sm) var(--s-md);
+    border-bottom: solid 1px var(---c-card-border-color);
   }
 
   &__content {
-    padding: var(--spacing-sm) var(--spacing-md);
-    flex: 1;
+    padding: var(--s-sm) var(--s-md);
+    //   flex: 1;
 
-    &--no-padding {
-      padding: 0;
-    }
+    //   &--no-padding {
+    //     padding: 0;
+    //   }
   }
 
   &__footer {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-top: solid 1px var(--color-border);
+    border-top: solid 1px var(--c-card-border-color);
+    padding: var(--s-sm) var(--s-md);
+  }
+
+  &--highlight {
+    border-color: var(--c-card-active-border-color);
   }
 }
 </style>

@@ -1,28 +1,35 @@
-.hh-pointer { cursor: pointer; }
-.hh-help { cursor: help; }
+.--inline { display: inline-block ;}
+.--pointer { cursor: pointer; }
+.--help { cursor: help; }
+.--no-focus-visible { outline: none; }
 
-.hh-inline { display: inline-block ;}
-
-.hh-divider {
+.--divider {
   border-bottom: solid 1px var(--color-border);
   margin: var(--spacing-sm) 0;
 }
-.hh-divider-y {
+
+.--divider-y {
   border-right: solid 1px var(--color-border);
   margin: 0 var(--spacing-sm);
   height: 100%;
 }
 
-.hh-group {
-  gap: var(--spacing-xs);
+.--group {
   align-items: center;
+  gap: var(--s-sm);
   display: flex;
 
   &--spread { justify-content: space-between; }
   &--end { justify-content: end; }
 }
 
-.hh-truncate {
+.--group-v {
+  flex-direction: column;
+  gap: var(--s-sm);
+  display: flex;
+}
+
+.--truncate {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

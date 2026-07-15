@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { E_POSTING_USER_STATUS } from '@house-hunter/types'
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 // App
@@ -7,8 +8,7 @@ import { usePostingsStore } from '@/stores/postings'
 import { E_ROUTER_PAGES } from '@/router/enums'
 // Components
 import { GalleryHorizontalEnd, LayoutDashboard } from '@lucide/vue'
-import CompUiPageTags from '@/components/ui/ui-page-tabs.vue'
-import { E_POSTING_USER_STATUS } from '@house-hunter/types'
+import CompLayoutTopTabs from '@/components/layouts/top-tabs.vue'
 
 const postingsStore = usePostingsStore()
 const { t } = useI18n()
@@ -18,7 +18,6 @@ const tabs = computed<Array<UiPageTabRoute>>(() => {
     .postings
     .filter(p => p._houseHunterFields.userStatus === E_POSTING_USER_STATUS.NEW)
     .length
-
 
   return [
     {
@@ -39,23 +38,7 @@ const tabs = computed<Array<UiPageTabRoute>>(() => {
 </script>
 
 <template>
-  <div class="home">
-    <CompUiPageTags :tabs="tabs" />
-    <div class="home__content">
-      <RouterView />
-    </div>
-  </div>
+  <CompLayoutTopTabs :tabs="tabs">
+    <RouterView />
+  </CompLayoutTopTabs>
 </template>
-
-<style lang="scss" scoped>
-.home {
-  flex-direction: column;
-  overflow: hidden;
-  display: flex;
-  height: 100%;
-
-  &__content {
-    flex: 1;
-  }
-}
-</style>

@@ -6,8 +6,8 @@ import { useClickoutSide } from '@/composables/click-outside'
 import { TELEPORTS } from '@/components/constants'
 // Components
 import CompFormsSelectOption from '@/components/forms/f-select-option.vue'
-import CompFormsSelectPill from '@/components/forms/f-select-pill.vue'
 import CompFormsFormField from '@/components/forms/f-form-field.vue'
+import CompUiTypeBadge from '@/components/ui/ui-type-badge.vue'
 import { ChevronDown, ChevronUp } from '@lucide/vue'
 
 type BaseProps = {
@@ -110,7 +110,7 @@ watch(optionsRef, positionDropdown)
 
     <template #default="{ id }">
       <div
-        class="select hh-pointer"
+        class="--base-input select --pointer"
         ref="selectRef"
         tabindex="-1"
         :class="{
@@ -122,11 +122,15 @@ watch(optionsRef, positionDropdown)
 
 
         <template v-if="multi">
-          <CompFormsSelectPill
+          <CompUiTypeBadge
             v-for="value in modelValue"
             :key="value"
-            :value="value"
-            @remove-value="toggleMultiValue(value)" />
+            type="light"
+            clearable
+            @clear="toggleMultiValue(value)"
+            @click.stop>
+            {{ value }}
+          </CompUiTypeBadge>
         </template>
         <p v-else class="select__display">{{ valueDisplay }}</p>
 
@@ -151,43 +155,29 @@ watch(optionsRef, positionDropdown)
 </template>
 <style lang="scss" scoped>
 .select {
-  background-color: var(--color-background-emphasis);
-  border: solid 1px var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-base);
-  padding: 0 var(--spacing-xs);
   position: relative;
-  line-height: 28px;
-  height: 36px;
-  width: 100%;
-
-  &__display {
-    line-height: 36px;
-  }
+  min-height: 40px;
 
   &__toggle {
     transform: translateY(-50%);
-    right: var(--spacing-xs);
+    right: var(--s-sm);
     pointer-events: none;
     position: absolute;
     top: 50%;
   }
 
+  &__display {
+    line-height: 36px;
+  }
+
   &__options {
-    background-color: var(--color-background-light);
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.07), 0 6px 30px 5px rgba(0, 0, 0, 0.06), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
+    background-color: var(--c-input-options-background);
     border-bottom-right-radius: var(--radius-sm);
     border-bottom-left-radius: var(--radius-sm);
     border: solid 1px var(--color-border);
+    z-index: var(--z-dropdown);
     position: fixed;
-    z-index: 9999;
-  }
-
-  &--pills {
-    gap: var(--spacing-2xs);
-    align-items: center;
-    min-height: 36px;
-    flex-wrap: wrap;
-    display: flex;
   }
 
   &--open {
@@ -195,9 +185,11 @@ watch(optionsRef, positionDropdown)
     border-bottom-left-radius: 0;
   }
 
-  &:focus-within {
-    border-color: var(--color-border-active);
-    outline: none;
+  &--pills {
+    align-items: center;
+    gap: var(--s-2xs);
+    flex-wrap: wrap;
+    display: flex;
   }
 }
 </style>

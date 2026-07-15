@@ -5,10 +5,10 @@ import CompUiMessage from '@/components/ui/ui-message.vue';
 
 <template>
   <div class="layout">
-    <CompUiMessage type="danger" :max-width="600">
+    <CompUiMessage opaque type="danger" :max-width="600">
       <template #message>
-        <p class="hh-text-md hh-font-bold hh-pb-2xs">Server is currently offline.</p>
-        <p class="hh-pb-2xs">Server is not responding. This might be caused by one or more issues:</p>
+        <p class="--text-md --font-bold --pb-2xs">Server is currently offline.</p>
+        <p class="--pb-2xs">Server is not responding. This might be caused by one or more issues:</p>
         <ul class="error-list">
           <li>Error encountered an initialization error</li>
           <li>An error occurred during run time</li>

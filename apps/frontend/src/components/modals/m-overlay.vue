@@ -22,13 +22,13 @@ const onOverlayClick = (event: MouseEvent): void => {
 
 <style lang="scss" scoped>
 .modal-overlay {
-  background-color: var(--color-border-active-90);
-  padding: var(--spacing-2xl);
+  background-color: var(--c-modal-overlay-background);
+  z-index: var(--z-modals);
   justify-content: center;
+  padding: var(--s-xl);
   align-items: center;
   position: fixed;
   display: flex;
-  z-index: 8000;
   height: 100%;
   width: 100%;
   left: 0;

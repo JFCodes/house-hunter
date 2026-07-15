@@ -8,6 +8,17 @@ export type UiPageTab = {
   key: string
 }
 
+export type UiButtonType =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'dark'
+  | 'light'
+  | 'link'
+
 export type IconToggleItem<K extends string> = {
   isActive: boolean
   icon: Component

@@ -6,8 +6,8 @@ import { E_ROUTER_PAGES, E_ROUTER_PARAMS } from '@/router/enums'
 import { useRouterUtils } from '@/composables/router-utils'
 import { useTasksStore } from '@/stores/tasks'
 // Components
+import CompLayoutLeftPanel from '@/components/layouts/left-panel.vue'
 import TaskCrawlNewPostingsItem from '@/components/pages/tasks/crawl-new-postings-item.vue'
-import CompUiCard from '@/components/ui/ui-card.vue'
 
 const { computedStringParam } = useRouterUtils()
 const tasksStore = useTasksStore()
@@ -31,28 +31,20 @@ watch(taskId, selectFirstTask, { immediate: true, flush: 'post' })
 </script>
 
 <template>
-  <div class="layout">
-    <CompUiCard no-padding>
-      <TaskCrawlNewPostingsItem
-        v-for="task in tasksStore.crawlNewPostingTasks"
-        class="task-item"
-        :highlight="task.id === taskId"
-        :task="task"
-        :key="task.id" />
-    </CompUiCard>
+  <CompLayoutLeftPanel :panel-width="520">
+    <template #left>
+      <div class="--group-v">
+        <TaskCrawlNewPostingsItem
+          v-for="task in tasksStore.crawlNewPostingTasks"
+          class="task-item"
+          :highlight="task.id === taskId"
+          :task="task"
+          :key="task.id" />
+      </div>
+    </template>
 
-    <div>
+    <template #main>
       <RouterView />
-    </div>
-  </div>
+    </template>
+  </CompLayoutLeftPanel>
 </template>
-
-<style lang="scss" scoped>
-.layout {
-  grid-template-columns: 520px auto;
-  padding: var(--spacing-lg) 0;
-  gap: var(--spacing-sm);
-  display: grid;
-  height: 100%;
-}
-</style>

@@ -1,6 +1,6 @@
 import { type T_TaskCrawlNewPostings, type T_TaskExecutionResult, Err_TaskExecution } from '@house-hunter/types'
 // App
-import type { MultiSearchPaginated, MultiSearchPaginatedPayload } from './_types'
+import type { MultiSearchPaginated, MultiSearchPaginatedPayload, PostingSearchItem } from './_types'
 import { requestPageListing } from './crawl-new-postings/request-page-listing-page'
 import { API_SEARCH_PATH, SELECTORS, BASE_URL } from './_constants'
 import { getSearchUrl } from './crawl-new-postings/get-search-url'
@@ -13,6 +13,13 @@ import {
 
 export async function crawl(task: T_TaskCrawlNewPostings): Promise<T_TaskExecutionResult> {
   const { browser, page } = await GetBrowserAndPage()
+  const checkPostingLimits = async (rawPostings: Array<PostingSearchItem>): Promise<void> => {
+    if (rawPostings.length > 1000 ){
+      const error = new Err_TaskExecution(task, 'error-execution', 'found too many posts. Restrict task options')
+      await browser.close()
+      throw error
+    }
+  }
 
   await page.goto(BASE_URL, { waitUntil: 'networkidle' })
   await DismissCookieBanner(page, {
@@ -21,6 +28,7 @@ export async function crawl(task: T_TaskCrawlNewPostings): Promise<T_TaskExecuti
   })
 
   const searchUrl = getSearchUrl(task)
+
   const response = await InterceptNetworkOnAction<MultiSearchPaginated, MultiSearchPaginatedPayload>({
     action: async (page) => { await page.goto(searchUrl) },
     inUrl: API_SEARCH_PATH,
@@ -45,11 +53,11 @@ export async function crawl(task: T_TaskCrawlNewPostings): Promise<T_TaskExecuti
       if (result === null) break
 
       rawPostings.push(...result)
+      await checkPostingLimits(rawPostings)
     }
   }
 
   await browser.close()
-
   const postings = rawPostings.map(item => parseResult(task, item))
   return { outcome: 'success', postings }
 }

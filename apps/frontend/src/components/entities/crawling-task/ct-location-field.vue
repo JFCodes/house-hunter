@@ -26,7 +26,7 @@ const showLocationTooltip = (event: MouseEvent): void => {
     v-model="location"
     :label="$t('global.location')">
     <template #after-label>
-      <BadgeInfo class="hh-help" :size="16" @mouseenter="showLocationTooltip" />
+      <BadgeInfo class="--help" :size="16" @mouseenter="showLocationTooltip" />
     </template>
   </CompFormInput>
 </template>

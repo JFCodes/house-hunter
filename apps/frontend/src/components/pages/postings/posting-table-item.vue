@@ -32,8 +32,8 @@ const { showPostingsModal } = useModals()
 
     <!-- Pricing -->
     <td>
-      <div class="hh-group">
-        <p class="hh-font-bold hh-text-md">{{ posting.price.toLocaleString() }}</p>
+      <div class="--group">
+        <p class="--font-bold --text-md">{{ posting.price.toLocaleString() }}</p>
         <Euro :size="16" />
       </div>
     </td>
@@ -57,8 +57,8 @@ const { showPostingsModal } = useModals()
     </td>
 
     <!-- Actions -->
-    <td class="hh-text-center">
-      <div class="hh-group">
+    <td class="--text-center">
+      <div class="--group">
         <CompUiIconButton :href="posting.url" :icon="ExternalLink" :is-active="false" />
         <CompUiIconButton :icon="Eye" :is-active="false" @click="showPostingsModal(posting)" />
       </div>

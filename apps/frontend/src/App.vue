@@ -5,6 +5,7 @@ import { useServerStatusStore } from '@/stores/server-status'
 import { unsubscribeSocket } from '@/websocket/instance'
 import { usePostingsStore } from '@/stores/postings'
 import { websocket } from '@/websocket/client'
+import { useTasksStore } from '@/stores/tasks'
 // Components
 import CompGlobalTooltipAnchor from '@/components/global/g-tooltip-anchor.vue'
 import CompGlobalToastsAnchor from '@/components/global/g-toasts-anchor.vue'
@@ -16,8 +17,10 @@ import ViewOffline from '@/views/v-offline.vue'
 
 const serverStatusStore = useServerStatusStore()
 const postingsStore = usePostingsStore()
+const tasksStore = useTasksStore()
 
 onMounted(() => {
+  tasksStore.searchCrawlNewPostingTasks()
   postingsStore.searchPostings()
   websocket.connect()
 })

@@ -7,7 +7,7 @@ html, body, #app {
 
 #app {
   font-size: 14px; // Controls rem relative sizing
-  background-color: var(--color-background);
-  font-family: var(--font-family);
-  color: var(--color-text-base);
+  background-color: var(--c-background-main);
+  font-family: var(--f-family);
+  color: var(--c-font-main);
 }

@@ -1,42 +1,43 @@
 <script setup lang="ts">
 import type { T_PostingAreas } from '@house-hunter/types'
 // Components
-import CompUiBadge from '@/components/ui/ui-badge.vue'
+import CompUiTypeBadge from '@/components/ui/ui-type-badge.vue'
 import { BrickWall, House, Scan } from '@lucide/vue'
+
+const ICON_SIZE = 18
 
 defineProps<{ postingAreas: T_PostingAreas }>()
 </script>
 
 <template>
-  <CompUiBadge>
+  <CompUiTypeBadge type="light">
     <div class="area">
       <div class="area__section">
-        <Scan :size="14" />
+        <Scan :size="ICON_SIZE" />
         <span class="">{{ postingAreas.livingArea }}</span>
       </div>
       <div class="area__section">
-        <House :size="14" />
+        <House :size="ICON_SIZE" />
         <span class="">{{ postingAreas.totalArea }}</span>
       </div>
       <div class="area__section">
-        <BrickWall :size="14" />
+        <BrickWall :size="ICON_SIZE" />
         <span class="">{{ postingAreas.builtArea || postingAreas.totalArea }}</span>
       </div>
     </div>
-  </CompUiBadge>
+  </CompUiTypeBadge>
 </template>
 
 <style lang="scss" scoped>
 .area {
-  gap: var(--spacing-md);
   align-items: center;
+  gap: var(--s-md);
   display: flex;
 
   &__section {
-    gap: var(--spacing-2xs);
     align-items: center;
+    gap: var(--s-2xs);
     display: flex;
   }
-
 }
 </style>

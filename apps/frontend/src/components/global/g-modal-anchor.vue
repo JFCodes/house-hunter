@@ -20,8 +20,8 @@ const modalsStore = useModalsStore()
 
 <style lang="scss" scoped>
 .modal-anchor {
+  z-index: var(--z-modals);
   position: fixed;
-  z-index: 8000;
   left: 0;
   top: 0;
 }

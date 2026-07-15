@@ -1,3 +1,10 @@
+<script setup lang="ts">
+// Components
+import CompLayoutCenterContainer from '@/components/layouts/center-container.vue'
+</script>
+
 <template>
-  notifications
+  <CompLayoutCenterContainer>
+    notifications
+  </CompLayoutCenterContainer>
 </template>

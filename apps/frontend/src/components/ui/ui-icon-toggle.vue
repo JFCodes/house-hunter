@@ -10,10 +10,11 @@ defineProps<{ items: Array<IconToggleItem<K>> }>()
   <div v-if="items.length > 1" class="icon-toggle">
     <div
       v-for="(item, index) in items"
-      class="icon-toggle__item hh-pointer"
+      class="icon-toggle__item --pointer"
       :class="{ 'icon-toggle__item--active': item.isActive }"
       :key="`icon-${index}`"
       @click="emits('item-click', item.key)">
+
       <component :is="item.icon" :size="20" />
     </div>
   </div>
@@ -21,15 +22,15 @@ defineProps<{ items: Array<IconToggleItem<K>> }>()
 
 <style lang="scss" scoped>
 .icon-toggle {
-
   &__item {
     display: inline-block;
-    padding: var(--spacing-2xs);
-    border: solid 1px var(--color-white);
+    padding: var(--s-xs);
+    border: solid 1px var(--c-gray-500);
 
     &--active {
-      border-color: var(--color-border-active);
-      color: var(--color-border-active);
+      background-color: color-mix(in oklab, var(--c-blue-1), transparent 90%);
+      border-color: var(--c-blue-1);
+      color: var(--c-blue-1);
     }
 
     &:first-child {

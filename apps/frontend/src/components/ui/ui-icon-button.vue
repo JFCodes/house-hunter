@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { RouterLink, type RouteLocationRaw } from 'vue-router'
 import { computed, type Component } from 'vue'
+// App
+import type { UiButtonType } from '@/components/ui/types'
 
-const props = defineProps<{
-  icon: Component
-  linkTo?: RouteLocationRaw
-  isActive: boolean
-  href?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    icon: Component
+    linkTo?: RouteLocationRaw
+    type?: UiButtonType
+    href?: string
+  }>(),
+  { type: 'link' }
+)
 
 const bindProps = computed(() => {
   if (props.linkTo) {
@@ -24,7 +29,9 @@ const bindProps = computed(() => {
     }
   } else {
     // Button props
-    return {}
+    return {
+      type: props.type
+    }
   }
 })
 
@@ -33,23 +40,20 @@ const bindProps = computed(() => {
 <template>
   <component
     type="button"
-    class="hh-base-button icon-button"
-    :class="{ 'icon-button--active': isActive }"
+    class="--base-button icon-button"
     :is="linkTo ? RouterLink : (href ? 'a' : 'button')"
+    :class="[`--base-button--${type}`]"
     v-bind="bindProps">
+
     <component
-      :color="isActive ? 'var(--color-text-base)' : 'var(--color-text-muted)'"
       :is="icon"
-      size="18" />
+      :size="22" />
+
   </component>
 </template>
 
 <style lang="scss" scoped>
 .icon-button {
-  width: 32px;
-
-  &--active {
-    border-color: var(--color-text-base);
-  }
+  width: 36px;
 }
 </style>

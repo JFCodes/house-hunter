@@ -1,41 +1,31 @@
 <script setup lang="ts">
 import type { T_TaskExecution } from '@house-hunter/types'
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
+// Components
+import CompUiTaskBadge from '@/components/ui/ui-task-badge.vue'
 import { RotateCcw } from '@lucide/vue'
 
-defineProps<{ execution: T_TaskExecution }>()
+const props = defineProps<{ execution: T_TaskExecution }>()
+
+const { t } = useI18n()
+
+const label = computed<string>(() => {
+  const { source, type } = props.execution.task
+  const taskType = t(`enums.taskType.${type}`)
+  const activeTask = t('global.activeTask')
+  return `${activeTask}: ${source} ${taskType}`
+})
 </script>
 
 <template>
-  <div class="task-execution hh-text-3xs hh-uppercase hh-font-bold">
+  <CompUiTaskBadge
+    type="running"
+    :icon="RotateCcw"
+    :label="label" />
+
+  <div class="task-execution --text-xs -uppercase --font-bold">
     <RotateCcw class="task-execution__icon" :size="17" />
     {{ $t('global.activeTask') }}: {{ execution.task.source }} ({{ $t(`enums.taskType.${execution.task.type}`) }})
   </div>
 </template>
-
-<style lang="scss" scoped>
-.task-execution {
-  background-color: var(--color-border-active-90);
-  border: solid 1px var(--color-border-active);
-  border-radius: var(--radius-sm);
-  padding: 0 var(--spacing-sm);
-  gap: var(--spacing-xs);
-  align-items: center;
-  line-height: 30px;
-  display: flex;
-  height: 32px;
-
-  &__icon {
-    animation: linear 1s spin infinite;
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(-360deg);
-  }
-}
-</style>

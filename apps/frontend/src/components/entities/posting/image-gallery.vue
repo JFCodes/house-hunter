@@ -36,7 +36,7 @@ const moveRight = (): void => {
     @keydown.right="moveRight"
     @keydown.left="moveLeft">
 
-    <div class="gallery__image hh-mb-md">
+    <div class="gallery__image --mb-sm">
       <CompUiEmpty v-if="images.images.length === 0 || !activeImage">
         <p>{{ $t('empty.noPostingImages') }}</p>
       </CompUiEmpty>
@@ -48,21 +48,19 @@ const moveRight = (): void => {
       <span
         v-for="index in images.images.length"
         :key="index"
-        class="gallery__dots-dot hh-pointer"
+        class="gallery__dots-dot --pointer"
         :class="{ 'gallery__dots-dot--active': activeIndex === index - 1 }"
         @click="activeIndex = index - 1">
       </span>
     </div>
-
   </div>
 </template>
 
 <style lang="scss" scoped>
 .gallery {
-  background-color: var(--color-background-light);
-  border: solid 1px var(--color-border);
+  background-color: var(--c-gray-700);
   border-radius: var(--radius-md);
-  padding: var(--spacing-xs);
+  padding: var(--s-xs);
   height: 100%;
   width: 100%;
 
@@ -80,19 +78,20 @@ const moveRight = (): void => {
 
   &__dots {
     justify-content: center;
-    gap: var(--spacing-2xs);
     align-items: center;
+    gap: var(--s-2xs);
     display: flex;
 
     &-dot {
-      background-color: var(--color-text-muted);
+      background-color: var(--c-gray-300);
       display: inline-block;
-      border-radius: 6px;
-      height: 12px;
-      width: 12px;
+      border-radius: 5px;
+      height: 10px;
+      width: 10px;
 
       &--active {
-        background-color: var(--color-border-active);
+        background-color: var(--c-orange-2);
+        transform: scale(1.2);
       }
     }
   }

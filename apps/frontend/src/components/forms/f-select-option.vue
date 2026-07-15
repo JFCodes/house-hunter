@@ -12,7 +12,7 @@ defineProps<{
 
 <template>
   <div
-    class="select-option hh-py-2xs hh-px-xs hh-pointer"
+    class="select-option --px-sm --pointer"
     :class="{ 'select-option--active': isActive }">
     <p>{{ option.label }}</p>
     <X v-if="isActive" class="select-option__delete" :size="22" />
@@ -20,13 +20,13 @@ defineProps<{
 </template>
 <style lang="scss" scoped>
 .select-option {
-  border: solid 1px transparent;
-  border-bottom-color: var(--color-border);
+  padding: 0 var(--s-sm);
   position: relative;
+  line-height: 38px;
 
   &__delete {
     transform: translateY(-50%);
-    right: var(--spacing-xs);
+    right: var(--s-xs);
     position: absolute;
     top: 50%;
   }
@@ -36,7 +36,7 @@ defineProps<{
   }
 
   &:hover {
-    background-color: var(--color-text-muted);
+    background-color: var(--c-gray-600);
   }
 }
 </style>

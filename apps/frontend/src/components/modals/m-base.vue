@@ -48,7 +48,7 @@ const onEscapePress = (): void => {
       <div v-if="slots['header']" class="modal-base__header">
         <slot name="header"></slot>
 
-        <div class="modal-base__header-close hh-pointer" @click="emits('close')">
+        <div class="modal-base__header-close --pointer" @click="emits('close')">
           <X :size="24" />
         </div>
       </div>
@@ -67,8 +67,8 @@ const onEscapePress = (): void => {
 
 <style lang="scss" scoped>
 .modal-base {
-  background-color: var(--color-background);
-  border: solid 2px var(--color-border);
+  border: solid 2px var(--c-modal-border-color);
+  background-color: var(--c-modal-background);
   border-radius: var(--radius-lg);
   position: relative;
   max-height: 100%;
@@ -76,28 +76,26 @@ const onEscapePress = (): void => {
   min-width: 400px;
 
   &__header {
-    background-color: var(--color-background-light);
-    padding: var(--spacing-sm) var(--spacing-xs);
-    border-bottom: solid 2px var(--color-border);
+    padding: var(--s-sm) var(--s-xs);
+    border-bottom: solid 1px var(--c-card-border-color);
     position: relative;
 
     &-close {
       transform: translateY(-50%);
-      padding: var(--spacing-2xs);
-      right: var(--spacing-xs);
+      padding: var(--s-2xs);
+      right: var(--s-xs);
       position: absolute;
       top: 50%;
     }
   }
 
   &__content {
-    padding: var(--spacing-sm) var(--spacing-xs);
+    padding: var(--s-sm) var(--s-xs);
   }
 
   &__footer {
-    background-color: var(--color-background-light);
-    padding: var(--spacing-sm) var(--spacing-xs);
-    border-top: solid 2px var(--color-border);
+    border-top: solid 1px var(--c-card-border-color);
+    padding: var(--s-sm) var(--s-xs);
   }
 }
 </style>

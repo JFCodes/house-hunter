@@ -34,15 +34,15 @@ const statusOptions = computed(() => {
 </script>
 
 <template>
-  <div class="hh-group hh-mb-sm swipe-header">
-    <p class="hh-text-md hh-font-bold">{{ posting.description }}</p>
+  <div class="--group --mb-sm swipe-header">
+    <p class="--text-md --font-bold">{{ posting.description }}</p>
     <CompUiIconButton :href="posting.url" :icon="ExternalLink" :is-active="false" />
   </div>
 
   <div class="swipe-item">
     <CompUiCard class="swipe-item__info">
-      <div class="hh-group hh-group--spread hh-mb-2xs">
-        <div class="hh-group">
+      <div class="--group --group--spread --mb-2xs">
+        <div class="--group">
           <CompEntityPostingSourceBadge :source="posting.source" />
           <CompEntityOperationBadge :posting-operation="posting.operation" />
         </div>
@@ -54,31 +54,30 @@ const statusOptions = computed(() => {
       </div>
 
       <!-- Description -->
-      <p class="hh-text-2xs hh-font-bold hh-truncate hh-mb-2xs">{{ posting.description }}</p>
-
+      <p class="--text-2xs --font-bold --truncate --mb-2xs">{{ posting.description }}</p>
 
       <!-- Pricing -->
-      <div class="hh-group hh-mb-2xs">
-        <p class=" hh-uppercase hh-text-3xs hh-font-bold">{{ $t('global.askingPrice') }}</p>
-        <p class="hh-font-bold hh-text-md">{{ posting.price.toLocaleString() }}</p>
+      <div class="--group --mb-2xs">
+        <p class=" --uppercase --text-3xs --font-bold">{{ $t('global.askingPrice') }}</p>
+        <p class="--font-bold --text-md">{{ posting.price.toLocaleString() }}</p>
         <Euro :size="16" />
       </div>
 
       <!-- Construction -->
-      <div v-if="posting.constructionYear" class="hh-group hh-mb-2xs">
-        <p class=" hh-uppercase hh-text-3xs hh-font-bold">{{ $t('global.constructionYear') }}</p>
-        <p class="hh-font-bold hh-text-md">{{ posting.constructionYear }}</p>
+      <div v-if="posting.constructionYear" class="--group --mb-2xs">
+        <p class=" --uppercase --text-3xs --font-bold">{{ $t('global.constructionYear') }}</p>
+        <p class="--font-bold --text-md">{{ posting.constructionYear }}</p>
       </div>
 
       <!-- Typology -->
-      <div class="hh-group hh-mb-2xs">
-        <p class="posting__title hh-font-bold hh-uppercase hh-text-3xs">{{ $t('global.typology') }}</p>
+      <div class="--group --mb-2xs">
+        <p class="posting__title --font-bold --uppercase --text-3xs">{{ $t('global.typology') }}</p>
         <CompEntityPostingTypologyBadge :posting-typology="posting.typology" />
       </div>
 
       <!-- Typology -->
-      <div class="hh-group hh-mb-md">
-        <p class="posting__title hh-font-bold hh-uppercase hh-text-3xs">{{ $t('global.area') }}</p>
+      <div class="--group --mb-md">
+        <p class="posting__title --font-bold --uppercase --text-3xs">{{ $t('global.area') }}</p>
         <CompEntityPostingAreaBadge :posting-areas="posting.areas" />
       </div>
     </CompUiCard>
@@ -90,7 +89,7 @@ const statusOptions = computed(() => {
     <div class="swipe-item__options">
       <CompEntityPostingStatusBadge
         v-for="status in statusOptions"
-        class="swipe-item__options-item hh-pointer"
+        class="swipe-item__options-item --pointer"
         :key="status"
         :posting-status="status"
         @click="emits('pick-status', status)" />
@@ -100,21 +99,21 @@ const statusOptions = computed(() => {
 
 <style lang="scss" scoped>
 .swipe-header {
-  gap: var(--spacing-sm);
   justify-content: center;
   align-items: center;
+  gap: var(--s-sm);
   display: flex;
 }
 
 .swipe-item {
   display: grid;
   grid-template-columns: 2fr auto 1fr;
-  gap: var(--spacing-xl);
+  gap: var(--s-lg);
 
   &__info {
     border: solid 1px var(--color-border);
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--s-sm);
     display: flex;
   }
 
@@ -123,7 +122,7 @@ const statusOptions = computed(() => {
   &__options {
     align-items: flex-start;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--s-sm);
     display: flex;
 
     &-item {

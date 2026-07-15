@@ -19,19 +19,19 @@ const { showPostingsModal } = useModals()
 </script>
 
 <template>
-  <CompUiCard no-padding class="hh-pointer" @click="showPostingsModal(posting)">
+  <CompUiCard no-padding class="--pointer" @click="showPostingsModal(posting)">
     <div class="posting">
       <img v-if="posting.images.main" class="posting__image" :src="posting.images.main" />
       <CompUiEmpty v-else :icon="Image" />
 
       <div class="posting__content">
         <!-- Source and operation type -->
-        <div class="hh-group hh-group--spread hh-mb-2xs">
-          <div class="hh-group">
+        <div class="--group --group--spread --mb-2xs">
+          <div class="--group">
             <CompEntityPostingSourceBadge :source="posting.source" />
             <CompEntityOperationBadge :posting-operation="posting.operation" />
           </div>
-          <div class="hh-group">
+          <div class="--group">
             <CompEntityPostingStatusBadge :posting-status="posting._houseHunterFields.userStatus" />
             <CompUiIconButton
               :icon="ExternalLink"
@@ -42,32 +42,32 @@ const { showPostingsModal } = useModals()
         </div>
 
         <!-- Description -->
-        <p class="hh-text-2xs hh-font-bold hh-truncate hh-mb-2xs">{{ posting.description }}</p>
+        <p class="--text-sm --font-bold --truncate --text-white --mb-2xs">{{ posting.description }}</p>
 
         <!-- Pricing -->
-        <div class="hh-group hh-mb-2xs">
-          <p class=" hh-uppercase hh-text-3xs hh-font-bold">{{ $t('global.askingPrice') }}</p>
-          <p class="hh-font-bold hh-text-md">{{ posting.price.toLocaleString() }}</p>
+        <div class="--group --mb-2xs">
+          <p class="posting__title --uppercase --text-xs --font-bold">{{ $t('global.askingPrice') }}</p>
+          <p class="--font-bold --text-md">{{ posting.price.toLocaleString() }}</p>
           <Euro :size="16" />
         </div>
 
         <!-- Construction -->
-        <div v-if="posting.constructionYear" class="hh-group hh-mb-2xs">
-          <p class=" hh-uppercase hh-text-3xs hh-font-bold">{{ $t('global.constructionYear') }}</p>
-          <p class="hh-font-bold hh-text-md">{{ posting.constructionYear }}</p>
+        <div v-if="posting.constructionYear" class="--group --mb-2xs">
+          <p class="posting__title --uppercase --text-xs --font-bold">{{ $t('global.year') }}</p>
+          <p class="--font-bold --text-md">{{ posting.constructionYear }}</p>
         </div>
 
-        <div class="hh-divider hh-mt-2xs"></div>
+        <div class="--divider --mt-2xs"></div>
 
         <!-- Typology -->
-        <div class="hh-group hh-mb-2xs">
-          <p class="posting__title hh-font-bold hh-uppercase hh-text-3xs">{{ $t('global.typology') }}</p>
+        <div class="--group --mb-sm">
+          <p class="posting__title --uppercase --text-xs --font-bold">{{ $t('global.typology') }}</p>
           <CompEntityPostingTypologyBadge :posting-typology="posting.typology" />
         </div>
 
         <!-- Typology -->
-        <div class="hh-group hh-mb-md">
-          <p class="posting__title hh-font-bold hh-uppercase hh-text-3xs">{{ $t('global.area') }}</p>
+        <div class="--group">
+          <p class="posting__title --uppercase --text-xs --font-bold">{{ $t('global.area') }}</p>
           <CompEntityPostingAreaBadge :posting-areas="posting.areas" />
         </div>
 
@@ -78,22 +78,20 @@ const { showPostingsModal } = useModals()
 
 <style lang="scss" scoped>
 .posting {
-  background-color: var(--color-background-emphasis);
-  grid-template-columns: 200px 1fr;
-  padding: var(--spacing-xs);
-  gap: var(--spacing-xs);
+  grid-template-columns: 180px 1fr;
+  padding: var(--s-xs);
+  gap: var(--s-xs);
   overflow: hidden;
   display: grid;
-  width: 600px;
+  width: 100%;
 
   &__image {
-    border-right: solid 2px var(--color-border);
     border-radius: var(--radius-sm);
     object-position: center center;
     object-fit: cover;
     overflow: hidden;
-    height: 200px;
-    width: 200px;
+    height: 180px;
+    width: 180px;
   }
 
   &__content {
@@ -101,7 +99,7 @@ const { showPostingsModal } = useModals()
   }
 
   &__title {
-    width: 45px;
+    width: 100px;
   }
 }
 </style>

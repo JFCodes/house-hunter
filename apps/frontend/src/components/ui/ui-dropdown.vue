@@ -44,7 +44,7 @@ watch(optionsRef, positionDropdown)
 
 <template>
   <div class="dropdown">
-    <div ref="triggerRef" class="hh-pointer">
+    <div ref="triggerRef" class="--pointer">
       <slot name="trigger" :isOpen="isOpen" :toggle="toggle"></slot>
     </div>
 
@@ -58,12 +58,13 @@ watch(optionsRef, positionDropdown)
 <style lang="scss" scoped>
 .dropdown {
   &__options {
-    background-color: var(--color-background-light);
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.07), 0 6px 30px 5px rgba(0, 0, 0, 0.06), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
+    background-color: var(--c-input-options-background);
     border-bottom-right-radius: var(--radius-sm);
     border-bottom-left-radius: var(--radius-sm);
     border: solid 1px var(--color-border);
+    z-index: var(--z-dropdown);
     position: fixed;
-    z-index: 9999;
   }
 }
 </style>

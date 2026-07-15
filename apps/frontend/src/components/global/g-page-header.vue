@@ -5,9 +5,9 @@ import { type Component, computed } from 'vue'
 import { useTasksStore } from '@/stores/tasks'
 import { E_ROUTER_PAGES } from '@/router/enums'
 // Components
+import { MonitorCog, BellDot, IdCard, Cctv, Home } from '@lucide/vue'
 import CompEntityTaskActiveTaskExecution from '@/components/entities/tasks/active-task-execution.vue'
 import CompEntityTaskLastTaskExecution from '@/components/entities/tasks/last-task-execution.vue'
-import { MonitorCog, Home, Cctv, IdCard, BellDot } from '@lucide/vue'
 import CompUiIconButton from '@/components/ui/ui-icon-button.vue'
 
 type Link = {
@@ -45,51 +45,51 @@ const checkLinkIsActive = (name: E_ROUTER_PAGES): boolean => {
 </script>
 
 <template>
-  <header class="header hh-py-xs">
-    <p class="hh-font-bold">HOUSE HUNTER</p>
-    <div class="header__middle">
-      <CompEntityTaskActiveTaskExecution
-        v-if="tasksStore.activeTaskExecution"
-        :execution="tasksStore.activeTaskExecution" />
+  <header class="header">
+    <div class="header__content --container-page">
 
-      <CompEntityTaskLastTaskExecution
-        v-else-if="tasksStore.lastTaskExecution"
-        :execution="tasksStore.lastTaskExecution.execution"
-        :result="tasksStore.lastTaskExecution.result" />
-    </div>
+      <p class="--text-md --font-bold --text-white">HOUSE HUNTER</p>
 
-    <div class="header__actions">
-      <CompUiIconButton
-        v-for="link in links"
-        :is-active="link.isActive"
-        :link-to="link.to"
-        :icon="link.icon"
-        :key="link.name" />
+      <div class="header__content-middle --group">
+        <CompEntityTaskActiveTaskExecution
+          v-if="tasksStore.activeTaskExecution"
+          :execution="tasksStore.activeTaskExecution" />
+
+        <CompEntityTaskLastTaskExecution
+          v-else-if="tasksStore.lastTaskExecution"
+          :execution="tasksStore.lastTaskExecution.execution"
+          :result="tasksStore.lastTaskExecution.result" />
+      </div>
+
+      <div class="--group">
+        <CompUiIconButton
+          v-for="link in links"
+          :type="link.isActive ? 'light' : 'link'"
+          :link-to="link.to"
+          :icon="link.icon"
+          :key="link.name" />
+      </div>
     </div>
   </header>
 </template>
 
 <style lang="scss" scoped>
 .header {
-  border-bottom: solid 1px var(--color-border);
-  gap: var(--spacing-sm);
-  align-items: center;
-  display: flex;
+  background-color: var(--c-background-surface);
+  border-bottom: solid 1px var(--c-border);
 
-  &__middle {
-    border-left: solid 1px var(--color-border);
-    padding: var(--spacing-sm);
-    gap: var(--spacing-sm);
+  &__content {
     align-items: center;
+    gap: var(--s-sm);
     display: flex;
-    height: 32px;
-    flex: 1;
-  }
 
-  &__actions {
-    gap: var(--spacing-xs);
-    align-items: center;
-    display: flex;
+    &-middle {
+      border-left: solid 1px var(--c-border);
+      padding: var(--s-sm);
+      height: 52px;
+
+      flex: 1;
+    }
   }
 }
 </style>

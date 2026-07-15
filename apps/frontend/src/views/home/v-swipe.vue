@@ -33,24 +33,21 @@ const updateStatus = (userStatus: E_POSTING_USER_STATUS): void => {
     .updateHunterFields(activePost.value.id, { userStatus })
     .finally(() => isUpdating.value = false)
 }
-
 </script>
 
 <template>
   <CompUiLoading v-if="isUpdating" />
 
   <div class="swipe">
-    <div class="hh-py-lg hh-group">
-      <p class="hh-font-bold">{{ $t('pages.swipe.statusPicker') }}:</p>
-      <CompEntityPostingStatusPicker
-        class=""
-        :active-status="postingsStatusToSwipe" />
+    <div class="--group">
+      <p class="--font-bold">{{ $t('pages.swipe.statusPicker') }}:</p>
+      <CompEntityPostingStatusPicker class="" :active-status="postingsStatusToSwipe" />
     </div>
 
-    <div v-if="postsToClassify.length === 0" class="hh-pt-3xl">
+    <div v-if="postsToClassify.length === 0" class="--pt-3xl">
       <CompUiEmpty>
-        <p class="hh-text-lg">{{ $t('pages.swipe.emptyMessage1') }}</p>
-        <p class="hh-text-md hh-font-bold">
+        <p class="--text-lg">{{ $t('pages.swipe.emptyMessage1') }}</p>
+        <p class="--text-md --font-bold">
           {{ $t('pages.swipe.emptyMessage2', { status: $t(`enums.postingStatus.${postingsStatusToSwipe}`) }) }}
         </p>
       </CompUiEmpty>
@@ -58,16 +55,14 @@ const updateStatus = (userStatus: E_POSTING_USER_STATUS): void => {
 
     <template v-else>
       <div class="">
-        <p class="hh-text-lg hh-font-bold hh-text-center hh-mb-xs">
+        <p class="--text-lg --font-bold --text-center --mb-2xs">
           {{ $t('pages.swipe.postsLeft', { count: postsToClassify.length }) }}
         </p>
-
       </div>
       <CompPageSwipeItem
         v-if="activePost"
         :posting="activePost"
         @pick-status="updateStatus" />
-
     </template>
   </div>
 </template>

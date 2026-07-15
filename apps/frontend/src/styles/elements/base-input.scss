@@ -1,0 +1,14 @@
+.--base-input {
+  border: solid 1px var(--c-input-border-color);
+  background-color: var(--c-input-background);
+  color: var(--c-input-font-color);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--s-xs);
+  line-height: 28px;
+  width: 100%;
+
+  &:focus-within {
+    border-color: var(--c-input-focused-border-color);
+    outline: none;
+  }
+}

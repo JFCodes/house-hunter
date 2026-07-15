@@ -46,10 +46,10 @@ onMounted(() => {
 
     <template #header>
       <div class="header">
-        <div class="hh-group">
+        <div class="--group">
           <CompEntityPostingSourceBadge :source="posting.source" />
-          <p>{{ posting.sourceId }}</p>
-          <p>{{ posting.description }}</p>
+          <p class="--text-white --font-bold">{{ posting.sourceId }}</p>
+          <p class="--text-white">{{ posting.description }}</p>
         </div>
 
         <CompEntityPostingStatusPicker
@@ -68,8 +68,12 @@ onMounted(() => {
     </template>
 
     <template #footer>
-      <div class="hh-group hh-group--end">
-        <CompUiButton :label="$t('global.save')" :disabled="!canSave" @click="save" />
+      <div class="--group --group--end">
+        <CompUiButton
+          type="success"
+          :label="$t('global.save')"
+          :disabled="!canSave"
+          @click="save" />
       </div>
     </template>
   </ModalsBase>
@@ -77,16 +81,16 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .header {
-  padding-right: var(--spacing-2xl);
   justify-content: space-between;
+  padding-right: var(--s-2xl);
   align-items: center;
   display: flex;
 }
 
 .content {
   grid-template-columns: auto 1fr;
-  padding: var(--spacing-sm);
-  gap: var(--spacing-md);
+  padding: var(--s-sm);
+  gap: var(--s-md);
   display: grid;
 }
 </style>

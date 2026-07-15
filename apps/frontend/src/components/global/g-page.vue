@@ -4,7 +4,7 @@ import CompGlobalPageHeader from '@/components/global/g-page-header.vue'
 </script>
 
 <template>
-  <div class="page  hh-px-3xl">
+  <div class="page">
     <div class="page__grid">
       <CompGlobalPageHeader />
 
@@ -23,10 +23,7 @@ import CompGlobalPageHeader from '@/components/global/g-page-header.vue'
 
   &__grid {
     grid-template-rows: auto 1fr;
-    gap: var(--spacing-xs);
-    max-width: 1550px;
     overflow: hidden;
-    margin: 0 auto;
     display: grid;
     height: 100%;
     width: 100%;
@@ -34,6 +31,8 @@ import CompGlobalPageHeader from '@/components/global/g-page-header.vue'
     &-content {
       position: relative;
       overflow: hidden;
+      height: 100%;
+      width: 100%;
     }
   }
 }

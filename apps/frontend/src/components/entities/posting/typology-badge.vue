@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { T_PostingTypology } from '@house-hunter/types'
 // Components
-import CompUiBadge from '@/components/ui/ui-badge.vue'
+import CompUiTypeBadge from '@/components/ui/ui-type-badge.vue'
 import {
   SquareParking,
   BedDouble,
@@ -10,55 +10,55 @@ import {
   Car,
 } from '@lucide/vue'
 
+const ICON_SIZE = 18
+
 defineProps<{ postingTypology: T_PostingTypology }>()
 </script>
 
 <template>
-  <CompUiBadge>
+  <CompUiTypeBadge type="light">
     <div class="typology">
       <div class="typology__section">
-        <BedDouble :size="14" />
+        <BedDouble :size="ICON_SIZE" />
         <span class="">{{ postingTypology.bedrooms }}</span>
       </div>
 
       <div class="typology__section">
-        <Bath :size="14" />
+        <Bath :size="ICON_SIZE" />
         <span class="">{{ postingTypology.bathrooms }}</span>
       </div>
 
       <div class="typology__section">
-        <HousePlus :size="14" />
+        <HousePlus :size="ICON_SIZE" />
         <span class="">{{ postingTypology.otherRooms }}</span>
       </div>
 
       <div class="typology__section" v-if="postingTypology.hasGarage">
-        <Car :size="14" />
+        <Car :size="ICON_SIZE" />
         <span class="">{{ postingTypology.parkingSpots }}</span>
       </div>
       <div class="typology__section" v-else-if="postingTypology.hasParking">
-        <SquareParking :size="14" />
+        <SquareParking :size="ICON_SIZE" />
         <span class="">{{ postingTypology.parkingSpots }}</span>
       </div>
       <div class="typology__section" v-else>
-        <SquareParking :size="14" />
+        <SquareParking :size="ICON_SIZE" />
         <span class="">0</span>
       </div>
     </div>
-
-  </CompUiBadge>
+  </CompUiTypeBadge>
 </template>
 
 <style lang="scss" scoped>
 .typology {
-  gap: var(--spacing-md);
   align-items: center;
+  gap: var(--s-md);
   display: flex;
 
   &__section {
-    gap: var(--spacing-2xs);
     align-items: center;
+    gap: var(--s-2xs);
     display: flex;
   }
-
 }
 </style>

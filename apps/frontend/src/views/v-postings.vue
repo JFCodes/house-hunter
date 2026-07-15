@@ -8,7 +8,7 @@ import { usePostingsStore } from '@/stores/postings'
 import { E_ROUTER_PAGES, E_ROUTER_PARAMS } from '@/router/enums'
 // Components
 import { POSTING_USER_STATUS_ICONS } from '@/components/constants'
-import CompUiPageTags from '@/components/ui/ui-page-tabs.vue'
+import CompLayoutTopTabs from '@/components/layouts/top-tabs.vue'
 import CompUiLoading from '@/components/ui/ui-loading.vue'
 import { IdCard } from '@lucide/vue'
 
@@ -42,7 +42,6 @@ const statusCounters = computed<Record<E_POSTING_USER_STATUS, number>>(() => {
   })
 })
 
-
 const tabs = computed<Array<UiPageTabRoute>>(() => ([
   {
     to: { name: E_ROUTER_PAGES.POSTINGS_ALL },
@@ -51,8 +50,9 @@ const tabs = computed<Array<UiPageTabRoute>>(() => ([
     icon: IdCard,
   },
   ...orderedStatus.map(status => ({
-    label: `${t(`enums.postingStatus.${status}`)} (${statusCounters.value[status]})`,
     key: `${E_ROUTER_PAGES.POSTINGS_BY_STATUS}-${status}`,
+    label: `${t(`enums.postingStatus.${status}`)}`,
+    badge: statusCounters.value[status] ? `${statusCounters.value[status]}` : '',
     icon: POSTING_USER_STATUS_ICONS[status],
     to: {
       params: { [E_ROUTER_PARAMS.POSTING_STATUS]: status },
@@ -66,26 +66,7 @@ onBeforeMount(postingsStore.searchPostings)
 
 <template>
   <CompUiLoading v-if="postingsStore.isLoading" />
-  <div class="layout">
-    <CompUiPageTags :tabs="tabs" />
-
-    <div class="layout__content">
-      <RouterView />
-    </div>
-  </div>
+  <CompLayoutTopTabs :tabs="tabs">
+    <RouterView />
+  </CompLayoutTopTabs>
 </template>
-
-<style lang="scss" scoped>
-.layout {
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  overflow: hidden;
-  display: flex;
-  height: 100%;
-
-  &__content {
-    overflow-y: hidden;
-    flex: 1;
-  }
-}
-</style>

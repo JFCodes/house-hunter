@@ -9,9 +9,9 @@ defineProps<{ postings: Array<T_Posting> }>()
 <template>
   <div class="table">
 
-    <table class="hh-base-table">
+    <table class="--base-table">
       <thead>
-        <tr>
+        <tr class="--font-light">
           <th></th>
           <th>{{ $t('global.description') }}</th>
           <th>{{ $t('global.askingPrice') }}</th>
@@ -20,7 +20,7 @@ defineProps<{ postings: Array<T_Posting> }>()
           <th>{{ $t('global.area') }}</th>
           <th>{{ $t('global.status') }}</th>
 
-          <th class="hh-text-center">{{ $t('global.actions') }}</th>
+          <th class="--text-center">{{ $t('global.actions') }}</th>
         </tr>
       </thead>
 

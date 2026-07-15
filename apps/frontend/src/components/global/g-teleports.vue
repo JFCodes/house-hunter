@@ -10,8 +10,8 @@ import { TELEPORTS } from '@/components/constants'
 
 <style lang="scss" scoped>
 .teleport-dropdown {
+  z-index: var(--z-teleports);
   position: fixed;
-  z-index: 9999;
   left: 0;
   top: 0;
 }

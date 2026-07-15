@@ -1,16 +1,32 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, type Component } from 'vue'
 // Components
 import { CircleAlert, CircleCheck, CircleX, Info } from '@lucide/vue'
 
+type MessageType = 'info' | 'success' | 'warning' | 'danger'
+
+const ICON_COMPONENT: Record<MessageType, Component> = {
+  'info': Info,
+  'success': CircleCheck,
+  'warning': CircleAlert,
+  'danger': CircleX,
+}
+
 const props = withDefaults(
   defineProps<{
-    type?: 'info' | 'success' | 'warning' | 'danger'
+    type?: MessageType
     maxWidth?: number
     message?: string
+    opaque?: boolean
   }>(),
   { type: 'info' },
 )
+
+const iconColor = computed<string>(() => {
+  return props.opaque
+    ? 'var(--c-white)'
+    : 'var(--c-font-main)'
+})
 
 const styleString = computed<string>(() => {
   const styles: Array<string> = []
@@ -22,13 +38,18 @@ const styleString = computed<string>(() => {
 </script>
 
 <template>
-  <div class="message" :class="`message--${type}`" :style="styleString">
+  <div
+    class="message"
+    :style="styleString"
+    :class="[
+      { 'message--opaque --text-white': opaque },
+      `message--${type}`,
+    ]">
+
     <slot name="icon">
-      <Info v-if="type === 'info'" color="var(--color-info-text)" :size="20" />
-      <CircleCheck v-else-if="type === 'success'" color="var(--color-success-text)" :size="20" />
-      <CircleAlert v-else-if="type === 'warning'" color="var(--color-warning-text)" :size="20" />
-      <CircleX v-else-if="type === 'danger'" color="var(--color-danger-text)" :size="20" />
+      <component :is="ICON_COMPONENT[type]" :color="iconColor" :size="20" />
     </slot>
+
     <div>
       <slot name="message">
         {{ message }}
@@ -41,29 +62,53 @@ const styleString = computed<string>(() => {
 .message {
   border-radius: var(--radius-md);
   border: solid 1px transparent;
-  padding: var(--spacing-xs);
-  gap: var(--spacing-xs);
+  padding: var(--s-sm);
+  gap: var(--s-sm);
   display: flex;
   width: 100%;
 
-  &--info {
-    background-color: var(--color-info-muted);
-    border-color: var(--color-info);
+  &--opaque {
+    &.message--info {
+      background-color: var(--c-info);
+      border-color: var(--c-info);
+    }
+
+    &.message--success {
+      background-color: var(--c-success);
+      border-color: var(--c-success);
+    }
+
+    &.message--warning {
+      background-color: var(--c-warning);
+      border-color: var(--c-warning);
+    }
+
+    &.message--danger {
+      background-color: var(--c-danger);
+      border-color: var(--c-danger);
+    }
   }
 
-  &--success {
-    background-color: var(--color-success-muted);
-    border-color: var(--color-success);
-  }
+  &:not(.message--opaque) {
+    &.message--info {
+      background-color: color-mix(in srgb, var(--c-info) 20%, transparent);
+      border-color: color-mix(in srgb, var(--c-info) 20%, transparent);
+    }
 
-  &--warning {
-    background-color: var(--color-warning-muted);
-    border-color: var(--color-warning);
-  }
+    &.message--success {
+      background-color: color-mix(in srgb, var(--c-success) 20%, transparent);
+      border-color: color-mix(in srgb, var(--c-success) 20%, transparent);
+    }
 
-  &--danger {
-    background-color: var(--color-danger-muted);
-    border-color: var(--color-danger);
+    &.message--warning {
+      background-color: color-mix(in srgb, var(--c-warning) 20%, transparent);
+      border-color: color-mix(in srgb, var(--c-warning) 20%, transparent);
+    }
+
+    &.message--danger {
+      background-color: color-mix(in srgb, var(--c-danger) 20%, transparent);
+      border-color: color-mix(in srgb, var(--c-danger) 20%, transparent);
+    }
   }
 }
 </style>

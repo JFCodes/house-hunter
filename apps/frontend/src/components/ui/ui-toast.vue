@@ -21,7 +21,7 @@ const ICONS: Record<T_UI_Toast['type'], Component> = {
     class="toast"
     :class="`toast--${toast.type}`">
 
-    <div class="toast__dismiss hh-pointer" @click="emits('dismiss')">
+    <div class="toast__dismiss --pointer" @click="emits('dismiss')">
       <X :size="18" />
     </div>
 
@@ -37,47 +37,46 @@ const ICONS: Record<T_UI_Toast['type'], Component> = {
         {{ message }}
       </p>
     </div>
-
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .toast {
-  padding: var(--spacing-2xs) var(--spacing-xs);
-  background-color: var(--color-text-muted);
-  border: solid 1px var(--color-text-muted);
-  padding-right: var(--spacing-lg);
+  padding: var(--s-2xs) var(--s-xs);
   border-radius: var(--radius-sm);
-  gap: var(--spacing-sm);
+  grid-template-columns: auto 1fr;
+  border: solid 1px transparent;
+  padding-right: var(--s-lg);
   position: relative;
+  gap: var(--s-sm);
+  display: grid;
   width: 320px;
-  display: flex;
 
   &__dismiss {
-    padding: var(--spacing-2xs);
-    right: var(--spacing-2xs);
-    top: var(--spacing-2xs);
+    padding: var(--s-3xs);
+    right: var(--s-3xs);
     position: absolute;
+    top: var(--s-2xs);
   }
 
   &--info {
-    background-color: var(--color-info-text);
-    border-color: var(--color-info);
+    background-color: color-mix(in srgb, var(--c-info) 20%, transparent);
+    border-color: color-mix(in srgb, var(--c-info) 20%, transparent);
   }
 
   &--success {
-    background-color: var(--color-success-text);
-    border-color: var(--color-success);
+    background-color: color-mix(in srgb, var(--c-success) 20%, transparent);
+    border-color: color-mix(in srgb, var(--c-success) 20%, transparent);
   }
 
   &--warning {
-    background-color: var(--color-warning-text);
-    border-color: var(--color-warning);
+    background-color: color-mix(in srgb, var(--c-warning) 20%, transparent);
+    border-color: color-mix(in srgb, var(--c-warning) 20%, transparent);
   }
 
   &--danger {
-    background-color: var(--color-danger);
-    border-color: var(--color-danger-text);
+    background-color: color-mix(in srgb, var(--c-danger) 20%, transparent);
+    border-color: color-mix(in srgb, var(--c-danger) 20%, transparent);
   }
 }
 </style>

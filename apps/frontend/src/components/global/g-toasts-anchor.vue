@@ -19,11 +19,11 @@ const toastsStore = useToastsStore()
 
 <style lang="scss" scoped>
 .toasts-anchor {
-  z-index: 9000;
-  bottom: var(--spacing-lg);
-  right: var(--spacing-lg);
+  z-index: var(--z-toasts);
   flex-direction: column;
-  gap: var(--spacing-xs);
+  bottom: var(--s-lg);
+  right: var(--s-lg);
+  gap: var(--s-xs);
   position: fixed;
   display: flex;
 }

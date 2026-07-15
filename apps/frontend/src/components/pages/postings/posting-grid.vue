@@ -19,11 +19,10 @@ defineProps<{ postings: Array<T_Posting> }>()
 
 <style lang="scss" scoped>
 .grid {
-  justify-content: space-evenly;
-  gap: var(--spacing-sm);
+  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+  gap: var(--s-sm);
   max-height: 100%;
   overflow-y: auto;
-  flex-wrap: wrap;
-  display: flex;
+  display: grid;
 }
 </style>

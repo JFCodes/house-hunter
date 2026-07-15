@@ -24,24 +24,13 @@ const value = defineModel<string>({ default: '' })
     </template>
 
     <template #default="{ id }">
-      <input v-model="value" class="input" :id="id" />
+      <input v-model="value" class="--base-input input" :id="id" />
     </template>
   </CompFormsFormField>
 </template>
-<style lang="scss" scoped>
-.input {
-  background-color: var(--color-background-emphasis);
-  border: solid 1px var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-base);
-  padding: 0 var(--spacing-xs);
-  line-height: 28px;
-  height: 36px;
-  width: 100%;
 
-  &:focus-within {
-    border-color: var(--color-border-active);
-    outline: none;
-  }
+<style lang="scss">
+.input {
+  height: 40px;
 }
 </style>
