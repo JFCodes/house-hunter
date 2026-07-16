@@ -1,4 +1,4 @@
-import type { T_TaskCrawlNewPostings, T_PostingOperation, T_PostingType } from '@house-hunter/types'
+import type { T_AdBuildingType, T_DiscoveryTask, T_AdType } from '@house-hunter/data-model'
 // App
 import { BASE_API_URL } from '../_constants'
 
@@ -9,10 +9,10 @@ type Options = {
   buildId: string
 }
 
-export function getApiSearchUrl (task: T_TaskCrawlNewPostings, options: Options): string {
+export function getApiSearchUrl (task: T_DiscoveryTask, options: Options): string {
   const { buildId, pageNumber } = options
-  const postingOperation = getPostingOperationSegment(task.options.postingOperation)
-  const postingType = getPostingTypesSegment(task.options.postingTypes)
+  const postingOperation = getAddTypeSegment(task.options.postingOperation)
+  const postingType = getAddBuildingTypeSegment(task.options.postingTypes)
 
   let url = BASE_API_URL
   url += '/_next/data'
@@ -31,19 +31,19 @@ export function getApiSearchUrl (task: T_TaskCrawlNewPostings, options: Options)
 }
 
 
-function getPostingOperationSegment (operation: T_PostingOperation): string {
-  switch (operation) {
+function getAddTypeSegment (addType: T_AdType): string {
+  switch (addType) {
     case 'rent': return 'arrendar'
     case 'buy': return 'comprar'
   }
 }
 
-function getPostingTypesSegment (types: Array<T_PostingType>): string {
+function getAddBuildingTypeSegment (types: Array<T_AdBuildingType>): string {
   if (types.length === 0) throw new Error('Imovirtual requires one posting type segment')
 
-  const mapTypology = (typology: T_PostingType): string => {
+  const mapTypology = (typology: T_AdBuildingType): string => {
     switch (typology) {
-      case 'single-home': return 'moradia'
+      case 'single-house': return 'moradia'
       case 'apartment': return 'apartamento'
     }
   }

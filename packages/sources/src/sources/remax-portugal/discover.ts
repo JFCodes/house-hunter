@@ -1,4 +1,4 @@
-import { type T_TaskCrawlNewPostings, type T_TaskExecutionResult, Err_TaskExecution } from '@house-hunter/types'
+import { type T_DiscoveryTask, type T_ExecutionResult, Err_TaskExecution } from '@house-hunter/data-model'
 // App
 import type { MultiSearchPaginated, MultiSearchPaginatedPayload, PostingSearchItem } from './_types'
 import { requestPageListing } from './crawl-new-postings/request-page-listing-page'
@@ -11,11 +11,11 @@ import {
   GetBrowserAndPage
 } from '../../engine'
 
-export async function crawl(task: T_TaskCrawlNewPostings): Promise<T_TaskExecutionResult> {
+export async function discoverScript(task: T_DiscoveryTask): Promise<T_ExecutionResult> {
   const { browser, page } = await GetBrowserAndPage()
   const checkPostingLimits = async (rawPostings: Array<PostingSearchItem>): Promise<void> => {
     if (rawPostings.length > 1000 ){
-      const error = new Err_TaskExecution(task, 'error-execution', 'found too many posts. Restrict task options')
+      const error = new Err_TaskExecution('error-during-execution', task, 'found too many posts. Restrict task options')
       await browser.close()
       throw error
     }
@@ -38,7 +38,7 @@ export async function crawl(task: T_TaskCrawlNewPostings): Promise<T_TaskExecuti
   })
 
   if (!response || !response.data || response.data.results.length === 0) {
-    const error = new Err_TaskExecution(task, 'error-execution', 'search error or search has no results')
+    const error = new Err_TaskExecution('error-during-execution', task, 'search error or search has no results')
     await browser.close()
     throw error
   }
@@ -59,5 +59,5 @@ export async function crawl(task: T_TaskCrawlNewPostings): Promise<T_TaskExecuti
 
   await browser.close()
   const postings = rawPostings.map(item => parseResult(task, item))
-  return { outcome: 'success', postings }
+  return { outcome: 'success', data: { upsert: postings } }
 }

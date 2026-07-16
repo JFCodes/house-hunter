@@ -1,4 +1,4 @@
-import { E_TASK_SOURCE } from '@house-hunter/types'
+import { E_TARGET } from '@house-hunter/data-model'
 // App
 import type { Source } from './types/source-interface'
 // Sources
@@ -6,8 +6,8 @@ import { ImovirtualPortugalSource } from './sources/imovirtual-portugal'
 import { IdealistaPortugalSource } from './sources/idealista-portugal'
 import { RemaxPortugalSource } from './sources/remax-portugal'
 
-export const SOURCES_MAP: Record<E_TASK_SOURCE, Source> = {
-  [E_TASK_SOURCE.IMOVIRTUAL_PORTUGAL]: ImovirtualPortugalSource,
-  [E_TASK_SOURCE.IDEALISTA_PORTUGAL]: IdealistaPortugalSource,
-  [E_TASK_SOURCE.REMAX_PORTUGAL]: RemaxPortugalSource
+export const SOURCES_MAP: Record<E_TARGET, Source> = {
+  [E_TARGET.IMOVIRTUAL_PORTUGAL]: ImovirtualPortugalSource,
+  [E_TARGET.IDEALISTA_PORTUGAL]: IdealistaPortugalSource,
+  [E_TARGET.REMAX_PORTUGAL]: RemaxPortugalSource
 }

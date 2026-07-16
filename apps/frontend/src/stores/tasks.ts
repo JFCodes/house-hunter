@@ -1,6 +1,10 @@
-import { E_TASK_SOURCE, E_TASK_TYPE, type T_TaskCrawlNewPostingsWithStatus, type T_TaskExecution, type T_TaskExecutionResult } from '@house-hunter/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import type {
+  T_TASK_CrawlNewPostings,
+  T_TaskExecutionResult,
+  T_TaskExecution,
+} from '@house-hunter/types'
 // App
 import { useApi } from '@/composables/api'
 
@@ -15,7 +19,7 @@ export const useTasksStore = defineStore('tasks', () => {
   const activeTaskExecution = ref<null | T_TaskExecution>(null)
   const lastTaskExecution = ref<null | LastTaskExecution>(null)
 
-  const crawlNewPostingTasks = ref<Array<T_TaskCrawlNewPostingsWithStatus>>([])
+  const crawlNewPostingTasks = ref<Array<T_TASK_CrawlNewPostings>>([])
   const isLoading = ref(false)
 
   const setActiveTaskExecution = (execution: T_TaskExecution): void => {

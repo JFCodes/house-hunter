@@ -1,10 +1,5 @@
-import type {
-  T_TaskCrawlNewPostings,
-  T_TaskExecutionResult,
-  T_TaskUpdatePosting,
-} from '@house-hunter/types'
+import type { T_DiscoveryTask, T_ExecutionResult } from '@house-hunter/data-model'
 
 export interface Source {
-  crawlNewPostings: (task: T_TaskCrawlNewPostings) => Promise<T_TaskExecutionResult>
-  updatePosting: (task: T_TaskUpdatePosting) => Promise<T_TaskExecutionResult>
+  discover: (task: T_DiscoveryTask) => Promise<T_ExecutionResult>
 }

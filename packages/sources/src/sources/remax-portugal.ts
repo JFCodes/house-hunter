@@ -1,18 +1,12 @@
-import type { T_TaskCrawlNewPostings, T_TaskExecutionResult, T_TaskUpdatePosting } from '@house-hunter/types'
+
+import type { T_DiscoveryTask, T_ExecutionResult } from '@house-hunter/data-model'
 // App
 import type { Source } from '../types/source-interface'
-import { crawl as CrawlNewPostings } from './remax-portugal/crawl-new-postings'
+import { discoverScript } from './remax-portugal/discover'
 
 class SourceClass implements Source {
-
-  async updatePosting (task: T_TaskUpdatePosting): Promise<T_TaskExecutionResult>  {
-    console.log('RemaxPortugalSource:updatePosting')
-
-    return { outcome: 'success', postings: [] }
-  }
-
-  async crawlNewPostings (task: T_TaskCrawlNewPostings): Promise<T_TaskExecutionResult>  {
-    return CrawlNewPostings(task)
+  async discover (task: T_DiscoveryTask): Promise<T_ExecutionResult>  {
+    return discoverScript(task)
   }
 }
 

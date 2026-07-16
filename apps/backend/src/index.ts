@@ -5,14 +5,14 @@ import http from 'http'
 import { WebSocketServer } from 'ws'
 // App
 import { controller as NoCacheController } from './controllers/no-cache'
-import { TaskExecutionQueue } from './tasks/execution-queue'
 import { initializeWebSocket } from './websocket'
 import { router as ApiRouter } from './routers'
+import './queues'
+
+// To delete
 import './data'
 
 const PORT = 3000
-
-TaskExecutionQueue.initialize()
 
 const app = express()
 

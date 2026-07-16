@@ -1,2 +1,3 @@
+export * from './tasks'
 export * from './posting'
-export * from './task'
+// TO DELETE

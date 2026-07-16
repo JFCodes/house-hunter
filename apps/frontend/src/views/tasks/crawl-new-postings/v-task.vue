@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { T_Task, T_TaskCrawlNewPostingsWithStatus } from '@house-hunter/types'
+import type { T_Task, T_TASK_CrawlNewPostings } from '@house-hunter/types'
 import { computed, watch, ref } from 'vue'
 // App
 import { useRouterUtils } from '@/composables/router-utils'
@@ -9,7 +9,7 @@ import { useTasksStore } from '@/stores/tasks'
 // Components
 import CompEntityCrawlTaskLocationField from '@/components/entities/crawling-task/ct-location-field.vue'
 import CompEntityCrawlTaskTypeField from '@/components/entities/crawling-task/ct-type-field.vue'
-import CompEntityActiveBadge from '@/components/entities/is-active-badge.vue'
+import CompEntityTaskStatusBadge from '@/components/entities/tasks/status-badge.vue'
 import CompUiButton from '@/components/ui/ui-button.vue'
 import CompUiEmpty from '@/components/ui/ui-empty.vue'
 import CompUiCard from '@/components/ui/ui-card.vue'
@@ -19,10 +19,10 @@ const { tasks: apiTasks } = useApi()
 const tasksStore = useTasksStore()
 
 const taskId = computedStringParam(E_ROUTER_PARAMS.TASK_ID)
-const editableTask = ref<null | T_TaskCrawlNewPostingsWithStatus>(null)
+const editableTask = ref<null | T_TASK_CrawlNewPostings>(null)
 const isLaunchingTask = ref(false)
 
-const task = computed<null | T_TaskCrawlNewPostingsWithStatus>(() => {
+const task = computed<null | T_TASK_CrawlNewPostings>(() => {
   if (!taskId.value) return null
   return tasksStore.crawlNewPostingTasks.find(t => t.id === taskId.value) ?? null
 })
@@ -61,7 +61,7 @@ watch(task, cloneTask, { immediate: true })
     <template #header>
       <header class="header">
         <div class="--group">
-          <CompEntityActiveBadge :entity="editableTask" />
+          <CompEntityTaskStatusBadge :status="editableTask.status" />
           <p class="--font-bold --text-lg">
             {{ editableTask.source.replaceAll('-', ' ') }}
           </p>

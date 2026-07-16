@@ -1,5 +1,5 @@
-import type { T_TaskExecution, T_TaskExecutionOutcome } from './task-execution'
-import type { T_Task } from '../entities/task'
+import type { T_TASK_CrawlNewPostings, T_TASK_UpdatePost } from '../entities/tasks'
+import type { T_TaskExecutionOutcome } from './task-execution'
 
 export enum E_ERROR_TYPES {
   TASK_EXECUTION_ERROR = 'task-execution-error'
@@ -10,7 +10,7 @@ export class Err_TaskExecution extends Error {
   message: string
 
   constructor(
-    public readonly task: T_Task,
+    public readonly task: T_TASK_CrawlNewPostings | T_TASK_UpdatePost,
     public readonly outcome: T_TaskExecutionOutcome,
     public readonly details: string,
   ) {

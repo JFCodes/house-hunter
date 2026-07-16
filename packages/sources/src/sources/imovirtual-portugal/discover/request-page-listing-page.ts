@@ -1,4 +1,4 @@
-import type { T_TaskCrawlNewPostings } from '@house-hunter/types'
+import type { T_DiscoveryTask } from '@house-hunter/data-model'
 import type { Page } from 'playwright'
 // App
 import { PageEvaluateFetch } from '../../../engine/scripts/page-evaluate-fetch'
@@ -7,7 +7,7 @@ import type { MultiSearchPaginated, PostingSearchItem } from '../_types'
 
 export async function requestPageListing (
   page: Page,
-  task: T_TaskCrawlNewPostings,
+  task: T_DiscoveryTask,
   buildId: string,
   pageNumber: number
 ): Promise<null | Array<PostingSearchItem>> {

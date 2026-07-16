@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { T_TaskCrawlNewPostingsWithStatus } from '@house-hunter/types'
+import type { T_TASK_CrawlNewPostings } from '@house-hunter/types'
 // App
 import { E_ROUTER_PAGES, E_ROUTER_PARAMS } from '@/router/enums'
 // Components
 import CompUiCard from '@/components/ui/ui-card.vue'
 import CompEntityPostingTypesBadges from '@/components/entities/posting/types-badges.vue'
+import CompEntityTaskStatusBadge from '@/components/entities/tasks/status-badge.vue'
 import CompEntityOperationBadge from '@/components/entities/operation-badge.vue'
-import CompEntityActiveBadge from '@/components/entities/is-active-badge.vue'
 
 defineProps<{
-  task: T_TaskCrawlNewPostingsWithStatus
+  task: T_TASK_CrawlNewPostings
   highlight: boolean
 }>()
 </script>
@@ -28,7 +28,7 @@ defineProps<{
       <div class="--group --mt-sm">
         <CompEntityOperationBadge :posting-operation="task.options.postingOperation" />
         <CompEntityPostingTypesBadges :posting-types="task.options.postingTypes" />
-        <CompEntityActiveBadge :entity="task" />
+        <CompEntityTaskStatusBadge :status="task.status" />
       </div>
     </CompUiCard>
   </RouterLink>

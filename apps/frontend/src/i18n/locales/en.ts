@@ -1,5 +1,9 @@
-import { type T_PostingType, type T_PostingOperation, E_TASK_TYPE } from '@house-hunter/types'
-import { E_POSTING_USER_STATUS } from '@house-hunter/types'
+import {
+  type T_PostingOperation,
+  type T_PostingType,
+  E_POSTING_USER_STATUS,
+  E_TASK_TYPE,
+} from '@house-hunter/types'
 
 const postingType: Record<T_PostingType, string> = {
   'apartment': 'Apartment',

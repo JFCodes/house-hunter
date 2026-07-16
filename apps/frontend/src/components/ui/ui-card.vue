@@ -39,7 +39,7 @@ defineProps<{
 
   &__header {
     padding: var(--s-sm) var(--s-md);
-    border-bottom: solid 1px var(---c-card-border-color);
+    border-bottom: solid 1px var(--c-card-border-color);
   }
 
   &__content {

@@ -1,4 +1,4 @@
-import type { E_TASK_SOURCE } from './task'
+import type { E_TASK_SOURCE } from './tasks/_base'
 
 export enum E_POSTING_USER_STATUS {
   NEW = 'new',

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// App
+import { useApi } from '@/composables/api'
 // Components
 import CompLayoutCenterContainer from '@/components/layouts/center-container.vue'
 import CompUiButton from '@/components/ui/ui-button.vue'
@@ -6,6 +8,8 @@ import CompUiTypeBadge from '@/components/ui/ui-type-badge.vue'
 import type { UiButtonType } from '@/components/ui/types'
 
 defineProps<{ label: string }>()
+
+const { testStuff } = useApi()
 
 const types: Array<UiButtonType> = [
   'primary',
@@ -25,7 +29,7 @@ const types: Array<UiButtonType> = [
   <CompLayoutCenterContainer>
     <p class="--font-bold --mb-xs">Default button:</p>
     <div class="--group --mb-lg">
-      <CompUiButton label="test stuff" />
+      <CompUiButton label="test stuff" @click="testStuff" />
     </div>
 
     <p class="--font-bold">Button not filled:</p>
