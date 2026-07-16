@@ -7,13 +7,6 @@ import {
   Err_TaskExecution,
 } from '@house-hunter/data-model'
 
-// import {
-//   E_TASK_TYPE, Err_TaskExecution,
-//   type T_TaskExecutionResult,
-//   type T_TaskExecution,
-//   T_TaskExecutionOutcome,
-// } from '@house-hunter/types'
-
 export async function ExecuteTask (execution: T_Execution<T_DiscoveryTask>): Promise<T_ExecutionResult> {
   const target = SOURCES_MAP[execution.task.target]
   const returnWithOutcome = (outcome: T_ExecutionResultOutcome): T_ExecutionResult => ({
@@ -34,7 +27,6 @@ export async function ExecuteTask (execution: T_Execution<T_DiscoveryTask>): Pro
       }
     }
 
-    console.log(error)
     return returnWithOutcome('error-unknown')
   } 
 }

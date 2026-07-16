@@ -1,6 +1,7 @@
 import { T_AdNew } from '@house-hunter/data-model'
 // App
 import { AdSchema } from '../schema'
+import { excluded } from '../utils'
 import { db } from '../database'
 import { sql } from 'drizzle-orm'
 
@@ -10,34 +11,34 @@ export async function upsertAds (ads: Array<T_AdNew>): Promise<void> {
     .onConflictDoUpdate({
       target: AdSchema.targetAndId,
       set: {
-        active: sql`excluded.${AdSchema.active}`,
-        descriptionShort: sql`excluded.${AdSchema.descriptionShort}`,
-        constructionYear: sql`excluded.${AdSchema.constructionYear}`,
-        price: sql`excluded.${AdSchema.price}`,
-        url: sql`excluded.${AdSchema.url}`,
-        areaBuilt: sql`excluded.${AdSchema.areaBuilt}`,
-        areaLiving: sql`excluded.${AdSchema.areaLiving}`,
-        areaTotal: sql`excluded.${AdSchema.areaTotal}`,
-        locationIsExact: sql`excluded.${AdSchema.locationIsExact}`,
-        locationLocalZone: sql`excluded.${AdSchema.locationLocalZone}`,
-        locationZipCode: sql`excluded.${AdSchema.locationZipCode}`,
-        locationAddress: sql`excluded.${AdSchema.locationAddress}`,
-        locationRegion: sql`excluded.${AdSchema.locationRegion}`,
-        locationLongitude: sql`excluded.${AdSchema.locationLongitude}`,
-        locationLatitude: sql`excluded.${AdSchema.locationLatitude}`,
-        typologyHasParking: sql`excluded.${AdSchema.typologyHasParking}`,
-        typologyHasGarage: sql`excluded.${AdSchema.typologyHasGarage}`,
-        typologyBedrooms: sql`excluded.${AdSchema.typologyBedrooms}`,
-        typologyBathrooms: sql`excluded.${AdSchema.typologyBathrooms}`,
-        typologyOtherRooms: sql`excluded.${AdSchema.typologyOtherRooms}`,
-        typologyTotalRooms: sql`excluded.${AdSchema.typologyTotalRooms}`,
-        typologyParkingSpots: sql`excluded.${AdSchema.typologyParkingSpots}`,
-        contactAgencyContact: sql`excluded.${AdSchema.contactAgencyContact}`,
-        contactAgencyName: sql`excluded.${AdSchema.contactAgencyName}`,
-        contactUserContact: sql`excluded.${AdSchema.contactUserContact}`,
-        contactUsername: sql`excluded.${AdSchema.contactUsername}`,
-        images: sql`excluded.${AdSchema.images}`,
-        imageMain: sql`excluded.${AdSchema.imageMain}`,
+        active: excluded(AdSchema.active),
+        descriptionShort: excluded(AdSchema.descriptionShort),
+        constructionYear: excluded(AdSchema.constructionYear),
+        price: excluded(AdSchema.price),
+        url: excluded(AdSchema.url),
+        areaBuilt: excluded(AdSchema.areaBuilt),
+        areaLiving: excluded(AdSchema.areaLiving),
+        areaTotal: excluded(AdSchema.areaTotal),
+        locationIsExact: excluded(AdSchema.locationIsExact),
+        locationLocalZone: excluded(AdSchema.locationLocalZone),
+        locationZipCode: excluded(AdSchema.locationZipCode),
+        locationAddress: excluded(AdSchema.locationAddress),
+        locationRegion: excluded(AdSchema.locationRegion),
+        locationLongitude: excluded(AdSchema.locationLongitude),
+        locationLatitude: excluded(AdSchema.locationLatitude),
+        typologyHasParking: excluded(AdSchema.typologyHasParking),
+        typologyHasGarage: excluded(AdSchema.typologyHasGarage),
+        typologyBedrooms: excluded(AdSchema.typologyBedrooms),
+        typologyBathrooms: excluded(AdSchema.typologyBathrooms),
+        typologyOtherRooms: excluded(AdSchema.typologyOtherRooms),
+        typologyTotalRooms: excluded(AdSchema.typologyTotalRooms),
+        typologyParkingSpots: excluded(AdSchema.typologyParkingSpots),
+        contactAgencyContact: excluded(AdSchema.contactAgencyContact),
+        contactAgencyName: excluded(AdSchema.contactAgencyName),
+        contactUserContact: excluded(AdSchema.contactUserContact),
+        contactUsername: excluded(AdSchema.contactUsername),
+        images: excluded(AdSchema.images),
+        imageMain: excluded(AdSchema.imageMain),
       }
     })
 }

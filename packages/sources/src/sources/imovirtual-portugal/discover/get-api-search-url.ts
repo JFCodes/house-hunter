@@ -11,8 +11,8 @@ type Options = {
 
 export function getApiSearchUrl (task: T_DiscoveryTask, options: Options): string {
   const { buildId, pageNumber } = options
-  const postingOperation = getAddTypeSegment(task.options.postingOperation)
-  const postingType = getAddBuildingTypeSegment(task.options.postingTypes)
+  const postingOperation = getAddTypeSegment(task.options.addType)
+  const postingType = getAddBuildingTypeSegment(task.options.buildingTypes)
 
   let url = BASE_API_URL
   url += '/_next/data'

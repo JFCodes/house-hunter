@@ -1,12 +1,10 @@
 import { type T_ExecutionResult, type T_DiscoveryTask, Err_TaskExecution } from '@house-hunter/data-model'
 // App
-import { getOffersCount } from './discover/get-offers-count'
-import { getBuildId } from './scripts/get-build-id'
 import { requestPageListing } from './discover/request-page-listing-page'
 import { DismissCookieBanner, GetBrowserAndPage } from '../../engine'
-import { getSearchUrl } from './discover/get-search-url'
-import { SELECTORS, BASE_URL } from './_constants'
 import { parseResult } from './scripts/parse-result'
+import { getBuildId } from './scripts/get-build-id'
+import { SELECTORS, BASE_URL } from './_constants'
 import type { PostingSearchItem } from './_types'
 
 export async function discoverScript(task: T_DiscoveryTask): Promise<T_ExecutionResult> {
@@ -18,28 +16,6 @@ export async function discoverScript(task: T_DiscoveryTask): Promise<T_Execution
     bannerSelector: SELECTORS.cookieBanner.banner
   })
 
-  let searchUrl: string = ''
-  try {
-    searchUrl = getSearchUrl(task)
-  } catch (e) {
-    const message = e instanceof Error ? e.message : 'failed to generate search url'
-    const error = new Err_TaskExecution('error-during-execution', task, message)
-    await browser.close()
-    throw error
-  }
-
-  await page.goto(searchUrl)
-
-  let totalPostings: number = 0
-  try {
-    totalPostings = await getOffersCount(page)
-  } catch (e) {
-    const message = e instanceof Error ? e.message : 'failed to count number of offers'
-    const error = new Err_TaskExecution('error-during-execution', task, message)
-    await browser.close()
-    throw error
-  }
-
   let buildId: string = ''
   try {
     buildId = await getBuildId(page)
@@ -50,19 +26,23 @@ export async function discoverScript(task: T_DiscoveryTask): Promise<T_Execution
     throw error
   }
 
-  const rawPostings: Array<PostingSearchItem> = []
-  const totalPages = Math.ceil(totalPostings / 72)
+  // First page brings in total pages
+  const result = await requestPageListing(page, task, buildId, 1)
+  if (!result || result.items.length === 0) return { outcome: 'success', data: { upsert: [] } }
+
+  const rawPostings: Array<PostingSearchItem> = [...result.items]
   
-  if (totalPages > 1) {
-    for (let nextPage = 1; nextPage <= totalPages; nextPage++) {
-      const result = await requestPageListing(page, task, buildId, nextPage).catch(error => {
-        console.log({ error })
-        return null
-      })
-      if (result !== null) rawPostings.push(...result)
-      break
+  if (result.totalPages > 1) {
+    for (let nextPage = 2; nextPage <= result.totalPages; nextPage++) {
+      const pageResult =  await requestPageListing(page, task, buildId, nextPage)
+      console.log('page result count', pageResult?.items.length)
+
+      if (!pageResult) break
+      rawPostings.push(...pageResult.items)
     }
   }
+
+  console.log(rawPostings.length)
 
   await browser.close()
   const postings = rawPostings.map(item => parseResult(task, item))

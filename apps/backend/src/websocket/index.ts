@@ -3,8 +3,8 @@ import http from 'http'
 import type {
   T_API_WEBSOCKET_ServerMessage_Connected,
   T_API_WEBSOCKET_ClientMessages,
-  T_API_WEBSOCKET_ServerMessages,
-} from '@house-hunter/types'
+  T_API_WEBSOCKET_ServerMessages
+} from '@house-hunter/data-model'
 
 export let broadcast = (message: T_API_WEBSOCKET_ServerMessages): void => {
   console.warn('broadCast callback not set')

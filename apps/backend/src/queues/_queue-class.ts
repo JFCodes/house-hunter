@@ -29,7 +29,7 @@ export class QueueClass<Task extends { id: string }> {
   }
 
   public queueTask (task: Task, maxRetries: number): void {
-    if (maxRetries < 1) return
+    if (maxRetries < 0) return
 
     this.registerExecution({
       registeredAt: new Date().getTime(),
@@ -65,7 +65,6 @@ export class QueueClass<Task extends { id: string }> {
     while (nextExecution) {
       this.activeExecution = nextExecution
       nextExecution.execution.startedAt = new Date().getTime()
-
       // Schedule to the end of event loop
       // This makes no op execution still wait for this.queue mutation in the meantime
       await new Promise(r => setTimeout(r, 0))
@@ -73,6 +72,8 @@ export class QueueClass<Task extends { id: string }> {
       //   broadcast({ type: 'task-started', payload: { task: nextExecution.taskExecution } })
       const result = await this.executeFunction(nextExecution.execution)
       console.log({ result })
+      console.log({ count: result.data.upsert.length })
+      result.data.upsert.forEach(r => console.log(r.targetAndId))
 
       this.processExecutionResult(result)
       //   broadcast({ type: 'task-ended', payload: {

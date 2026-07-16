@@ -11,7 +11,7 @@ export const AdSchema = sqliteTable('ad', {
   targetAndId: text('targetAndId').notNull().unique(),
   targetId: text('targetId').notNull(),
   // System fields
-  adBuildingTypes: text('buildingTypes', { mode: 'json' }).notNull().$type<Array<T_AdBuildingType>>(),
+  adBuildingTypes: text('adBuildingTypes', { mode: 'json' }).notNull().$type<Array<T_AdBuildingType>>(),
   status: text('status').notNull().$type<E_ADD_STATUS>().$default(() => E_ADD_STATUS.NEW),
   createdAt: integer('createdAt').notNull().$default(() => new Date().getTime()),
   updatedAt: integer('updatedAt').notNull().$default(() => new Date().getTime()),

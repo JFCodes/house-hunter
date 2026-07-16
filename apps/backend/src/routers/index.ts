@@ -1,6 +1,6 @@
 import { Router, type Router as RouterType } from 'express'
 // Routes
-import { router as PostingsRouter } from './routes/postings'
+import { router as PostingsRouter } from './routes/ad'
 import { router as TasksRouter } from './routes/tasks'
 // Controllers
 import { controller as TestStuffController } from '../controllers/test-stuff'

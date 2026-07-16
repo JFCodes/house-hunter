@@ -5,12 +5,17 @@ import { PageEvaluateFetch } from '../../../engine/scripts/page-evaluate-fetch'
 import { getApiSearchUrl } from './get-api-search-url'
 import type { MultiSearchPaginated, PostingSearchItem } from '../_types'
 
+type Result = {
+  items: Array<PostingSearchItem>
+  totalPages: number
+}
+
 export async function requestPageListing (
   page: Page,
   task: T_DiscoveryTask,
   buildId: string,
   pageNumber: number
-): Promise<null | Array<PostingSearchItem>> {
+): Promise<null | Result> {
 
   const response = await PageEvaluateFetch<MultiSearchPaginated>(page, {
     url: getApiSearchUrl(task, { pageNumber, buildId }),
@@ -21,8 +26,11 @@ export async function requestPageListing (
     }
   }).catch(() => null)
 
-  if (response === null || typeof response === 'string') return []
-  if (!response.pageProps) return []
+  if (response === null || typeof response === 'string') return null
+  if (!response.pageProps) return null
 
-  return response.pageProps.data.searchAds.items
+  return {
+    totalPages: response.pageProps.data.searchAds.pagination.totalPages,
+    items: response.pageProps.data.searchAds.items,
+  }
 }

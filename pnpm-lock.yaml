@@ -218,9 +218,6 @@ importers:
       '@house-hunter/sources':
         specifier: workspace:*
         version: link:../../packages/sources
-      '@house-hunter/types':
-        specifier: workspace:*
-        version: link:../../packages/types
       better-sqlite3:
         specifier: ^12.11.1
         version: 12.11.1

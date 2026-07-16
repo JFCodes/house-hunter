@@ -9,9 +9,6 @@ import { initializeWebSocket } from './websocket'
 import { router as ApiRouter } from './routers'
 import './queues'
 
-// To delete
-import './data'
-
 const PORT = 3000
 
 const app = express()

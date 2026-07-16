@@ -76,49 +76,12 @@ export function parseResult (task: T_DiscoveryTask, fromSource: PostingSearchIte
     typologyHasGarage: null,
     typologyBathrooms: null,
     // Contacts
-    contactUserContact: advertOwner?.contacts[0] ?? null,
-    contactUsername: advertOwner?.name ?? '',
+    contactUserContact: advertOwner.contacts[0] ?? '',
+    contactUsername: advertOwner.name ?? '',
     contactAgencyName: agency?.name ?? '',
     contactAgencyContact: '',
     // Images
     imageMain: fromSource.images[0]?.large ?? null,
     images: fromSource.images.map(i => i.large),
   }
-  // const getContactsData = (): T_PostingContacts => {
-
-  //   return {
-
-  //   }
-  // }
-  
-  // const getTypologyData = (): T_PostingTypology => {
-
-  //   return{
-
-  //   }
-  // }
-
-  // const getImagesData = (): T_PostingImages => {
-  //   return {
-  //     images: , 
-  //     main: ,
-  //   }
-  // }
-  
-  // const getAreasData = (): T_PostingAreas => ({
-
-  // })
-
-  // return {
-  //   ...F_GetPostingIds(task.source, fromSource.id),
-  //   _houseHunterFields: F_GetPostingEmptyHouseHunterFields(),
-  //   location: getLocationData(),
-  //   contacts: getContactsData(),
-  //   typology: getTypologyData(),
-  //   images: getImagesData(),
-  //   areas: getAreasData(),
-  //   operation: task.options.postingOperation,
-  //   ,
-  //   active: true,
-  // }
 }
