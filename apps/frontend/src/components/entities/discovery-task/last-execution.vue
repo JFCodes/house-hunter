@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { T_TaskExecution, T_TaskExecutionResult } from '@house-hunter/types'
+import type { T_Execution, T_DiscoveryTask, T_ExecutionResult } from '@house-hunter/data-model'
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 // Components
@@ -7,17 +7,16 @@ import CompUiTaskBadge from '@/components/ui/ui-task-badge.vue'
 import { SearchCheck, SearchX } from '@lucide/vue'
 
 const props = defineProps<{
-  result: Omit<T_TaskExecutionResult, 'postings'>
-  execution: T_TaskExecution
+  result: Omit<T_ExecutionResult, 'data'>
+  execution: T_Execution<T_DiscoveryTask>
 }>()
 
 const { t } = useI18n()
 
 const label = computed<string>(() => {
-  const { source, type } = props.execution.task
-  const taskType = t(`enums.taskType.${type}`)
+  const { target } = props.execution.task
   const activeTask = t('global.activeTask')
-  return `${activeTask}: ${source} ${taskType}`
+  return `${activeTask}: ${target}`
 })
 </script>
 

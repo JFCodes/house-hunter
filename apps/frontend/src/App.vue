@@ -5,6 +5,7 @@ import { useDiscoveryTasksStore } from '@/stores/discovery-tasks'
 import { useServerStatusStore } from '@/stores/server-status'
 import { unsubscribeSocket } from '@/websocket/instance'
 import { websocket } from '@/websocket/client'
+import { useAdsStore } from '@/stores/ads'
 // Components
 import CompGlobalTooltipAnchor from '@/components/global/g-tooltip-anchor.vue'
 import CompGlobalToastsAnchor from '@/components/global/g-toasts-anchor.vue'
@@ -16,12 +17,12 @@ import ViewOffline from '@/views/v-offline.vue'
 
 const discoveryTasksStore = useDiscoveryTasksStore()
 const serverStatusStore = useServerStatusStore()
+const adsStore = useAdsStore()
 
 onMounted(() => {
-  // tasksStore.searchCrawlNewPostingTasks()
-  // postingsStore.searchPostings()
   discoveryTasksStore.search()
   websocket.connect()
+  adsStore.search()
 })
 
 onUnmounted(() => {

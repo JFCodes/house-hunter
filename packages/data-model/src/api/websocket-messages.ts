@@ -14,15 +14,15 @@ export type T_API_WEBSOCKET_ClientMessages =
 export type T_API_WEBSOCKET_ServerMessage_DiscoveryTask_Execution_Ended = {
   type: 'discovery-task-execution-ended',
   payload: {
-    result: Omit<T_ExecutionResult, 'postings'>
-    task: T_Execution<T_DiscoveryTask>,
+    result: Omit<T_ExecutionResult, 'data'>
+    execution: T_Execution<T_DiscoveryTask>,
   }
 }
 
 export type T_API_WEBSOCKET_ServerMessage_DiscoveryTask_Execution_Started = {
   type: 'discovery-task-execution-started',
   payload: {
-    task: T_Execution<T_DiscoveryTask>
+    execution: T_Execution<T_DiscoveryTask>
   }
 }
 

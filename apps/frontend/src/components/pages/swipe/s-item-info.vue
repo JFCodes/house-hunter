@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { E_POSTING_USER_STATUS } from '@house-hunter/types'
-import type { T_Posting } from '@house-hunter/types'
-import { computed } from 'vue'
+import type { T_Ad } from '@house-hunter/data-model'
 // App
 // Component
-import CompEntityPostingTypologyBadge from '@/components/entities/posting/typology-badge.vue'
-import CompEntityPostingImageGallery from '@/components/entities/posting/image-gallery.vue'
-import CompEntityPostingStatusBadge from '@/components/entities/posting/status-badge.vue'
-import CompEntityPostingSourceBadge from '@/components/entities/posting/source-badge.vue'
-import CompEntityPostingAreaBadge from '@/components/entities/posting/area-badge.vue'
-import CompEntityOperationBadge from '@/components/entities/operation-badge.vue'
+import CompEntityAdTypologyBadge from '@/components/entities/ad/typology-badge.vue'
+import CompEntityAdTargetBadge from '@/components/entities/ad/target-badge.vue'
+import CompEntityAdTypeBadge from '@/components/entities/ad/type-badge.vue'
+import CompEntityAdAreBadge from '@/components/entities/ad/area-badge.vue'
 import CompUiIconButton from '@/components/ui/ui-icon-button.vue'
 import CompUiCard from '@/components/ui/ui-card.vue'
 import { ExternalLink } from '@lucide/vue'
 
-defineProps<{ posting: T_Posting }>()
+defineProps<{ ad: T_Ad }>()
 
 </script>
 
@@ -23,12 +19,12 @@ defineProps<{ posting: T_Posting }>()
     <template #header>
       <div class="--group --group--spread --mb-2xs">
         <div class="--group">
-          <CompEntityPostingSourceBadge :source="posting.source" />
-          <CompEntityOperationBadge :posting-operation="posting.operation" />
+          <CompEntityAdTargetBadge :target="ad.target" />
+          <CompEntityAdTypeBadge :ad-type="ad.adType" />
         </div>
         <CompUiIconButton
           :icon="ExternalLink"
-          :href="posting.url"
+          :href="ad.url"
           :is-active="false"
           @click.stop />
       </div>
@@ -42,32 +38,32 @@ defineProps<{ posting: T_Posting }>()
     <!--  -->
 
     <!-- Description -->
-    <!-- <p class="--text-2xs --font-bold --truncate --mb-2xs">{{ posting.description }}</p> -->
+    <p class="--text-2xs --font-bold --truncate --mb-2xs">{{ ad.descriptionShort }}</p>
 
     <!-- Pricing -->
-    <!-- <div class="--group --mb-2xs">
+    <div class="--group --mb-2xs">
       <p class=" --uppercase --text-3xs --font-bold">{{ $t('global.askingPrice') }}</p>
-      <p class="--font-bold --text-md">{{ posting.price.toLocaleString() }}</p>
+      <p class="--font-bold --text-md">{{ ad.price.toLocaleString() }}</p>
       <Euro :size="16" />
-    </div> -->
+    </div>
 
     <!-- Construction -->
-    <!-- <div v-if="posting.constructionYear" class="--group --mb-2xs">
+    <div v-if="ad.constructionYear" class="--group --mb-2xs">
       <p class=" --uppercase --text-3xs --font-bold">{{ $t('global.constructionYear') }}</p>
-      <p class="--font-bold --text-md">{{ posting.constructionYear }}</p>
-    </div> -->
+      <p class="--font-bold --text-md">{{ ad.constructionYear }}</p>
+    </div>
 
     <!-- Typology -->
-    <!-- <div class="--group --mb-2xs">
-      <p class="posting__title --font-bold --uppercase --text-3xs">{{ $t('global.typology') }}</p>
-      <CompEntityPostingTypologyBadge :posting-typology="posting.typology" />
-    </div> -->
+    <div class="--group --mb-2xs">
+      <p class="--font-bold --uppercase --text-3xs">{{ $t('global.typology') }}</p>
+      <CompEntityAdTypologyBadge :ad="ad" />
+    </div>
 
     <!-- Typology -->
-    <!-- <div class="--group --mb-md">
-      <p class="posting__title --font-bold --uppercase --text-3xs">{{ $t('global.area') }}</p>
-      <CompEntityPostingAreaBadge :posting-areas="posting.areas" />
-    </div> -->
+    <div class="--group --mb-md">
+      <p class="--font-bold --uppercase --text-3xs">{{ $t('global.area') }}</p>
+      <CompEntityAdAreBadge :ad="ad" />
+    </div>
   </CompUiCard>
 </template>
 

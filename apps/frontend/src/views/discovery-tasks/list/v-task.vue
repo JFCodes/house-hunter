@@ -1,12 +1,11 @@
 <script setup lang="ts">
-// import type { T_Task, T_TASK_CrawlNewPostings } from '@house-hunter/types'
 import type { T_DiscoveryTask } from '@house-hunter/data-model'
 import { computed, watch, ref } from 'vue'
 // App
-import { useRouterUtils } from '@/composables/router-utils'
-// import { useApi } from '@/composables/api'
-import { E_ROUTER_PARAMS } from '@/router/enums'
 import { useDiscoveryTasksStore } from '@/stores/discovery-tasks'
+import { useRouterUtils } from '@/composables/router-utils'
+import { useApi } from '@/composables/api'
+import { E_ROUTER_PARAMS } from '@/router/enums'
 // Components
 import CompEntityDiscoveryTaskFieldBuildingType from '@/components/entities/discovery-task/fields/field-building-type.vue'
 import CompEntityDiscoveryTaskFieldLocation from '@/components/entities/discovery-task/fields/field-location.vue'
@@ -16,7 +15,7 @@ import CompUiEmpty from '@/components/ui/ui-empty.vue'
 import CompUiCard from '@/components/ui/ui-card.vue'
 
 const { computedStringParam } = useRouterUtils()
-// const { discoveryTasks: apiDiscoveryTasks } = useApi()
+const { discoveryTasks: apiDiscoveryTasks } = useApi()
 const discoveryTasksStore = useDiscoveryTasksStore()
 
 const taskId = computedStringParam(E_ROUTER_PARAMS.TASK_ID)
@@ -41,13 +40,13 @@ const cloneTask = (task: T_DiscoveryTask | null): void => {
     : null
 }
 
-const scheduleCrawl = (): void => {
-  // if (!task.value) return
+const schedule = (): void => {
+  if (!task.value) return
 
-  // isLaunchingTask.value = true
-  // apiTasks.crawlNewPostings
-  //   .schedule(task.value.id)
-  //   .finally(() => isLaunchingTask.value = false)
+  isLaunchingTask.value = true
+  apiDiscoveryTasks
+    .schedule(task.value.id)
+    .finally(() => isLaunchingTask.value = false)
 }
 
 watch(task, cloneTask, { immediate: true })
@@ -73,7 +72,7 @@ watch(task, cloneTask, { immediate: true })
             type="primary"
             :is-loading="isLaunchingTask || isExecutingTask"
             :label="$t('pages.task.crawling.triggerCrawl')"
-            @click="scheduleCrawl" />
+            @click="schedule" />
         </div>
       </header>
     </template>

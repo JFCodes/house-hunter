@@ -16,7 +16,7 @@ const activeStatus = computedStringParam(E_ROUTER_PARAMS.AD_STATUS)
 const filteredAds = computed<Array<T_Ad>>(() => {
   if (!activeStatus.value) return []
 
-  const filter = (posting: T_Ad) => posting.status === activeStatus.value
+  const filter = (ad: T_Ad) => ad.status === activeStatus.value
   return adsStore.ads.filter(filter)
 })
 </script>

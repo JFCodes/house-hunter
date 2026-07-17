@@ -27,7 +27,6 @@
     "@house-hunter/data-model": "workspace:*",
     "@house-hunter/functions": "workspace:*",
     "@house-hunter/sources-info": "workspace:*",
-    "@house-hunter/types": "workspace:*",
     "playwright": "^1.61.1"
   }
 }

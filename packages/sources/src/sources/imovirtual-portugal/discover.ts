@@ -35,14 +35,10 @@ export async function discoverScript(task: T_DiscoveryTask): Promise<T_Execution
   if (result.totalPages > 1) {
     for (let nextPage = 2; nextPage <= result.totalPages; nextPage++) {
       const pageResult =  await requestPageListing(page, task, buildId, nextPage)
-      console.log('page result count', pageResult?.items.length)
-
       if (!pageResult) break
       rawPostings.push(...pageResult.items)
     }
   }
-
-  console.log(rawPostings.length)
 
   await browser.close()
   const postings = rawPostings.map(item => parseResult(task, item))

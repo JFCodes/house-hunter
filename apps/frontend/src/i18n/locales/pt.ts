@@ -1,37 +1,29 @@
 import {
-  type T_PostingOperation,
-  type T_PostingType,
-  E_POSTING_USER_STATUS,
-  E_TASK_TYPE,
-} from '@house-hunter/types'
+  type T_AdBuildingType,
+  type T_AdType,
+  E_AD_STATUS
+} from '@house-hunter/data-model'
 // App
 import type { MessageSchema } from '@/i18n/locales/_schema'
 
-// cSpell:disable
-const postingType: Record<T_PostingType, string> = {
-  'apartment': 'Apartamento',
-  'single-home': 'Moradia'
+const adBuildingType: Record<T_AdBuildingType, string> = {
+  'single-house': 'Single house',
+  'apartment': 'Apartment',
+}
+const adType: Record<T_AdType, string> = {
+  'rent': 'rent',
+  'buy': 'buy'
 }
 
-const taskType: Record<E_TASK_TYPE, string> = {
-  [E_TASK_TYPE.CRAWL_NEW_POSTINGS]: 'procurar anúncios novos',
-  [E_TASK_TYPE.UPDATED_POSTING]: 'atualizar anúncio'
-}
-
-const postingOperation: Record<T_PostingOperation, string> = {
-  'rent': 'alugar',
-  'buy': 'comprar'
-}
-
-const postingStatus: Record<E_POSTING_USER_STATUS, string> = {
-  [E_POSTING_USER_STATUS.NEW]: 'Novo',
-  [E_POSTING_USER_STATUS.DISMISS]: 'Ignorado',
-  [E_POSTING_USER_STATUS.INTERESTING]: 'Interessante',
-  [E_POSTING_USER_STATUS.CONTACT_MADE]: 'Contactado',
-  [E_POSTING_USER_STATUS.PROPOSAL_MADE]: 'Proposta submetida',
-  [E_POSTING_USER_STATUS.PROPOSAL_ACCEPTED]: 'Poposta aceite',
-  [E_POSTING_USER_STATUS.PROPOSAL_REJECTED]: 'Poposta rejeitada',
-  [E_POSTING_USER_STATUS.BOUGHT]: 'Comprada',
+const adStatus: Record<E_AD_STATUS, string> = {
+  [E_AD_STATUS.NEW]: 'New',
+  [E_AD_STATUS.DELETED]: 'Deleted',
+  [E_AD_STATUS.INTERESTING]: 'Interesting',
+  [E_AD_STATUS.CONTACT_MADE]: 'Contacted',
+  [E_AD_STATUS.PROPOSAL_MADE]: 'Proposal submitted',
+  [E_AD_STATUS.PROPOSAL_ACCEPTED]: 'Proposal accepted',
+  [E_AD_STATUS.PROPOSAL_REJECTED]: 'Proposal rejected',
+  [E_AD_STATUS.COMPLETED]: 'Completed',
 }
 
 export default {
@@ -44,6 +36,7 @@ export default {
     constructionYear: 'Ano de construção',
     dashboard: 'Dashboard',
     description: 'Descrição',
+    discoveryAds: 'Procurar anúncios',
     location: 'Localização',
     history: 'Histórico',
     save: 'Guardar',
@@ -55,7 +48,7 @@ export default {
     year: 'Ano',
   },
   pages: {
-    postings: {
+    ads: {
       tabs: {
         all: 'Todos',
       }
@@ -74,7 +67,7 @@ export default {
     }
   },
   empty: {
-    noPostingImages: 'Este anúncios não tem imagens',
+    noAdImages: 'Este anúncios não tem imagens',
   },
   notFound: {
     task: 'Workflow não encontrado',
@@ -84,15 +77,15 @@ export default {
     crawlNewPostingLocation2: 'Consulta as informações relativas a este campo na documentação.',
   },
   toasts: {
-    taskStarted: {
+    discoveryAdsTaskStarted: {
       message: `Workflow do tipo '{type}' no site {source} começou`,
       title: 'Workflow de pesquisa começou',
     },
-    taskEndedSuccess: {
+    discoveryAdsTaskSuccess: {
       message: `Workflow do tipo '{type}' no site {source} terminou com sucess`,
       title: 'Workflow terminou com sucess',
     },
-    taskEndedError: {
+    discoveryAdsTaskError: {
       message: `Workflow do tipo '{type}' no site {source} terminou com um erro:`,
       title: 'Error no workflow',
     },
@@ -102,9 +95,8 @@ export default {
     }
   },
   enums: {
-    postingOperation,
-    postingStatus,
-    postingType,
-    taskType
+    adBuildingType,
+    adStatus,
+    adType,
   }
 } satisfies MessageSchema

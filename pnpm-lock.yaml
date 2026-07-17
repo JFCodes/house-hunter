@@ -276,9 +276,6 @@ importers:
       '@house-hunter/data-model':
         specifier: workspace:*
         version: link:../../packages/data-model
-      '@house-hunter/types':
-        specifier: workspace:*
-        version: link:../../packages/types
       '@lucide/vue':
         specifier: ^1.23.0
         version: 1.23.0(vue@3.5.39(typescript@6.0.3))
@@ -395,9 +392,6 @@ importers:
       '@house-hunter/data-model':
         specifier: workspace:*
         version: link:../data-model
-      '@house-hunter/types':
-        specifier: workspace:*
-        version: link:../types
     devDependencies:
       chokidar-cli:
         specifier: ^3.0.0
@@ -420,9 +414,6 @@ importers:
       '@house-hunter/sources-info':
         specifier: workspace:*
         version: link:../sources-info
-      '@house-hunter/types':
-        specifier: workspace:*
-        version: link:../types
       playwright:
         specifier: ^1.61.1
         version: 1.61.1
@@ -438,18 +429,6 @@ importers:
         version: 6.0.3
 
   packages/sources-info:
-    devDependencies:
-      chokidar-cli:
-        specifier: ^3.0.0
-        version: 3.0.0
-      tsup:
-        specifier: ^8.5.1
-        version: 8.5.1(jiti@2.7.0)(postcss@8.5.16)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/types:
     devDependencies:
       chokidar-cli:
         specifier: ^3.0.0

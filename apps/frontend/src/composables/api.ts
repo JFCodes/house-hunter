@@ -28,7 +28,8 @@ export function useApi () {
   const testStuff = () => request({ path: 'test-stuff', method: 'GET' })
   
   const discoveryTasks = {
-    get: () => request<T_API_RESPONSE_DiscoveryTasks>({ path: 'discovery-tasks', method: 'GET' })
+    schedule: (taskId: string) => request({ path: `discovery-tasks/${taskId}/schedule`, method: 'POST' }),
+    get: () => request<T_API_RESPONSE_DiscoveryTasks>({ path: 'discovery-tasks', method: 'GET' }),
   }
 
   const ads = {

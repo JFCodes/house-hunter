@@ -10,7 +10,7 @@ defineProps<{ buildingTypes: Array<T_AdBuildingType> }>()
   <CompUiTypeBadge
     v-for="(buildingType, index) in buildingTypes"
     type="light"
-    :key="`${postingType}-${index}`">
+    :key="`${buildingType}-${index}`">
     {{ $t(`enums.adBuildingType.${buildingType}`) }}
   </CompUiTypeBadge>
 </template>

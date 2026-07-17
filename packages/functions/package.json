@@ -24,7 +24,6 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@house-hunter/data-model": "workspace:*",
-    "@house-hunter/types": "workspace:*"
+    "@house-hunter/data-model": "workspace:*"
   }
 }

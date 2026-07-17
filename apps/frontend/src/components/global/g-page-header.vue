@@ -2,12 +2,12 @@
 import { type RouteLocationRaw, useRoute } from 'vue-router'
 import { type Component, computed } from 'vue'
 // App
-import { useTasksStore } from '@/stores/tasks'
+import { useDiscoveryTasksStore } from '@/stores/discovery-tasks'
 import { E_ROUTER_PAGES } from '@/router/enums'
 // Components
 import { MonitorCog, BellDot, IdCard, Cctv, Home } from '@lucide/vue'
-import CompEntityTaskActiveTaskExecution from '@/components/entities/tasks/active-task-execution.vue'
-import CompEntityTaskLastTaskExecution from '@/components/entities/tasks/last-task-execution.vue'
+import DiscoverTaskActiveExecution from '@/components/entities/discovery-task/active-execution.vue'
+import DiscoverTaskLastExecution from '@/components/entities/discovery-task/last-execution.vue'
 import CompUiIconButton from '@/components/ui/ui-icon-button.vue'
 
 type Link = {
@@ -17,7 +17,7 @@ type Link = {
   icon: Component
 }
 
-const tasksStore = useTasksStore()
+const discoveryTasksStore = useDiscoveryTasksStore()
 const route = useRoute()
 
 const links = computed<Array<Link>>(() => {
@@ -26,7 +26,6 @@ const links = computed<Array<Link>>(() => {
   const settingsLink = getLinkItem(E_ROUTER_PAGES.SETTINGS, MonitorCog)
   const homeLink = getLinkItem(E_ROUTER_PAGES.HOME, Home)
   const adsLink = getLinkItem(E_ROUTER_PAGES.ADS, IdCard)
-
 
   return [homeLink, adsLink, tasksLink, notificationsLink, settingsLink]
 })
@@ -52,14 +51,14 @@ const checkLinkIsActive = (name: E_ROUTER_PAGES): boolean => {
       <p class="--text-md --font-bold --text-white">HOUSE HUNTER</p>
 
       <div class="header__content-middle --group">
-        <CompEntityTaskActiveTaskExecution
-          v-if="tasksStore.activeTaskExecution"
-          :execution="tasksStore.activeTaskExecution" />
+        <DiscoverTaskActiveExecution
+          v-if="discoveryTasksStore.activeTaskExecution"
+          :execution="discoveryTasksStore.activeTaskExecution" />
 
-        <CompEntityTaskLastTaskExecution
-          v-else-if="tasksStore.lastTaskExecution"
-          :execution="tasksStore.lastTaskExecution.execution"
-          :result="tasksStore.lastTaskExecution.result" />
+        <DiscoverTaskLastExecution
+          v-else-if="discoveryTasksStore.lastTaskExecution"
+          :execution="discoveryTasksStore.lastTaskExecution.execution"
+          :result="discoveryTasksStore.lastTaskExecution.result" />
       </div>
 
       <div class="--group">

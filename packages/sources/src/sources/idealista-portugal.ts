@@ -5,7 +5,6 @@ import type { Source } from '../types/source-interface'
 class SourceClass implements Source {
 
   async discover (task: T_DiscoveryTask): Promise<T_ExecutionResult>  {
-    console.log('IdealistaPortugalSource:discover')
     return {
       data: { upsert: [] },
       outcome: 'success',

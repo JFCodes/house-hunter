@@ -34,37 +34,38 @@ export default {
     constructionYear: 'Construction year',
     dashboard: 'Dashboard',
     description: 'Description',
+    discoveryAds: 'Discover ads',
     location: 'Location',
     history: 'History',
     save: 'Save',
     status: 'Status',
     stopped: 'Stopped',
-    swipe: 'Swipe postings',
+    swipe: 'Swipe ads',
     tasks: 'Tasks',
     typology: 'Rooms',
     year: 'Year',
   },
   pages: {
-    postings: {
+    ads: {
       tabs: {
         all: 'All',
       }
     },
     task: {
       crawling: {
-        triggerCrawl: 'Find new posts',
-        types: 'Posting types'
+        triggerCrawl: 'Find new ads',
+        types: 'Add types'
       }
     },
     swipe: {
-      emptyMessage1: 'No more posts to swipe',
-      emptyMessage2: `No more posts with status '{status}'`,
+      emptyMessage1: 'No more ads to swipe',
+      emptyMessage2: `No more ads with status '{status}'`,
       postsLeft: 'You have {count} ads to swipe',
       statusPicker: 'Select status to classify',
     }
   },
   empty: {
-    noPostingImages: 'No images in this posting',
+    noAdImages: 'No images in this posting',
   },
   notFound: {
     task: 'Task not found',
@@ -74,16 +75,16 @@ export default {
     crawlNewPostingLocation2: 'Please check the source information about this field.',
   },
   toasts: {
-    taskStarted: {
-      message: `Task type '{type}' on {source} has started`,
+    discoveryAdsTaskStarted: {
+      message: `Discover ads task type on {target} has started`,
       title: 'Crawling started',
     },
-    taskEndedSuccess: {
-      message: `Task type '{type}' on {source} finished successfully`,
+    discoveryAdsTaskSuccess: {
+      message: `Discover ads task on {target} finished successfully`,
       title: 'Task finished successfully',
     },
-    taskEndedError: {
-      message: `Task type '{type}' on {source} finished with an error:`,
+    discoveryAdsTaskError: {
+      message: `Discover ads task on {target} finished with an error`,
       title: 'Task error',
     },
     postingUpdateFailed: {

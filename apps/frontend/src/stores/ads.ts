@@ -14,10 +14,7 @@ export const useAdsStore = defineStore('ads', () => {
     isLoading.value = true
     apiAds
       .search({ page: 1, size: 100 })
-      .then(result => {
-        console.log({ result })
-        ads.value = result.data
-      })
+      .then(result => { ads.value = result.data })
       .catch(() => [])
       .finally(() => isLoading.value = false)
   }

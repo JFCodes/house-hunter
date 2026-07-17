@@ -8,9 +8,9 @@ import CompFormSelect from '@/components/forms/f-select.vue'
 
 const { t } = useI18n()
 
-const postingLocation = defineModel<Array<T_AdBuildingType>>({ default: () => [] })
+const adLocation = defineModel<Array<T_AdBuildingType>>({ default: () => [] })
 
-const postingTypeOptions: Array<UiSelectOption<T_AdBuildingType>> = [
+const adTypeOptions: Array<UiSelectOption<T_AdBuildingType>> = [
   { label: t(`enums.adBuildingType.${'single-house'}`), value: 'single-house' },
   { label: t(`enums.adBuildingType.${'apartment'}`), value: 'apartment' },
 ]
@@ -18,9 +18,9 @@ const postingTypeOptions: Array<UiSelectOption<T_AdBuildingType>> = [
 
 <template>
   <CompFormSelect
-    v-model="postingLocation"
+    v-model="adLocation"
     close-on-click-outside
     multi
     :label="$t('pages.task.crawling.types')"
-    :options="postingTypeOptions" />
+    :options="adTypeOptions" />
 </template>

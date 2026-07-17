@@ -1,12 +1,17 @@
-import type { T_DiscoveryTask } from '@house-hunter/data-model'
+import type { T_API_WEBSOCKET_ServerMessage_DiscoveryTask_Execution_Ended, T_DiscoveryTask, T_Execution } from '@house-hunter/data-model'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 // App
 import { useApi } from '@/composables/api'
 
+type LastTaskExecution = T_API_WEBSOCKET_ServerMessage_DiscoveryTask_Execution_Ended['payload']
+
 export const useDiscoveryTasksStore = defineStore('discovery-tasks', () => {
   const { discoveryTasks: apiDiscoveryTasks } = useApi()
+
+  const activeTaskExecution = ref<null | T_Execution<T_DiscoveryTask>>(null)
+  const lastTaskExecution = ref<null | LastTaskExecution>(null)
 
   const tasks = ref<Array<T_DiscoveryTask>>([])
   const isLoading = ref(false)
@@ -20,35 +25,22 @@ export const useDiscoveryTasksStore = defineStore('discovery-tasks', () => {
       .finally(() => isLoading.value = false)
   }
   
-  return {
-    search,
-    tasks,
-    isLoading
+  const setActiveTaskExecution = (execution: T_Execution<T_DiscoveryTask>): void => {
+    activeTaskExecution.value = execution
   }
 
-  // const activeTaskExecution = ref<null | T_TaskExecution>(null)
-  // const lastTaskExecution = ref<null | LastTaskExecution>(null)
+  const setLastTaskExecution = (payload: LastTaskExecution): void => {
+    lastTaskExecution.value = payload
+    activeTaskExecution.value = null
+  }
 
-  // const crawlNewPostingTasks = ref<Array<T_TASK_CrawlNewPostings>>([])
-
-  // const setActiveTaskExecution = (execution: T_TaskExecution): void => {
-  //   activeTaskExecution.value = execution
-  // }
-
-  // const setLastTaskExecution = (execution: T_TaskExecution, result: Omit<T_TaskExecutionResult, 'postings'>): void => {
-  //   lastTaskExecution.value = { execution, result }
-  //   activeTaskExecution.value = null
-  // }
-
-
-
-  // return {
-  //   searchCrawlNewPostingTasks,
-  //   setActiveTaskExecution,
-  //   setLastTaskExecution,
-  //   crawlNewPostingTasks,
-  //   activeTaskExecution,
-  //   lastTaskExecution,
-  //   isLoading,
-  // }
+  return {
+    setActiveTaskExecution,
+    setLastTaskExecution,
+    search,
+    activeTaskExecution,
+    lastTaskExecution,
+    isLoading,
+    tasks,
+  }
 })

@@ -38,7 +38,7 @@ const moveRight = (): void => {
 
     <div class="gallery__image --mb-sm">
       <CompUiEmpty v-if="ad.images.length === 0 || !activeImage">
-        <p>{{ $t('empty.noPostingImages') }}</p>
+        <p>{{ $t('empty.noAdImages') }}</p>
       </CompUiEmpty>
       <img v-if="activeImage" class="gallery__image-img" :src="activeImage" />
 

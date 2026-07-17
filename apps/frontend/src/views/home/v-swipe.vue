@@ -1,54 +1,54 @@
 <script setup lang="ts">
-import { E_POSTING_USER_STATUS, type T_Posting } from '@house-hunter/types'
+import { E_AD_STATUS, type T_Ad } from '@house-hunter/data-model'
 import { computed, ref } from 'vue'
 // App
-import { usePostingsStore } from '@/stores/postings'
+import { useAdsStore } from '@/stores/ads'
 // Component
-import CompEntityPostingStatusPicker from '@/components/entities/posting/status-picker.vue'
+import CompEntityAdStatusPicker from '@/components/entities/ad/status-picker.vue'
 import CompPageSwipeItem from '@/components/pages/swipe/s-item.vue'
 import CompUiLoading from '@/components/ui/ui-loading.vue'
 import CompUiEmpty from '@/components/ui/ui-empty.vue'
 
-const postingsStore = usePostingsStore()
+const adsStore = useAdsStore()
 
-const postingsStatusToSwipe = ref<E_POSTING_USER_STATUS>(E_POSTING_USER_STATUS.NEW)
+const adStatusToSwipe = ref<E_AD_STATUS>(E_AD_STATUS.NEW)
 const isUpdating = ref(false)
 const activeIndex = ref(0)
 
-const postsToClassify = computed<Array<T_Posting>>(() => {
-  return postingsStore
-    .postings
-    .filter(p => p._houseHunterFields.userStatus === postingsStatusToSwipe.value)
+const adsToClassify = computed<Array<T_Ad>>(() => {
+  return adsStore.ads.filter(p => p.status === adStatusToSwipe.value)
 })
 
-const activePost = computed<null | T_Posting>(() => {
-  return postsToClassify.value[activeIndex.value] ?? null
+const activeAd = computed<null | T_Ad>(() => {
+  return adsToClassify.value[activeIndex.value] ?? null
 })
 
-const updateStatus = (userStatus: E_POSTING_USER_STATUS): void => {
-  if (!activePost.value) return
+const updateStatus = (): void => {
+  // if (!activePost.value) return
 
-  isUpdating.value = true
-  postingsStore
-    .updateHunterFields(activePost.value.id, { userStatus })
-    .finally(() => isUpdating.value = false)
+  // isUpdating.value = true
+  // postingsStore
+  //   .updateHunterFields(activePost.value.id, { userStatus })
+  //   .finally(() => isUpdating.value = false)
 }
 </script>
 
 <template>
-  <CompUiLoading v-if="isUpdating" />
+  <CompUiLoading v-if="adsStore.isLoading || isUpdating" />
 
   <div class="swipe">
     <div class="--group">
       <p class="--font-bold">{{ $t('pages.swipe.statusPicker') }}:</p>
-      <CompEntityPostingStatusPicker class="" :active-status="postingsStatusToSwipe" />
+      <CompEntityAdStatusPicker
+        :active-status="adStatusToSwipe"
+        @status-change="status => adStatusToSwipe = status" />
     </div>
 
-    <div v-if="postsToClassify.length === 0" class="--pt-3xl">
+    <div v-if="adsToClassify.length === 0" class="--pt-3xl">
       <CompUiEmpty>
         <p class="--text-lg">{{ $t('pages.swipe.emptyMessage1') }}</p>
         <p class="--text-md --font-bold">
-          {{ $t('pages.swipe.emptyMessage2', { status: $t(`enums.postingStatus.${postingsStatusToSwipe}`) }) }}
+          {{ $t('pages.swipe.emptyMessage2', { status: $t(`enums.adStatus.${adStatusToSwipe}`) }) }}
         </p>
       </CompUiEmpty>
     </div>
@@ -56,13 +56,10 @@ const updateStatus = (userStatus: E_POSTING_USER_STATUS): void => {
     <template v-else>
       <div class="">
         <p class="--text-lg --font-bold --text-center --mb-2xs">
-          {{ $t('pages.swipe.postsLeft', { count: postsToClassify.length }) }}
+          {{ $t('pages.swipe.postsLeft', { count: adsToClassify.length }) }}
         </p>
       </div>
-      <CompPageSwipeItem
-        v-if="activePost"
-        :posting="activePost"
-        @pick-status="updateStatus" />
+      <CompPageSwipeItem v-if="activeAd" :ad="activeAd" @pick-status="updateStatus" />
     </template>
   </div>
 </template>

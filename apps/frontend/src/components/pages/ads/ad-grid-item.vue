@@ -20,11 +20,11 @@ const { showAdModal } = useModals()
 
 <template>
   <CompUiCard no-padding class="--pointer" @click="showAdModal(ad)">
-    <div class="posting">
-      <img v-if="ad.imageMain" class="posting__image" :src="ad.imageMain" />
+    <div class="ad">
+      <img v-if="ad.imageMain" class="ad__image" :src="ad.imageMain" />
       <CompUiEmpty v-else :icon="Image" />
 
-      <div class="posting__content">
+      <div class="ad__content">
         <!-- Source and operation type -->
         <div class="--group --group--spread --mb-2xs">
           <div class="--group">
@@ -46,14 +46,14 @@ const { showAdModal } = useModals()
 
         <!-- Pricing -->
         <div class="--group --mb-2xs">
-          <p class="posting__title --uppercase --text-xs --font-bold">{{ $t('global.askingPrice') }}</p>
+          <p class="ad__title --uppercase --text-xs --font-bold">{{ $t('global.askingPrice') }}</p>
           <p class="--font-bold --text-md">{{ ad.price.toLocaleString() }}</p>
           <Euro :size="16" />
         </div>
 
         <!-- Construction -->
         <div v-if="ad.constructionYear" class="--group --mb-2xs">
-          <p class="posting__title --uppercase --text-xs --font-bold">{{ $t('global.year') }}</p>
+          <p class="ad__title --uppercase --text-xs --font-bold">{{ $t('global.year') }}</p>
           <p class="--font-bold --text-md">{{ ad.constructionYear }}</p>
         </div>
 
@@ -61,13 +61,13 @@ const { showAdModal } = useModals()
 
         <!-- Typology -->
         <div class="--group --mb-sm">
-          <p class="posting__title --uppercase --text-xs --font-bold">{{ $t('global.typology') }}</p>
+          <p class="ad__title --uppercase --text-xs --font-bold">{{ $t('global.typology') }}</p>
           <CompEntityAdTypologyBadge :ad="ad" />
         </div>
 
         <!-- Typology -->
         <div class="--group">
-          <p class="posting__title --uppercase --text-xs --font-bold">{{ $t('global.area') }}</p>
+          <p class="ad__title --uppercase --text-xs --font-bold">{{ $t('global.area') }}</p>
           <CompEntityAdAreaBadge :ad="ad" />
         </div>
 
@@ -77,7 +77,7 @@ const { showAdModal } = useModals()
 </template>
 
 <style lang="scss" scoped>
-.posting {
+.ad {
   grid-template-columns: 180px 1fr;
   padding: var(--s-xs);
   gap: var(--s-xs);

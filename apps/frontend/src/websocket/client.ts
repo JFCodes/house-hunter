@@ -1,4 +1,4 @@
-import type { T_API_WEBSOCKET_ClientMessages, T_API_WEBSOCKET_ServerMessages } from '@house-hunter/types'
+import type { T_API_WEBSOCKET_ClientMessages, T_API_WEBSOCKET_ServerMessages } from '@house-hunter/data-model'
 
 type MessageListener = (message: T_API_WEBSOCKET_ServerMessages) => void
 type ConnectionListener = (connected: boolean) => void
@@ -46,7 +46,6 @@ class WebSocketClient {
     })
 
     socket.addEventListener('close', event => {
-      console.log('WebSocket closed:', event.code, event.reason)
       this.socket = null
       this.notifyConnectionListeners(false)
 

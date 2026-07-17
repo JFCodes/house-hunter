@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { E_AD_STATUS } from '@house-hunter/data-model'
-import { onBeforeMount, computed } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 // App
 import { E_ROUTER_PAGES, E_ROUTER_PARAMS } from '@/router/enums'
@@ -46,7 +46,7 @@ const tabs = computed<Array<UiPageTabRoute>>(() => ([
   {
     to: { name: E_ROUTER_PAGES.ADS_ALL },
     key: E_ROUTER_PAGES.ADS_ALL,
-    label: t('pages.postings.tabs.all'),
+    label: t('pages.ads.tabs.all'),
     icon: IdCard,
   },
   ...orderedStatus.map(status => ({
@@ -60,8 +60,6 @@ const tabs = computed<Array<UiPageTabRoute>>(() => ([
     },
   }))
 ]))
-
-onBeforeMount(adsStore.search)
 </script>
 
 <template>

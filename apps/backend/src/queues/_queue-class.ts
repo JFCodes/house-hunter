@@ -1,11 +1,15 @@
 import type { T_Execution, T_ExecutionResult } from '@house-hunter/data-model'
+// App
 import { upsertAds } from '../database/entities/ad'
 
-type ExecuteFunction<Task extends { id: string }>
-  = (execution: T_Execution<Task>) => Promise<T_ExecutionResult>
+type ExecuteFunction<Task extends { id: string }> = (execution: T_Execution<Task>) => Promise<T_ExecutionResult>
+type OnEndedFunction<Task extends { id: string }> = (execution: T_Execution<Task>, result: T_ExecutionResult) => void
+type OnStartedFunction<Task extends { id: string }> = (execution: T_Execution<Task>) => void
 
 export type QueueOptions<Task extends { id: string }> = {
   executeFunction: ExecuteFunction<Task>
+  onStarted: OnStartedFunction<Task>
+  onEnded: OnEndedFunction<Task>
   name: string
 }
 
@@ -17,6 +21,8 @@ type QueuedExecution<Task extends { id: string }> = {
 
 export class QueueClass<Task extends { id: string }> {
   readonly executeFunction: ExecuteFunction<Task>
+  readonly onStarted: OnStartedFunction<Task>
+  readonly onEnded: OnEndedFunction<Task>
   readonly name: string
 
   public activeExecution: null | QueuedExecution<Task> = null
@@ -25,6 +31,8 @@ export class QueueClass<Task extends { id: string }> {
 
   constructor(options: QueueOptions<Task>) {
     this.executeFunction = options.executeFunction
+    this.onStarted = options.onStarted
+    this.onEnded = options.onEnded
     this.name = options.name
   }
 
@@ -69,20 +77,11 @@ export class QueueClass<Task extends { id: string }> {
       // This makes no op execution still wait for this.queue mutation in the meantime
       await new Promise(r => setTimeout(r, 0))
 
-      //   broadcast({ type: 'task-started', payload: { task: nextExecution.taskExecution } })
+      this.onStarted(nextExecution.execution)
       const result = await this.executeFunction(nextExecution.execution)
-      console.log({ result })
-      console.log({ count: result.data.upsert.length })
-      result.data.upsert.forEach(r => console.log(r.targetAndId))
 
+      this.onEnded(nextExecution.execution, result)
       this.processExecutionResult(result)
-      //   broadcast({ type: 'task-ended', payload: {
-      //     task: nextExecution.taskExecution,
-      //     result: {
-      //       outcome: result.outcome,
-      //       error: result.error
-      //     }
-      //   } })
 
     
       if (result.outcome !== 'success') {

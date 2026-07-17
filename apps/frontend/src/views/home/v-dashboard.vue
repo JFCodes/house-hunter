@@ -5,8 +5,6 @@ import { useApi } from '@/composables/api'
 import CompLayoutCenterContainer from '@/components/layouts/center-container.vue'
 import CompUiButton from '@/components/ui/ui-button.vue'
 
-defineProps<{ label: string }>()
-
 const { testStuff } = useApi()
 
 </script>

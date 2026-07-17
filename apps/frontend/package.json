@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@house-hunter/data-model": "workspace:*",
-    "@house-hunter/types": "workspace:*",
     "@lucide/vue": "^1.23.0",
     "pinia": "^3.0.4",
     "sass": "^1.101.0",
