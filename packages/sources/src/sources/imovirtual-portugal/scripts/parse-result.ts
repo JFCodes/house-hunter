@@ -55,6 +55,7 @@ export function parseResult (task: T_DiscoveryTask, fromSource: PostingSearchIte
     descriptionShort: fromSource.title,
     adType: task.options.addType,
     url: getUrl(fromSource.href),
+    target: task.target,
     // Area
     areaTotal: fromSource.terrainAreaInSquareMeters || fromSource.areaInSquareMeters,
     areaLiving: fromSource.areaInSquareMeters,

@@ -1,5 +1,5 @@
 import { sqliteTable, integer, text} from 'drizzle-orm/sqlite-core'
-import { E_ADD_STATUS } from './enums'
+import { E_AD_STATUS } from './enums'
 import { E_TARGET } from '../targets'
 import { T_AdBuildingType, T_AdType } from './types'
 
@@ -8,11 +8,12 @@ export const AdSchema = sqliteTable('ad', {
   id: text('id').primaryKey().$default(() => crypto.randomUUID()),
   entityTye: text('entityType').notNull().$type<'ad'>().$default(() => 'ad'),
   fromTarget: text('fromTarget').notNull().$type<E_TARGET>(),
-  targetAndId: text('targetAndId').notNull().unique(),
+  target: text('target').notNull().$type<E_TARGET>(),
   targetId: text('targetId').notNull(),
+  targetAndId: text('targetAndId').notNull().unique(),
   // System fields
   adBuildingTypes: text('adBuildingTypes', { mode: 'json' }).notNull().$type<Array<T_AdBuildingType>>(),
-  status: text('status').notNull().$type<E_ADD_STATUS>().$default(() => E_ADD_STATUS.NEW),
+  status: text('status').notNull().$type<E_AD_STATUS>().$default(() => E_AD_STATUS.NEW),
   createdAt: integer('createdAt').notNull().$default(() => new Date().getTime()),
   updatedAt: integer('updatedAt').notNull().$default(() => new Date().getTime()),
   adType: text('adType').notNull().$type<T_AdType>(),

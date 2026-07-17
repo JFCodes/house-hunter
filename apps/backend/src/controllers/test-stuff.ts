@@ -6,12 +6,10 @@ import { DiscoveryTasksQueue } from '../queues'
 
 export async function controller(_: Request, res: Response) {
   const discoveryTasks = db.select().from(DiscoveryTaskSchema).all()
-  const task = discoveryTasks[1]
   const ads = db.select().from(AdSchema).all()
 
-  // if (task) {
-  //   DiscoveryTasksQueue.queueTask(task, 0)
-  // }
+  // if (discoveryTasks[0]) DiscoveryTasksQueue.queueTask(discoveryTasks[0], 0)
+  // if (discoveryTasks[1]) DiscoveryTasksQueue.queueTask(discoveryTasks[1], 0)
 
   // await db.insert(DiscoveryTaskSchema).values({
   //   target: E_TARGET.REMAX_PORTUGAL,

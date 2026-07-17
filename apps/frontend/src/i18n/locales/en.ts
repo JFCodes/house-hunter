@@ -1,34 +1,27 @@
 import {
-  type T_PostingOperation,
-  type T_PostingType,
-  E_POSTING_USER_STATUS,
-  E_TASK_TYPE,
-} from '@house-hunter/types'
+  type T_AdBuildingType,
+  type T_AdType,
+  E_AD_STATUS
+} from '@house-hunter/data-model'
 
-const postingType: Record<T_PostingType, string> = {
+const adBuildingType: Record<T_AdBuildingType, string> = {
+  'single-house': 'Single house',
   'apartment': 'Apartment',
-  'single-home': 'Single home'
 }
-
-const taskType: Record<E_TASK_TYPE, string> = {
-  [E_TASK_TYPE.CRAWL_NEW_POSTINGS]: 'discover new posts',
-  [E_TASK_TYPE.UPDATED_POSTING]: 'update item'
-}
-
-const postingOperation: Record<T_PostingOperation, string> = {
+const adType: Record<T_AdType, string> = {
   'rent': 'rent',
   'buy': 'buy'
 }
 
-const postingStatus: Record<E_POSTING_USER_STATUS, string> = {
-  [E_POSTING_USER_STATUS.NEW]: 'New',
-  [E_POSTING_USER_STATUS.DISMISS]: 'Dismissed',
-  [E_POSTING_USER_STATUS.INTERESTING]: 'Interesting',
-  [E_POSTING_USER_STATUS.CONTACT_MADE]: 'Contacted',
-  [E_POSTING_USER_STATUS.PROPOSAL_MADE]: 'Proposal submitted',
-  [E_POSTING_USER_STATUS.PROPOSAL_ACCEPTED]: 'Proposal accepted',
-  [E_POSTING_USER_STATUS.PROPOSAL_REJECTED]: 'Proposal rejected',
-  [E_POSTING_USER_STATUS.BOUGHT]: 'Bought',
+const adStatus: Record<E_AD_STATUS, string> = {
+  [E_AD_STATUS.NEW]: 'New',
+  [E_AD_STATUS.DELETED]: 'Deleted',
+  [E_AD_STATUS.INTERESTING]: 'Interesting',
+  [E_AD_STATUS.CONTACT_MADE]: 'Contacted',
+  [E_AD_STATUS.PROPOSAL_MADE]: 'Proposal submitted',
+  [E_AD_STATUS.PROPOSAL_ACCEPTED]: 'Proposal accepted',
+  [E_AD_STATUS.PROPOSAL_REJECTED]: 'Proposal rejected',
+  [E_AD_STATUS.COMPLETED]: 'Completed',
 }
 
 export default {
@@ -99,9 +92,8 @@ export default {
     }
   },
   enums: {
-    postingOperation,
-    postingStatus,
-    postingType,
-    taskType
+    adBuildingType,
+    adStatus,
+    adType,
   }
 } as const

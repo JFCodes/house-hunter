@@ -1,6 +1,5 @@
-import type { T_Posting } from '@house-hunter/types'
+import type { T_Ad } from '@house-hunter/data-model'
 
-export type ModalPostingReturnType = null
-export type ModalPostingProps = {
-  posting: T_Posting
-}
+export type ModalAdProps = { ad: T_Ad }
+export type ModalAdReturnType = null
+

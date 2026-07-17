@@ -1,3 +1,0 @@
-<template>
-  tasks logs
-</template>

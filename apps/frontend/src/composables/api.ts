@@ -1,17 +1,18 @@
-import {
+import type {
   // Payload
-  type T_API_PAYLOAD_PathPostingHunterFields,
   // Responses
-  type T_API_RESPONSE_TasksCrawlNewPostingsSearch,
-  type T_API_RESPONSE_PostingsSearch,
-  type T_API_RESPONSE_Posting,
-  type T_API_RESPONSE_Ping,
-} from '@house-hunter/types'
+  T_API_RESPONSE_DiscoveryTasks,
+  T_API_RESPONSE_AdSearch,
+  T_API_RESPONSE_Ping,
+  T_API_Pagination,
+} from '@house-hunter/data-model'
 
+type QueryValues = Record<string, string | number>
 
 type RequestBaseOptions = {
   method: 'GET' | 'POST' | 'PATCH'
   path: string
+  query?: QueryValues
 }
 
 type RequestOptions<Body = never> =
@@ -26,28 +27,24 @@ export function useApi () {
   const ping = () => request<T_API_RESPONSE_Ping>({ path: 'ping', method: 'GET' })
   const testStuff = () => request({ path: 'test-stuff', method: 'GET' })
   
-  const tasks = {
-    crawlNewPostings: {
-      search: () => request<T_API_RESPONSE_TasksCrawlNewPostingsSearch>({ path: 'tasks/crawl-new-postings/search', method: 'GET' }),
-      schedule: (taskId: string) => request({ path: `tasks/crawl-new-postings/${taskId}/schedule`, method: 'POST' })
-    }
+  const discoveryTasks = {
+    get: () => request<T_API_RESPONSE_DiscoveryTasks>({ path: 'discovery-tasks', method: 'GET' })
   }
 
-  const postings = {
-    search: () => request<T_API_RESPONSE_PostingsSearch>({ path: 'postings/search', method: 'GET' }),
-    pathHunterFields: (postingId: string, fields: Partial<T_API_PAYLOAD_PathPostingHunterFields>) => {
-      return request<T_API_RESPONSE_Posting, T_API_PAYLOAD_PathPostingHunterFields>({
-        path: `postings/${postingId}/hunter-fields`,
-        method: 'PATCH',
-        body: fields,
-      })
-    }
+  const ads = {
+    search: (query: T_API_Pagination) => request<T_API_RESPONSE_AdSearch, never>({
+      method: 'GET',
+      path: 'ads',
+      query,
+    })
   }
 
   // Private
-  async function request <Response, Body = never> (options: RequestOptions<Body>): Promise<Response> {
-    const { method, path } = options
-    const url = getUrl(path)
+  async function request <Response, Body = never> (
+    options: RequestOptions<Body>
+  ): Promise<Response> {
+    const { method, query, path } = options
+    const url = getUrl(path, query)
     const body = 'body' in options
       ? JSON.stringify(options.body)
       : null
@@ -71,8 +68,15 @@ export function useApi () {
     }
   }
 
-  function getUrl (path: string): string {
+  function getUrl (path: string, query?: QueryValues): string {
     const url = new URL(`${baseUrl}/${path}`)
+
+    if(query) {
+      Object.entries(query).forEach(([key, value]) => {
+        url.searchParams.set(key, String(value))
+      })
+    }
+
     return url.href
   }
 
@@ -85,7 +89,7 @@ export function useApi () {
   return {
     testStuff,
     ping,
-    postings,
-    tasks,
+    discoveryTasks,
+    ads
   }
 }

@@ -3,7 +3,7 @@ import { E_POSTING_USER_STATUS } from '@house-hunter/types'
 // App
 import type { UiButtonType } from '@/components/ui/types'
 // Components
-import { POSTING_USER_STATUS_ICONS } from '@/components/constants'
+// import { POSTING_USER_STATUS_ICONS } from '@/components/constants'
 import CompUiTypeBadge from '@/components/ui/ui-type-badge.vue'
 
 const STATUS_TYPES: Record<E_POSTING_USER_STATUS, UiButtonType> = {
@@ -26,11 +26,11 @@ defineProps<{
 <template>
   <CompUiTypeBadge :type="STATUS_TYPES[postingStatus]" :width="width" :height="38">
 
-    <component :is="POSTING_USER_STATUS_ICONS[postingStatus]" :size="20" />
+    <!-- <component :is="POSTING_USER_STATUS_ICONS[postingStatus]" :size="20" />
     <p class="status-badge__label">
       {{ $t(`enums.postingStatus.${postingStatus}`) }}
     </p>
-    <slot name="after-icon"></slot>
+    <slot name="after-icon"></slot> -->
 
   </CompUiTypeBadge>
 </template>

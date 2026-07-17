@@ -1,4 +1,4 @@
-export enum E_ADD_STATUS {
+export enum E_AD_STATUS {
   NEW = 'new',
   DELETED = 'deleted',
   INTERESTING = 'interesting',

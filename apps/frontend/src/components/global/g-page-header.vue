@@ -22,12 +22,13 @@ const route = useRoute()
 
 const links = computed<Array<Link>>(() => {
   const notificationsLink = getLinkItem(E_ROUTER_PAGES.NOTIFICATIONS, BellDot)
+  const tasksLink = getLinkItem(E_ROUTER_PAGES.DISCOVERY_TASKS_LIST, Cctv)
   const settingsLink = getLinkItem(E_ROUTER_PAGES.SETTINGS, MonitorCog)
-  const postingsLink = getLinkItem(E_ROUTER_PAGES.POSTINGS, IdCard)
-  const tasksLink = getLinkItem(E_ROUTER_PAGES.TASKS, Cctv)
   const homeLink = getLinkItem(E_ROUTER_PAGES.HOME, Home)
+  const adsLink = getLinkItem(E_ROUTER_PAGES.ADS, IdCard)
 
-  return [homeLink, postingsLink, tasksLink, notificationsLink, settingsLink]
+
+  return [homeLink, adsLink, tasksLink, notificationsLink, settingsLink]
 })
 
 const getLinkItem = (name: E_ROUTER_PAGES, icon: Component): Link => ({

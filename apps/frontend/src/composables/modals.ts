@@ -1,18 +1,18 @@
-import type { T_Posting } from '@house-hunter/types'
+import type { T_Ad } from '@house-hunter/data-model'
 // App
 import { useModalsStore } from '@/stores/modals'
-import type { ModalPostingProps } from '@/components/modals/_types'
+import type { ModalAdProps } from '@/components/modals/_types'
 // Components
-import PostingModal from '@/components/modals/m-posting.vue'
+import AdModal from '@/components/modals/m-ad.vue'
 
 export function useModals () {
   const modalsStore = useModalsStore()
 
-  const showPostingsModal = (posting: T_Posting): void => {
-    modalsStore.launch<ModalPostingProps, null>(PostingModal, { posting })
+  const showAdModal = (ad: T_Ad): void => {
+    modalsStore.launch<ModalAdProps, null>(AdModal, { ad })
   }
 
   return {
-    showPostingsModal
+    showAdModal
   }
 }

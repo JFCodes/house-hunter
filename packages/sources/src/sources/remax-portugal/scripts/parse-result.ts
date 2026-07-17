@@ -27,6 +27,7 @@ export function parseResult (task: T_DiscoveryTask, fromSource: PostingSearchIte
     adBuildingTypes: task.options.buildingTypes,
     price: fromSource.listingPrice,
     adType: task.options.addType,
+    target: task.target,
     // Area
     areaLiving: fromSource.livingArea,
     areaTotal: fromSource.totalArea,
