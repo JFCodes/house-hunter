@@ -9,5 +9,6 @@ export type T_API_Paginated<T> = {
 
 export type T_API_RESPONSE_DiscoveryTasks = Array<T_DiscoveryTask>
 export type T_API_RESPONSE_AdSearch = T_API_Paginated<T_Ad>
+export type T_API_RESPONSE_DiscoveryTask = T_DiscoveryTask
 export type T_API_RESPONSE_Ping = { status: 'ok' }
 export type T_API_RESPONSE_Ad = T_Ad

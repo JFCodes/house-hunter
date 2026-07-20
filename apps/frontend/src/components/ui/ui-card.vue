@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// Component
+import CompUiLoading from '@/components/ui/ui-loading.vue'
+
 const slots = defineSlots<{
   default(): void
   header(): void
@@ -8,11 +11,14 @@ const slots = defineSlots<{
 defineProps<{
   noPadding?: boolean
   highlight?: boolean
+  isLoading?: boolean
 }>()
 </script>
 
 <template>
   <div class="card" :class="{ 'card--highlight': highlight }">
+    <CompUiLoading v-if="isLoading" />
+
     <div v-if="slots['header']" class="card__header">
       <slot name="header"></slot>
     </div>
@@ -34,6 +40,7 @@ defineProps<{
   background-color: var(--c-card-background);
   border-radius: var(--radius-md);
   flex-direction: column;
+  position: relative;
   overflow: hidden;
   display: flex;
 

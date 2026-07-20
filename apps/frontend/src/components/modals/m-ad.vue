@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { E_AD_STATUS } from '@house-hunter/data-model'
+import { E_AD_STATUS, type T_Ad } from '@house-hunter/data-model'
 import { computed, onMounted, ref } from 'vue'
 // App
 import type { ModalAdReturnType, ModalAdProps } from '@/components/modals/_types'
 import type { InjectedProps } from '@/stores/modals'
+import { useAdsStore } from '@/stores/ads'
 // Components
 import CompEntityAdStatusPicker from '@/components/entities/ad/status-picker.vue'
 import CompEntityAdImageGallery from '@/components/entities/ad/image-gallery.vue'
@@ -13,22 +14,29 @@ import ModalsBase from '@/components/modals/m-base.vue'
 
 const props = defineProps<ModalAdProps & InjectedProps<ModalAdReturnType>>()
 
+const adsStore = useAdsStore()
+
 const editableStatus = ref<E_AD_STATUS>(E_AD_STATUS.NEW)
 const isLoading = ref(false)
 
 const canSave = computed(() => editableStatus.value !== props.ad.status)
 
-const save = async () => {
-  isLoading.value = true
-  // postingsStore
-  //   .updateHunterFields(props.posting.id, { userStatus: editableStatus.value })
-  //   .then(() => props.closeModal(null))
-  //   .finally(() => isLoading.value = false)
+const seedEditableFields = (ad: T_Ad): void => {
+  editableStatus.value = ad.status
 }
 
-onMounted(() => {
-  editableStatus.value = props.ad.status
-})
+const save = async () => {
+  isLoading.value = true
+  await adsStore
+    .patch(props.ad.id, { status: editableStatus.value })
+    .then(result => {
+      if (result !== null) seedEditableFields(result)
+    })
+    .finally(() => isLoading.value = false)
+}
+
+
+onMounted(() => seedEditableFields(props.ad))
 </script>
 
 <template>
@@ -68,7 +76,7 @@ onMounted(() => {
           type="success"
           :label="$t('global.save')"
           :disabled="!canSave"
-          @click="save" />
+          @click="() => save()" />
       </div>
     </template>
   </ModalsBase>

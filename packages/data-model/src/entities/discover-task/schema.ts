@@ -38,3 +38,9 @@ export const DiscoveryTaskSchema = sqliteTable('discovery-task', {
 
 export type T_DiscoveryTaskNew =  typeof DiscoveryTaskSchema.$inferInsert
 export type T_DiscoveryTask = typeof DiscoveryTaskSchema.$inferSelect
+export type T_DiscoveryTaskPatch = Partial<Omit<T_DiscoveryTask, 
+  | 'id'
+  | 'entityType'
+  | 'target'
+  | 'isRunning'
+>>

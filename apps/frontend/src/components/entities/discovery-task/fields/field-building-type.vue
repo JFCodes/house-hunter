@@ -21,6 +21,6 @@ const adTypeOptions: Array<UiSelectOption<T_AdBuildingType>> = [
     v-model="adLocation"
     close-on-click-outside
     multi
-    :label="$t('pages.task.crawling.types')"
+    :label="$t('pages.task.discoveryTask.types')"
     :options="adTypeOptions" />
 </template>

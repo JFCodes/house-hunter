@@ -30,17 +30,17 @@ export async function discoverScript(task: T_DiscoveryTask): Promise<T_Execution
   const result = await requestPageListing(page, task, buildId, 1)
   if (!result || result.items.length === 0) return { outcome: 'success', data: { upsert: [] } }
 
-  const rawPostings: Array<PostingSearchItem> = [...result.items]
+  const rawAds: Array<PostingSearchItem> = [...result.items]
   
   if (result.totalPages > 1) {
     for (let nextPage = 2; nextPage <= result.totalPages; nextPage++) {
       const pageResult =  await requestPageListing(page, task, buildId, nextPage)
       if (!pageResult) break
-      rawPostings.push(...pageResult.items)
+      rawAds.push(...pageResult.items)
     }
   }
 
   await browser.close()
-  const postings = rawPostings.map(item => parseResult(task, item))
-  return { outcome: 'success', data: { upsert: postings } }
+  const ads = rawAds.map(item => parseResult(task, item))
+  return { outcome: 'success', data: { upsert: ads } }
 }

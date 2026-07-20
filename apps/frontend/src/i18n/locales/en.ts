@@ -52,8 +52,8 @@ export default {
       }
     },
     task: {
-      crawling: {
-        triggerCrawl: 'Find new ads',
+      discoveryTask: {
+        trigger: 'Find new ads',
         types: 'Add types'
       }
     },
@@ -65,14 +65,14 @@ export default {
     }
   },
   empty: {
-    noAdImages: 'No images in this posting',
+    noAdImages: 'No images in this ad',
   },
   notFound: {
     task: 'Task not found',
   },
   tooltips: {
-    crawlNewPostingLocation1: 'Location option is based on the source website.',
-    crawlNewPostingLocation2: 'Please check the source information about this field.',
+    targetLocation1: 'Location option is based on the source website.',
+    targetLocation2: 'Please check the source information about this field.',
   },
   toasts: {
     discoveryAdsTaskStarted: {
@@ -87,10 +87,14 @@ export default {
       message: `Discover ads task on {target} finished with an error`,
       title: 'Task error',
     },
-    postingUpdateFailed: {
-      message: `Failed to save changes to post`,
+    adUpdateFailed: {
+      message: `Failed to save changes to ad`,
       title: 'Update error',
-    }
+    },
+    taskUpdateFailed: {
+      message: `Failed to save changes to task`,
+      title: 'Update error',
+    },
   },
   enums: {
     adBuildingType,

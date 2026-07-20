@@ -21,6 +21,7 @@ const discoveryTasksStore = useDiscoveryTasksStore()
 const taskId = computedStringParam(E_ROUTER_PARAMS.TASK_ID)
 const editableTask = ref<null | T_DiscoveryTask>(null)
 const isLaunchingTask = ref(false)
+const isUpdating = ref(false)
 
 const task = computed<null | T_DiscoveryTask>(() => {
   if (!taskId.value) return null
@@ -32,6 +33,20 @@ const isExecutingTask = computed(() => {
   // if (!task.value) return false
   // if (!tasksStore.activeTaskExecution) return false
   // return tasksStore.activeTaskExecution.task.id === task.value.id
+})
+
+const hasChanges = computed(() => {
+  if (!task.value || !editableTask.value) return false
+  return JSON.stringify(task.value) !== JSON.stringify(editableTask.value)
+})
+
+const canSave = computed(() => {
+  if (!editableTask.value) return false
+
+  if (editableTask.value.options.buildingTypes.length === 0) return false
+  if (!editableTask.value.options.location) return false
+
+  return true
 })
 
 const cloneTask = (task: T_DiscoveryTask | null): void => {
@@ -49,6 +64,19 @@ const schedule = (): void => {
     .finally(() => isLaunchingTask.value = false)
 }
 
+const save = (): void => {
+  if (!taskId.value) return
+  if (!editableTask.value) return
+
+  isUpdating.value = true
+  discoveryTasksStore
+    .patch(taskId.value, { options: editableTask.value?.options })
+    .then(result => {
+      if (result) cloneTask(result)
+    })
+    .finally(() => isUpdating.value = false)
+}
+
 watch(task, cloneTask, { immediate: true })
 </script>
 
@@ -57,7 +85,7 @@ watch(task, cloneTask, { immediate: true })
     <p class="--text-md">{{ $t('notFound.task') }}</p>
   </CompUiEmpty>
 
-  <CompUiCard v-else>
+  <CompUiCard v-else :is-loading="isUpdating">
     <template #header>
       <header class="header">
         <div class="--group">
@@ -71,7 +99,7 @@ watch(task, cloneTask, { immediate: true })
             filled
             type="primary"
             :is-loading="isLaunchingTask || isExecutingTask"
-            :label="$t('pages.task.crawling.triggerCrawl')"
+            :label="$t('pages.task.discoveryTask.trigger')"
             @click="schedule" />
         </div>
       </header>
@@ -81,6 +109,16 @@ watch(task, cloneTask, { immediate: true })
       <CompEntityDiscoveryTaskFieldLocation v-model="editableTask.options.location" class="--mb-sm" />
       <CompEntityDiscoveryTaskFieldBuildingType v-model="editableTask.options.buildingTypes" />
     </div>
+
+    <template #footer>
+      <div class="--group --group--end">
+        <CompUiButton
+          type="success"
+          :label="$t('global.save')"
+          :disabled="!canSave || !hasChanges"
+          @click="() => save()" />
+      </div>
+    </template>
   </CompUiCard>
 </template>
 

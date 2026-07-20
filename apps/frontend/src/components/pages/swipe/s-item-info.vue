@@ -8,7 +8,7 @@ import CompEntityAdTypeBadge from '@/components/entities/ad/type-badge.vue'
 import CompEntityAdAreBadge from '@/components/entities/ad/area-badge.vue'
 import CompUiIconButton from '@/components/ui/ui-icon-button.vue'
 import CompUiCard from '@/components/ui/ui-card.vue'
-import { ExternalLink } from '@lucide/vue'
+import { ExternalLink, Euro } from '@lucide/vue'
 
 defineProps<{ ad: T_Ad }>()
 

@@ -23,13 +23,13 @@ const activeAd = computed<null | T_Ad>(() => {
   return adsToClassify.value[activeIndex.value] ?? null
 })
 
-const updateStatus = (): void => {
-  // if (!activePost.value) return
+const updateStatus = (status: E_AD_STATUS): void => {
+  if (!activeAd.value) return
 
-  // isUpdating.value = true
-  // postingsStore
-  //   .updateHunterFields(activePost.value.id, { userStatus })
-  //   .finally(() => isUpdating.value = false)
+  isUpdating.value = true
+  adsStore
+    .patch(activeAd.value.id, { status })
+    .finally(() => isUpdating.value = false)
 }
 </script>
 

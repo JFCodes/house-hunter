@@ -25,7 +25,7 @@ export async function controller(req: Request, res: Response<T_API_RESPONSE_Ad>)
 
   const updated = await db
     .update(AdSchema)
-    .set(patchFields)
+    .set(updatedRecord)
     .where(eq(AdSchema.id, adId))
     .returning()
 

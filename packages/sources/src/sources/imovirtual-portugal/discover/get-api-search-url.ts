@@ -11,20 +11,20 @@ type Options = {
 
 export function getApiSearchUrl (task: T_DiscoveryTask, options: Options): string {
   const { buildId, pageNumber } = options
-  const postingOperation = getAddTypeSegment(task.options.addType)
-  const postingType = getAddBuildingTypeSegment(task.options.buildingTypes)
+  const adOperation = getAddTypeSegment(task.options.addType)
+  const adType = getAddBuildingTypeSegment(task.options.buildingTypes)
 
   let url = BASE_API_URL
   url += '/_next/data'
   url += `/${buildId}`
   url += '/pt/resultados'
-  url += `/${postingOperation}`
-  url += `/${postingType}`
+  url += `/${adOperation}`
+  url += `/${adType}`
   url += `/${task.options.location}.json`
   url += '?limit=72'
   url += `&page=${pageNumber}`
-  url += `&searchingCriteria=${postingOperation}`
-  url += `&searchingCriteria=${postingType}`
+  url += `&searchingCriteria=${adOperation}`
+  url += `&searchingCriteria=${adType}`
   url += task.options.location.split('/').map(l => `&searchingCriteria=${l}`).join('')
 
   return url
@@ -39,7 +39,7 @@ function getAddTypeSegment (addType: T_AdType): string {
 }
 
 function getAddBuildingTypeSegment (types: Array<T_AdBuildingType>): string {
-  if (types.length === 0) throw new Error('Imovirtual requires one posting type segment')
+  if (types.length === 0) throw new Error('Imovirtual requires one ad type segment')
 
   const mapTypology = (typology: T_AdBuildingType): string => {
     switch (typology) {

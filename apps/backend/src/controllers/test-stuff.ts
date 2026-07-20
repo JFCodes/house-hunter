@@ -11,23 +11,5 @@ export async function controller(_: Request, res: Response) {
   // if (discoveryTasks[0]) DiscoveryTasksQueue.queueTask(discoveryTasks[0], 0)
   // if (discoveryTasks[1]) DiscoveryTasksQueue.queueTask(discoveryTasks[1], 0)
 
-  // await db.insert(DiscoveryTaskSchema).values({
-  //   target: E_TARGET.REMAX_PORTUGAL,
-  //   options: {
-  //     buildingTypes: ['single-house'],
-  //     location: 'leiria/leiria/r',
-  //     addType: 'buy',
-  //   }
-  // })
-
-  // await db.insert(DiscoveryTaskSchema).values({
-  //   target: E_TARGET.IMOVIRTUAL_PORTUGAL,
-  //   options: {
-  //     buildingTypes: ['single-house'],
-  //     location: 'leiria/leiria',
-  //     addType: 'buy',
-  //   }
-  // })
-
   return res.sendStatus(200)
 }

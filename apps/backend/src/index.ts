@@ -7,6 +7,7 @@ import { WebSocketServer } from 'ws'
 import { controller as NoCacheController } from './controllers/no-cache'
 import { initializeWebSocket } from './websocket'
 import { router as ApiRouter } from './routers'
+import { seedDatabase } from './database/seed'
 import './queues'
 
 const PORT = 3000
@@ -26,6 +27,8 @@ const websocketServer = new WebSocketServer({
 })
 
 initializeWebSocket(websocketServer)
+seedDatabase()
+
 httpServer.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
 })

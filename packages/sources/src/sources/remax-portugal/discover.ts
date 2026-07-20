@@ -1,9 +1,9 @@
 import { type T_DiscoveryTask, type T_ExecutionResult, Err_TaskExecution } from '@house-hunter/data-model'
 // App
 import type { MultiSearchPaginated, MultiSearchPaginatedPayload, PostingSearchItem } from './_types'
-import { requestPageListing } from './crawl-new-postings/request-page-listing-page'
+import { requestPageListing } from './discover/request-page-listing-page'
 import { API_SEARCH_PATH, SELECTORS, BASE_URL } from './_constants'
-import { getSearchUrl } from './crawl-new-postings/get-search-url'
+import { getSearchUrl } from './discover/get-search-url'
 import { parseResult } from './scripts/parse-result'
 import {
   InterceptNetworkOnAction,
@@ -43,7 +43,7 @@ export async function discoverScript(task: T_DiscoveryTask): Promise<T_Execution
     throw error
   }
 
-  const rawPostings = response.data.results
+  const rawAds = response.data.results
   const totalPages = response.data.totalPages
   const currentPayload = response.request.payload!
 
@@ -52,12 +52,12 @@ export async function discoverScript(task: T_DiscoveryTask): Promise<T_Execution
       const result = await requestPageListing(page, currentPayload, nextPage)
       if (result === null) break
 
-      rawPostings.push(...result)
-      await checkPostingLimits(rawPostings)
+      rawAds.push(...result)
+      await checkPostingLimits(rawAds)
     }
   }
 
   await browser.close()
-  const postings = rawPostings.map(item => parseResult(task, item))
-  return { outcome: 'success', data: { upsert: postings } }
+  const ads = rawAds.map(item => parseResult(task, item))
+  return { outcome: 'success', data: { upsert: ads } }
 }

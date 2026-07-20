@@ -58,3 +58,15 @@ export const AdSchema = sqliteTable('ad', {
 
 export type T_AdNew =  typeof AdSchema.$inferInsert
 export type T_Ad = typeof AdSchema.$inferSelect
+export type T_AdPatch = Partial<Omit<T_Ad, 
+  | 'id'
+  | 'entityTye'
+  | 'fromTarget'
+  | 'target'
+  | 'targetId'
+  | 'targetAndId'
+  | 'createdAt'
+  | 'deletedAt'
+  | 'price'
+  | 'url'
+>>

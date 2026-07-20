@@ -14,8 +14,8 @@ const location = defineModel<string>({ default: '' })
 const showLocationTooltip = (event: MouseEvent): void => {
   sourceLocationInfo(event, {
     messages: [
-      t('tooltips.crawlNewPostingLocation1'),
-      t('tooltips.crawlNewPostingLocation2'),
+      t('tooltips.targetLocation1'),
+      t('tooltips.targetLocation2'),
     ]
   })
 }

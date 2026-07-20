@@ -1,9 +1,13 @@
 import type {
   // Payload
+  T_API_PAYLOAD_PatchAd,
   // Responses
+  T_API_PAYLOAD_PatchDiscoveryTask,
   T_API_RESPONSE_DiscoveryTasks,
+  T_API_RESPONSE_DiscoveryTask,
   T_API_RESPONSE_AdSearch,
   T_API_RESPONSE_Ping,
+  T_API_RESPONSE_Ad,
   T_API_Pagination,
 } from '@house-hunter/data-model'
 
@@ -30,9 +34,19 @@ export function useApi () {
   const discoveryTasks = {
     schedule: (taskId: string) => request({ path: `discovery-tasks/${taskId}/schedule`, method: 'POST' }),
     get: () => request<T_API_RESPONSE_DiscoveryTasks>({ path: 'discovery-tasks', method: 'GET' }),
+    patch: (taskId: string, payload: T_API_PAYLOAD_PatchDiscoveryTask) => request<T_API_RESPONSE_DiscoveryTask, T_API_PAYLOAD_PatchDiscoveryTask>({
+      path: `discovery-tasks/${taskId}`,
+      method: 'PATCH',
+      body: payload,
+    })
   }
 
   const ads = {
+    patch: (adId: string, payload: T_API_PAYLOAD_PatchAd) => request<T_API_RESPONSE_Ad, T_API_PAYLOAD_PatchAd>({
+      path: `ads/${adId}`,
+      method: 'PATCH',
+      body: payload,
+    }),
     search: (query: T_API_Pagination) => request<T_API_RESPONSE_AdSearch, never>({
       method: 'GET',
       path: 'ads',
@@ -60,6 +74,17 @@ export function useApi () {
     const responseText = await response.text()
     const contentType = response.headers.get('content-type') ?? ''
     const expectedJson = contentType.includes('application/json')
+
+
+    if (!response.ok) {
+      let errorJson: string
+      try {
+        errorJson = await response.json()
+      } catch (error) {
+        throw response.status
+      }
+      throw errorJson
+    }
 
     try {
       return JSON.parse(responseText) as Response

@@ -54,8 +54,8 @@ export default {
       }
     },
     task: {
-      crawling: {
-        triggerCrawl: 'Procurar anúncios',
+      discoveryTask: {
+        trigger: 'Procurar anúncios',
         types: 'Tipos de anúncios'
       }
     },
@@ -73,8 +73,8 @@ export default {
     task: 'Workflow não encontrado',
   },
   tooltips: {
-    crawlNewPostingLocation1: 'A opção localização depende das opçøes do site de pesquisa',
-    crawlNewPostingLocation2: 'Consulta as informações relativas a este campo na documentação.',
+    targetLocation1: 'A opção localização depende das opçøes do site de pesquisa',
+    targetLocation2: 'Consulta as informações relativas a este campo na documentação.',
   },
   toasts: {
     discoveryAdsTaskStarted: {
@@ -89,7 +89,7 @@ export default {
       message: `Workflow do tipo '{type}' no site {source} terminou com um erro:`,
       title: 'Error no workflow',
     },
-    postingUpdateFailed: {
+    adUpdateFailed: {
       message: `Nã0 foi possivel gravar as alterações`,
       title: 'Erro ao gravar',
     }
