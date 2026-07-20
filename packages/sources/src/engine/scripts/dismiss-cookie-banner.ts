@@ -10,6 +10,9 @@ export async function DismissCookieBanner (page: Page, options: Options): Promis
 
   // Handle cookies banner
   const banner = page.locator(bannerSelector)
+
+  console.log('visible: ', await banner.isVisible())
+
   if (await banner.isVisible()) {
     const button = banner.locator(bannerButtonSelection)
 

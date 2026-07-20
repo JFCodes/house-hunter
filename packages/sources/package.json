@@ -19,6 +19,7 @@
     "build": "tsup src/index.ts --format esm,cjs --dts"
   },
   "devDependencies": {
+    "@types/node": "^24.13.2",
     "chokidar-cli": "^3.0.0",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3"
